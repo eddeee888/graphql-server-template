@@ -6,6 +6,11 @@ const config: CodegenConfig = {
   generates: {
     "src/schema": {
       preset,
+      presetConfig: {
+        typesPluginsConfig: {
+          contextType: "../index#ResolverContext",
+        },
+      },
       plugins: [],
     },
   },

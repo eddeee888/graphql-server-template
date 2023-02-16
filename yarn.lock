@@ -507,10 +507,10 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@eddeee888/gcg-typescript-resolver-files@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@eddeee888/gcg-typescript-resolver-files/-/gcg-typescript-resolver-files-0.2.0.tgz#4b1a1ad1f0327db57843a7d7bfa9553e0bfe0b45"
-  integrity sha512-bCGALYo7DnQ1qwZgh7CWpPDbESbkf6pew9WhmzDiXx6X6g68trZ80ItKDHxbGNNixen6D36iLMVs+mpg9W8VMw==
+"@eddeee888/gcg-typescript-resolver-files@0.0.0-pr69-run114-1-20230215112019":
+  version "0.0.0-pr69-run114-1-20230215112019"
+  resolved "https://registry.yarnpkg.com/@eddeee888/gcg-typescript-resolver-files/-/gcg-typescript-resolver-files-0.0.0-pr69-run114-1-20230215112019.tgz#15aca717dd523cbcc11e7eb477d9bc85d19cb928"
+  integrity sha512-ZN03k9NUMI5WHEXF2JWdyNplzh3d+d1UCALA9pGf7h1xTe6vCwE3plahznsgEgBq1eCpFRLV1XViy234+jHHWA==
   dependencies:
     "@graphql-codegen/add" "^3.2.1"
     "@graphql-codegen/plugin-helpers" "^2.7.1"

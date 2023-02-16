@@ -1,14 +1,14 @@
-import { createSchema } from "graphql-yoga";
+import { createYoga, createSchema } from "graphql-yoga";
+import { createServer } from "http";
+import { typeDefs } from "./schema/typeDefs.generated";
+import { resolvers } from "./schema/resolvers.generated";
+import { data } from "./data";
 
-export const schema = createSchema({
-  typeDefs: /* GraphQL */ `
-    type Query {
-      hello: String
-    }
-  `,
-  resolvers: {
-    Query: {
-      hello: () => "world",
-    },
-  },
+export type ResolverContext = { data: typeof data };
+
+const yoga = createYoga<ResolverContext>({
+  schema: createSchema<ResolverContext>({ typeDefs, resolvers }),
+  context: { data },
 });
+const server = createServer(yoga);
+server.listen(3000, () => console.log("It's at http://localhost:3000/graphql"));

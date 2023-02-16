@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "ts-node-esm src/index.ts"
+    "dev": "yarn graphql-codegen && ts-node-esm src/index.ts"
   },
   "dependencies": {
     "graphql": "16.6.0",

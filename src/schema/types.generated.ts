@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
+import { BookMapper } from './book/schema.mappers';
 import { UserMapper } from './user/schema.mappers';
 import { ResolverContext } from '../index';
 export type Maybe<T> = T | null;
@@ -50,6 +51,7 @@ export type QueryUserArgs = {
 
 export type User = {
   __typename: 'User';
+  booksRead: Array<Book>;
   fullName: Scalars['String'];
   id: Scalars['ID'];
 };
@@ -123,7 +125,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Book: ResolverTypeWrapper<Book>;
+  Book: ResolverTypeWrapper<BookMapper>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Mutation: ResolverTypeWrapper<{}>;
@@ -134,7 +136,7 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Book: Book;
+  Book: BookMapper;
   ID: Scalars['ID'];
   String: Scalars['String'];
   Mutation: {};
@@ -159,6 +161,7 @@ export type QueryResolvers<ContextType = ResolverContext, ParentType extends Res
 };
 
 export type UserResolvers<ContextType = ResolverContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+  booksRead?: Resolver<Array<ResolversTypes['Book']>, ParentType, ContextType>;
   fullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

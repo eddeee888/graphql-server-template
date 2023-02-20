@@ -1,10 +1,14 @@
 extend type Query {
-  book(id: ID!): Book
+  book(id: ID!): BookPayload!
 }
-extend type Mutation {
-  markBookAsRead(id: ID!): Book!
-}
+
 type Book {
   id: ID!
   isbn: String!
 }
+
+type BookResult {
+  result: Book
+}
+
+union BookPayload = BookResult | StandardError

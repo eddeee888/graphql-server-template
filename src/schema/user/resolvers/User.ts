@@ -16,5 +16,5 @@ export const User: UserResolvers = {
     );
 
     return books;
-  }
+  },
 };

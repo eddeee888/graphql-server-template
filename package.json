@@ -1,7 +1,7 @@
 {
   "name": "graphql-server",
   "version": "1.0.0",
-  "repository": "git@github.com:eddeee888/graphql-server.git",
+  "repository": "git@github.com:eddeee888/graphql-server-template.git",
   "author": "Eddy Nguyen <ch@eddeee888.me>",
   "license": "MIT",
   "private": true,

@@ -1,5 +1,4 @@
 type Query
-type Mutation
 
 type StandardError {
   error: ErrorType!

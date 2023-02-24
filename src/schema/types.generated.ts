@@ -50,10 +50,6 @@ export type ErrorType =
   | "NOT_FOUND"
   | "UNEXPECTED_ERROR";
 
-export type Mutation = {
-  __typename: "Mutation";
-};
-
 export type Query = {
   __typename: "Query";
   book: BookPayload;
@@ -196,7 +192,6 @@ export type ResolversTypes = {
   >;
   DateTime: ResolverTypeWrapper<Scalars["DateTime"]>;
   ErrorType: ErrorType;
-  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   StandardError: ResolverTypeWrapper<StandardError>;
   User: ResolverTypeWrapper<UserMapper>;
@@ -215,7 +210,6 @@ export type ResolversParentTypes = {
     result?: Maybe<ResolversParentTypes["Book"]>;
   };
   DateTime: Scalars["DateTime"];
-  Mutation: {};
   Query: {};
   StandardError: StandardError;
   User: UserMapper;
@@ -254,11 +248,6 @@ export interface DateTimeScalarConfig
   extends GraphQLScalarTypeConfig<ResolversTypes["DateTime"], any> {
   name: "DateTime";
 }
-
-export type MutationResolvers<
-  ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"]
-> = {};
 
 export type QueryResolvers<
   ContextType = ResolverContext,
@@ -301,7 +290,6 @@ export type Resolvers<ContextType = ResolverContext> = {
   BookPayload?: BookPayloadResolvers<ContextType>;
   BookResult?: BookResultResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
-  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   StandardError?: StandardErrorResolvers<ContextType>;
   User?: UserResolvers<ContextType>;

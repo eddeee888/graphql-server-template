@@ -4,5 +4,8 @@ export const book: NonNullable<QueryResolvers["book"]> = async (
   { id },
   { data }
 ) => {
-  return data.books[id];
+  return {
+    __typename: "BookResult",
+    result: data.books[id],
+  };
 };

@@ -6,14 +6,15 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "yarn graphql-codegen && ts-node-esm src/index.ts"
+    "start": "ts-node-esm src/index.ts",
+    "dev": "yarn graphql-codegen && yarn start"
   },
   "dependencies": {
     "graphql": "16.6.0",
     "graphql-yoga": "3.6.0"
   },
   "devDependencies": {
-    "@eddeee888/gcg-typescript-resolver-files": "0.0.0-pr69-run114-1-20230215112019",
+    "@eddeee888/gcg-typescript-resolver-files": "0.3.0",
     "@graphql-codegen/cli": "3.0.0",
     "prettier": "2.8.4",
     "ts-node": "10.9.1",

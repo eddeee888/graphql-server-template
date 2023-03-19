@@ -1,5 +1,6 @@
 extend type Query {
   book(id: ID!): BookPayload!
+  readable(id: ID!): Readable
 }
 
 type Book {
@@ -12,3 +13,15 @@ type BookResult {
 }
 
 union BookPayload = BookResult | StandardError
+
+type ShortNovel {
+  id: ID!
+  summary: String!
+}
+
+type Magazine {
+  id: ID!
+  issueNumber: Int!
+}
+
+union Readable = ShortNovel | Magazine

@@ -50,9 +50,16 @@ export type ErrorType =
   | "NOT_FOUND"
   | "UNEXPECTED_ERROR";
 
+export type Magazine = {
+  __typename: "Magazine";
+  id: Scalars["ID"];
+  issueNumber: Scalars["Int"];
+};
+
 export type Query = {
   __typename: "Query";
   book: BookPayload;
+  readable?: Maybe<Readable>;
   user?: Maybe<User>;
 };
 
@@ -60,8 +67,20 @@ export type QueryBookArgs = {
   id: Scalars["ID"];
 };
 
+export type QueryReadableArgs = {
+  id: Scalars["ID"];
+};
+
 export type QueryUserArgs = {
   id: Scalars["ID"];
+};
+
+export type Readable = Magazine | ShortNovel;
+
+export type ShortNovel = {
+  __typename: "ShortNovel";
+  id: Scalars["ID"];
+  summary: Scalars["String"];
 };
 
 export type StandardError = {
@@ -192,7 +211,11 @@ export type ResolversTypes = {
   >;
   DateTime: ResolverTypeWrapper<Scalars["DateTime"]>;
   ErrorType: ErrorType;
+  Magazine: ResolverTypeWrapper<Magazine>;
+  Int: ResolverTypeWrapper<Scalars["Int"]>;
   Query: ResolverTypeWrapper<{}>;
+  Readable: ResolversTypes["Magazine"] | ResolversTypes["ShortNovel"];
+  ShortNovel: ResolverTypeWrapper<ShortNovel>;
   StandardError: ResolverTypeWrapper<StandardError>;
   User: ResolverTypeWrapper<UserMapper>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
@@ -210,7 +233,13 @@ export type ResolversParentTypes = {
     result?: Maybe<ResolversParentTypes["Book"]>;
   };
   DateTime: Scalars["DateTime"];
+  Magazine: Magazine;
+  Int: Scalars["Int"];
   Query: {};
+  Readable:
+    | ResolversParentTypes["Magazine"]
+    | ResolversParentTypes["ShortNovel"];
+  ShortNovel: ShortNovel;
   StandardError: StandardError;
   User: UserMapper;
   Boolean: Scalars["Boolean"];
@@ -249,6 +278,15 @@ export interface DateTimeScalarConfig
   name: "DateTime";
 }
 
+export type MagazineResolvers<
+  ContextType = ResolverContext,
+  ParentType extends ResolversParentTypes["Magazine"] = ResolversParentTypes["Magazine"]
+> = {
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  issueNumber?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<
   ContextType = ResolverContext,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
@@ -259,12 +297,38 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QueryBookArgs, "id">
   >;
+  readable?: Resolver<
+    Maybe<ResolversTypes["Readable"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryReadableArgs, "id">
+  >;
   user?: Resolver<
     Maybe<ResolversTypes["User"]>,
     ParentType,
     ContextType,
     RequireFields<QueryUserArgs, "id">
   >;
+};
+
+export type ReadableResolvers<
+  ContextType = ResolverContext,
+  ParentType extends ResolversParentTypes["Readable"] = ResolversParentTypes["Readable"]
+> = {
+  __resolveType: TypeResolveFn<
+    "Magazine" | "ShortNovel",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type ShortNovelResolvers<
+  ContextType = ResolverContext,
+  ParentType extends ResolversParentTypes["ShortNovel"] = ResolversParentTypes["ShortNovel"]
+> = {
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  summary?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type StandardErrorResolvers<
@@ -290,7 +354,10 @@ export type Resolvers<ContextType = ResolverContext> = {
   BookPayload?: BookPayloadResolvers<ContextType>;
   BookResult?: BookResultResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
+  Magazine?: MagazineResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Readable?: ReadableResolvers<ContextType>;
+  ShortNovel?: ShortNovelResolvers<ContextType>;
   StandardError?: StandardErrorResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };

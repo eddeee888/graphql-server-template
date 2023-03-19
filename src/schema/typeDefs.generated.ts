@@ -147,18 +147,62 @@ export const typeDefs = {
           directives: [],
           loc: { start: 189, end: 216 },
         },
+        {
+          kind: "FieldDefinition",
+          name: {
+            kind: "Name",
+            value: "readable",
+            loc: { start: 219, end: 227 },
+          },
+          arguments: [
+            {
+              kind: "InputValueDefinition",
+              name: {
+                kind: "Name",
+                value: "id",
+                loc: { start: 228, end: 230 },
+              },
+              type: {
+                kind: "NonNullType",
+                type: {
+                  kind: "NamedType",
+                  name: {
+                    kind: "Name",
+                    value: "ID",
+                    loc: { start: 232, end: 234 },
+                  },
+                  loc: { start: 232, end: 234 },
+                },
+                loc: { start: 232, end: 235 },
+              },
+              directives: [],
+              loc: { start: 228, end: 235 },
+            },
+          ],
+          type: {
+            kind: "NamedType",
+            name: {
+              kind: "Name",
+              value: "Readable",
+              loc: { start: 238, end: 246 },
+            },
+            loc: { start: 238, end: 246 },
+          },
+          directives: [],
+          loc: { start: 219, end: 246 },
+        },
       ],
-      loc: { start: 167, end: 218 },
+      loc: { start: 167, end: 248 },
     },
     {
       kind: "ObjectTypeDefinition",
-      name: { kind: "Name", value: "Book", loc: { start: 225, end: 229 } },
+      name: { kind: "Name", value: "Book", loc: { start: 255, end: 259 } },
       interfaces: [],
       directives: [],
       fields: [
         {
           kind: "FieldDefinition",
-          name: { kind: "Name", value: "id", loc: { start: 234, end: 236 } },
+          name: { kind: "Name", value: "id", loc: { start: 264, end: 266 } },
           arguments: [],
           type: {
             kind: "NonNullType",
@@ -167,18 +211,18 @@ export const typeDefs = {
               name: {
                 kind: "Name",
                 value: "ID",
-                loc: { start: 238, end: 240 },
+                loc: { start: 268, end: 270 },
               },
-              loc: { start: 238, end: 240 },
+              loc: { start: 268, end: 270 },
             },
-            loc: { start: 238, end: 241 },
+            loc: { start: 268, end: 271 },
           },
           directives: [],
-          loc: { start: 234, end: 241 },
+          loc: { start: 264, end: 271 },
         },
         {
           kind: "FieldDefinition",
-          name: { kind: "Name", value: "isbn", loc: { start: 244, end: 248 } },
+          name: { kind: "Name", value: "isbn", loc: { start: 274, end: 278 } },
           arguments: [],
           type: {
             kind: "NonNullType",
@@ -187,24 +231,24 @@ export const typeDefs = {
               name: {
                 kind: "Name",
                 value: "String",
-                loc: { start: 250, end: 256 },
+                loc: { start: 280, end: 286 },
               },
-              loc: { start: 250, end: 256 },
+              loc: { start: 280, end: 286 },
             },
-            loc: { start: 250, end: 257 },
+            loc: { start: 280, end: 287 },
           },
           directives: [],
-          loc: { start: 244, end: 257 },
+          loc: { start: 274, end: 287 },
         },
       ],
-      loc: { start: 220, end: 259 },
+      loc: { start: 250, end: 289 },
     },
     {
       kind: "ObjectTypeDefinition",
       name: {
         kind: "Name",
         value: "BookResult",
-        loc: { start: 266, end: 276 },
+        loc: { start: 296, end: 306 },
       },
       interfaces: [],
       directives: [],
@@ -214,7 +258,7 @@ export const typeDefs = {
           name: {
             kind: "Name",
             value: "result",
-            loc: { start: 281, end: 287 },
+            loc: { start: 311, end: 317 },
           },
           arguments: [],
           type: {
@@ -222,22 +266,22 @@ export const typeDefs = {
             name: {
               kind: "Name",
               value: "Book",
-              loc: { start: 289, end: 293 },
+              loc: { start: 319, end: 323 },
             },
-            loc: { start: 289, end: 293 },
+            loc: { start: 319, end: 323 },
           },
           directives: [],
-          loc: { start: 281, end: 293 },
+          loc: { start: 311, end: 323 },
         },
       ],
-      loc: { start: 261, end: 295 },
+      loc: { start: 291, end: 325 },
     },
     {
       kind: "UnionTypeDefinition",
       name: {
         kind: "Name",
         value: "BookPayload",
-        loc: { start: 303, end: 314 },
+        loc: { start: 333, end: 344 },
       },
       directives: [],
       types: [
@@ -246,80 +290,35 @@ export const typeDefs = {
           name: {
             kind: "Name",
             value: "BookResult",
-            loc: { start: 317, end: 327 },
+            loc: { start: 347, end: 357 },
           },
-          loc: { start: 317, end: 327 },
+          loc: { start: 347, end: 357 },
         },
         {
           kind: "NamedType",
           name: {
             kind: "Name",
             value: "StandardError",
-            loc: { start: 330, end: 343 },
+            loc: { start: 360, end: 373 },
           },
-          loc: { start: 330, end: 343 },
+          loc: { start: 360, end: 373 },
         },
       ],
-      loc: { start: 297, end: 343 },
-    },
-    {
-      kind: "ObjectTypeExtension",
-      name: { kind: "Name", value: "Query", loc: { start: 356, end: 361 } },
-      interfaces: [],
-      directives: [],
-      fields: [
-        {
-          kind: "FieldDefinition",
-          name: { kind: "Name", value: "user", loc: { start: 366, end: 370 } },
-          arguments: [
-            {
-              kind: "InputValueDefinition",
-              name: {
-                kind: "Name",
-                value: "id",
-                loc: { start: 371, end: 373 },
-              },
-              type: {
-                kind: "NonNullType",
-                type: {
-                  kind: "NamedType",
-                  name: {
-                    kind: "Name",
-                    value: "ID",
-                    loc: { start: 375, end: 377 },
-                  },
-                  loc: { start: 375, end: 377 },
-                },
-                loc: { start: 375, end: 378 },
-              },
-              directives: [],
-              loc: { start: 371, end: 378 },
-            },
-          ],
-          type: {
-            kind: "NamedType",
-            name: {
-              kind: "Name",
-              value: "User",
-              loc: { start: 381, end: 385 },
-            },
-            loc: { start: 381, end: 385 },
-          },
-          directives: [],
-          loc: { start: 366, end: 385 },
-        },
-      ],
-      loc: { start: 344, end: 387 },
+      loc: { start: 327, end: 373 },
     },
     {
       kind: "ObjectTypeDefinition",
-      name: { kind: "Name", value: "User", loc: { start: 394, end: 398 } },
+      name: {
+        kind: "Name",
+        value: "ShortNovel",
+        loc: { start: 380, end: 390 },
+      },
       interfaces: [],
       directives: [],
       fields: [
         {
           kind: "FieldDefinition",
-          name: { kind: "Name", value: "id", loc: { start: 403, end: 405 } },
+          name: { kind: "Name", value: "id", loc: { start: 395, end: 397 } },
           arguments: [],
           type: {
             kind: "NonNullType",
@@ -328,21 +327,21 @@ export const typeDefs = {
               name: {
                 kind: "Name",
                 value: "ID",
-                loc: { start: 407, end: 409 },
+                loc: { start: 399, end: 401 },
               },
-              loc: { start: 407, end: 409 },
+              loc: { start: 399, end: 401 },
             },
-            loc: { start: 407, end: 410 },
+            loc: { start: 399, end: 402 },
           },
           directives: [],
-          loc: { start: 403, end: 410 },
+          loc: { start: 395, end: 402 },
         },
         {
           kind: "FieldDefinition",
           name: {
             kind: "Name",
-            value: "fullName",
-            loc: { start: 413, end: 421 },
+            value: "summary",
+            loc: { start: 405, end: 412 },
           },
           arguments: [],
           type: {
@@ -352,21 +351,202 @@ export const typeDefs = {
               name: {
                 kind: "Name",
                 value: "String",
-                loc: { start: 423, end: 429 },
+                loc: { start: 414, end: 420 },
               },
-              loc: { start: 423, end: 429 },
+              loc: { start: 414, end: 420 },
             },
-            loc: { start: 423, end: 430 },
+            loc: { start: 414, end: 421 },
           },
           directives: [],
-          loc: { start: 413, end: 430 },
+          loc: { start: 405, end: 421 },
+        },
+      ],
+      loc: { start: 375, end: 423 },
+    },
+    {
+      kind: "ObjectTypeDefinition",
+      name: { kind: "Name", value: "Magazine", loc: { start: 430, end: 438 } },
+      interfaces: [],
+      directives: [],
+      fields: [
+        {
+          kind: "FieldDefinition",
+          name: { kind: "Name", value: "id", loc: { start: 443, end: 445 } },
+          arguments: [],
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: {
+                kind: "Name",
+                value: "ID",
+                loc: { start: 447, end: 449 },
+              },
+              loc: { start: 447, end: 449 },
+            },
+            loc: { start: 447, end: 450 },
+          },
+          directives: [],
+          loc: { start: 443, end: 450 },
+        },
+        {
+          kind: "FieldDefinition",
+          name: {
+            kind: "Name",
+            value: "issueNumber",
+            loc: { start: 453, end: 464 },
+          },
+          arguments: [],
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: {
+                kind: "Name",
+                value: "Int",
+                loc: { start: 466, end: 469 },
+              },
+              loc: { start: 466, end: 469 },
+            },
+            loc: { start: 466, end: 470 },
+          },
+          directives: [],
+          loc: { start: 453, end: 470 },
+        },
+      ],
+      loc: { start: 425, end: 472 },
+    },
+    {
+      kind: "UnionTypeDefinition",
+      name: { kind: "Name", value: "Readable", loc: { start: 480, end: 488 } },
+      directives: [],
+      types: [
+        {
+          kind: "NamedType",
+          name: {
+            kind: "Name",
+            value: "ShortNovel",
+            loc: { start: 491, end: 501 },
+          },
+          loc: { start: 491, end: 501 },
+        },
+        {
+          kind: "NamedType",
+          name: {
+            kind: "Name",
+            value: "Magazine",
+            loc: { start: 504, end: 512 },
+          },
+          loc: { start: 504, end: 512 },
+        },
+      ],
+      loc: { start: 474, end: 512 },
+    },
+    {
+      kind: "ObjectTypeExtension",
+      name: { kind: "Name", value: "Query", loc: { start: 525, end: 530 } },
+      interfaces: [],
+      directives: [],
+      fields: [
+        {
+          kind: "FieldDefinition",
+          name: { kind: "Name", value: "user", loc: { start: 535, end: 539 } },
+          arguments: [
+            {
+              kind: "InputValueDefinition",
+              name: {
+                kind: "Name",
+                value: "id",
+                loc: { start: 540, end: 542 },
+              },
+              type: {
+                kind: "NonNullType",
+                type: {
+                  kind: "NamedType",
+                  name: {
+                    kind: "Name",
+                    value: "ID",
+                    loc: { start: 544, end: 546 },
+                  },
+                  loc: { start: 544, end: 546 },
+                },
+                loc: { start: 544, end: 547 },
+              },
+              directives: [],
+              loc: { start: 540, end: 547 },
+            },
+          ],
+          type: {
+            kind: "NamedType",
+            name: {
+              kind: "Name",
+              value: "User",
+              loc: { start: 550, end: 554 },
+            },
+            loc: { start: 550, end: 554 },
+          },
+          directives: [],
+          loc: { start: 535, end: 554 },
+        },
+      ],
+      loc: { start: 513, end: 556 },
+    },
+    {
+      kind: "ObjectTypeDefinition",
+      name: { kind: "Name", value: "User", loc: { start: 563, end: 567 } },
+      interfaces: [],
+      directives: [],
+      fields: [
+        {
+          kind: "FieldDefinition",
+          name: { kind: "Name", value: "id", loc: { start: 572, end: 574 } },
+          arguments: [],
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: {
+                kind: "Name",
+                value: "ID",
+                loc: { start: 576, end: 578 },
+              },
+              loc: { start: 576, end: 578 },
+            },
+            loc: { start: 576, end: 579 },
+          },
+          directives: [],
+          loc: { start: 572, end: 579 },
+        },
+        {
+          kind: "FieldDefinition",
+          name: {
+            kind: "Name",
+            value: "fullName",
+            loc: { start: 582, end: 590 },
+          },
+          arguments: [],
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: {
+                kind: "Name",
+                value: "String",
+                loc: { start: 592, end: 598 },
+              },
+              loc: { start: 592, end: 598 },
+            },
+            loc: { start: 592, end: 599 },
+          },
+          directives: [],
+          loc: { start: 582, end: 599 },
         },
         {
           kind: "FieldDefinition",
           name: {
             kind: "Name",
             value: "booksRead",
-            loc: { start: 433, end: 442 },
+            loc: { start: 602, end: 611 },
           },
           arguments: [],
           type: {
@@ -380,22 +560,22 @@ export const typeDefs = {
                   name: {
                     kind: "Name",
                     value: "Book",
-                    loc: { start: 445, end: 449 },
+                    loc: { start: 614, end: 618 },
                   },
-                  loc: { start: 445, end: 449 },
+                  loc: { start: 614, end: 618 },
                 },
-                loc: { start: 445, end: 450 },
+                loc: { start: 614, end: 619 },
               },
-              loc: { start: 444, end: 451 },
+              loc: { start: 613, end: 620 },
             },
-            loc: { start: 444, end: 452 },
+            loc: { start: 613, end: 621 },
           },
           directives: [],
-          loc: { start: 433, end: 452 },
+          loc: { start: 602, end: 621 },
         },
       ],
-      loc: { start: 389, end: 454 },
+      loc: { start: 558, end: 623 },
     },
   ],
-  loc: { start: 0, end: 454 },
+  loc: { start: 0, end: 623 },
 } as unknown as DocumentNode;

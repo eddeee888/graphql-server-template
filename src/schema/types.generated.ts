@@ -37,24 +37,29 @@ export type Book = {
   isbn: Scalars["String"];
 };
 
-export type BookPayload = BookResult | StandardError;
+export type BookPayload = BookResult | PayloadError;
 
 export type BookResult = {
   __typename: "BookResult";
   result?: Maybe<Book>;
 };
 
-export type ErrorType =
-  | "FORBIDDEN_ERROR"
-  | "INPUT_VALIDATION_ERROR"
-  | "NOT_FOUND"
-  | "UNEXPECTED_ERROR";
-
 export type Magazine = {
   __typename: "Magazine";
   id: Scalars["ID"];
   issueNumber: Scalars["Int"];
 };
+
+export type PayloadError = {
+  __typename: "PayloadError";
+  error: PayloadErrorType;
+};
+
+export type PayloadErrorType =
+  | "FORBIDDEN_ERROR"
+  | "INPUT_VALIDATION_ERROR"
+  | "NOT_FOUND"
+  | "UNEXPECTED_ERROR";
 
 export type Query = {
   __typename: "Query";
@@ -81,11 +86,6 @@ export type ShortNovel = {
   __typename: "ShortNovel";
   id: Scalars["ID"];
   summary: Scalars["String"];
-};
-
-export type StandardError = {
-  __typename: "StandardError";
-  error: ErrorType;
 };
 
 export type User = {
@@ -205,18 +205,18 @@ export type ResolversTypes = {
   Book: ResolverTypeWrapper<BookMapper>;
   ID: ResolverTypeWrapper<Scalars["ID"]>;
   String: ResolverTypeWrapper<Scalars["String"]>;
-  BookPayload: ResolversTypes["BookResult"] | ResolversTypes["StandardError"];
+  BookPayload: ResolversTypes["BookResult"] | ResolversTypes["PayloadError"];
   BookResult: ResolverTypeWrapper<
     Omit<BookResult, "result"> & { result?: Maybe<ResolversTypes["Book"]> }
   >;
   DateTime: ResolverTypeWrapper<Scalars["DateTime"]>;
-  ErrorType: ErrorType;
   Magazine: ResolverTypeWrapper<Magazine>;
   Int: ResolverTypeWrapper<Scalars["Int"]>;
+  PayloadError: ResolverTypeWrapper<PayloadError>;
+  PayloadErrorType: PayloadErrorType;
   Query: ResolverTypeWrapper<{}>;
   Readable: ResolversTypes["Magazine"] | ResolversTypes["ShortNovel"];
   ShortNovel: ResolverTypeWrapper<ShortNovel>;
-  StandardError: ResolverTypeWrapper<StandardError>;
   User: ResolverTypeWrapper<UserMapper>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
 };
@@ -228,19 +228,19 @@ export type ResolversParentTypes = {
   String: Scalars["String"];
   BookPayload:
     | ResolversParentTypes["BookResult"]
-    | ResolversParentTypes["StandardError"];
+    | ResolversParentTypes["PayloadError"];
   BookResult: Omit<BookResult, "result"> & {
     result?: Maybe<ResolversParentTypes["Book"]>;
   };
   DateTime: Scalars["DateTime"];
   Magazine: Magazine;
   Int: Scalars["Int"];
+  PayloadError: PayloadError;
   Query: {};
   Readable:
     | ResolversParentTypes["Magazine"]
     | ResolversParentTypes["ShortNovel"];
   ShortNovel: ShortNovel;
-  StandardError: StandardError;
   User: UserMapper;
   Boolean: Scalars["Boolean"];
 };
@@ -259,7 +259,7 @@ export type BookPayloadResolvers<
   ParentType extends ResolversParentTypes["BookPayload"] = ResolversParentTypes["BookPayload"]
 > = {
   __resolveType: TypeResolveFn<
-    "BookResult" | "StandardError",
+    "BookResult" | "PayloadError",
     ParentType,
     ContextType
   >;
@@ -284,6 +284,14 @@ export type MagazineResolvers<
 > = {
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   issueNumber?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PayloadErrorResolvers<
+  ContextType = ResolverContext,
+  ParentType extends ResolversParentTypes["PayloadError"] = ResolversParentTypes["PayloadError"]
+> = {
+  error?: Resolver<ResolversTypes["PayloadErrorType"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -331,14 +339,6 @@ export type ShortNovelResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type StandardErrorResolvers<
-  ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["StandardError"] = ResolversParentTypes["StandardError"]
-> = {
-  error?: Resolver<ResolversTypes["ErrorType"], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
 export type UserResolvers<
   ContextType = ResolverContext,
   ParentType extends ResolversParentTypes["User"] = ResolversParentTypes["User"]
@@ -355,9 +355,9 @@ export type Resolvers<ContextType = ResolverContext> = {
   BookResult?: BookResultResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   Magazine?: MagazineResolvers<ContextType>;
+  PayloadError?: PayloadErrorResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Readable?: ReadableResolvers<ContextType>;
   ShortNovel?: ShortNovelResolvers<ContextType>;
-  StandardError?: StandardErrorResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };

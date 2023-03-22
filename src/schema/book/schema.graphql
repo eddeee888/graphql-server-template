@@ -12,7 +12,7 @@ type BookResult {
   result: Book
 }
 
-union BookPayload = BookResult | StandardError
+union BookPayload = BookResult | PayloadError
 
 type ShortNovel {
   id: ID!

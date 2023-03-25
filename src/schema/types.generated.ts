@@ -5,6 +5,7 @@ import {
 } from "graphql";
 import { BookMapper } from "./book/schema.mappers";
 import { UserMapper } from "./user/schema.mappers";
+import { WizardMapper } from "./character/schema.mappers";
 import { ResolverContext } from "../index";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -53,10 +54,44 @@ export type BookResult = {
   result?: Maybe<Book>;
 };
 
+export type CharacterNode = {
+  appearsIn: Array<Readable>;
+  id: Scalars["ID"]["output"];
+  lastAppearsIn?: Maybe<Readable>;
+  mostRelatedCharacter?: Maybe<CharacterNode>;
+  relatedCharacters: Array<CharacterNode>;
+};
+
+export type ExtraCharacter = CharacterNode & {
+  __typename?: "ExtraCharacter";
+  appearsIn: Array<Readable>;
+  creditName: Scalars["String"]["output"];
+  id: Scalars["ID"]["output"];
+  lastAppearsIn?: Maybe<Readable>;
+  mostRelatedCharacter?: Maybe<CharacterNode>;
+  relatedCharacters: Array<CharacterNode>;
+};
+
+export type Fighter = CharacterNode &
+  MainCharacter & {
+    __typename?: "Fighter";
+    appearsIn: Array<Readable>;
+    id: Scalars["ID"]["output"];
+    lastAppearsIn?: Maybe<Readable>;
+    mostRelatedCharacter?: Maybe<CharacterNode>;
+    powerLevel: Scalars["Int"]["output"];
+    relatedCharacters: Array<CharacterNode>;
+    screenName: Scalars["String"]["output"];
+  };
+
 export type Magazine = {
   __typename?: "Magazine";
   id: Scalars["ID"]["output"];
   issueNumber: Scalars["Int"]["output"];
+};
+
+export type MainCharacter = {
+  screenName: Scalars["String"]["output"];
 };
 
 export type PayloadError = {
@@ -73,11 +108,16 @@ export type PayloadErrorType =
 export type Query = {
   __typename?: "Query";
   book: BookPayload;
+  character?: Maybe<CharacterNode>;
   readable?: Maybe<Readable>;
   user?: Maybe<User>;
 };
 
 export type QueryBookArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type QueryCharacterArgs = {
   id: Scalars["ID"]["input"];
 };
 
@@ -103,6 +143,18 @@ export type User = {
   fullName: Scalars["String"]["output"];
   id: Scalars["ID"]["output"];
 };
+
+export type Wizard = CharacterNode &
+  MainCharacter & {
+    __typename?: "Wizard";
+    appearsIn: Array<Readable>;
+    id: Scalars["ID"]["output"];
+    lastAppearsIn?: Maybe<Readable>;
+    mostRelatedCharacter?: Maybe<CharacterNode>;
+    relatedCharacters: Array<CharacterNode>;
+    screenName: Scalars["String"]["output"];
+    spells: Array<Scalars["String"]["output"]>;
+  };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -221,6 +273,26 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
     | (ShortNovel & { __typename: "ShortNovel" });
 };
 
+/** Mapping of interface types */
+export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = {
+  CharacterNode:
+    | (Omit<ExtraCharacter, "appearsIn" | "lastAppearsIn"> & {
+        appearsIn: Array<RefType["Readable"]>;
+        lastAppearsIn?: Maybe<RefType["Readable"]>;
+      } & { __typename: "ExtraCharacter" })
+    | (Omit<Fighter, "appearsIn" | "lastAppearsIn"> & {
+        appearsIn: Array<RefType["Readable"]>;
+        lastAppearsIn?: Maybe<RefType["Readable"]>;
+      } & { __typename: "Fighter" })
+    | (WizardMapper & { __typename: "Wizard" });
+  MainCharacter:
+    | (Omit<Fighter, "appearsIn" | "lastAppearsIn"> & {
+        appearsIn: Array<RefType["Readable"]>;
+        lastAppearsIn?: Maybe<RefType["Readable"]>;
+      } & { __typename: "Fighter" })
+    | (WizardMapper & { __typename: "Wizard" });
+};
+
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Book: ResolverTypeWrapper<BookMapper>;
@@ -232,9 +304,27 @@ export type ResolversTypes = {
   BookResult: ResolverTypeWrapper<
     Omit<BookResult, "result"> & { result?: Maybe<ResolversTypes["Book"]> }
   >;
+  CharacterNode: ResolverTypeWrapper<
+    ResolversInterfaceTypes<ResolversTypes>["CharacterNode"]
+  >;
   DateTime: ResolverTypeWrapper<Scalars["DateTime"]["output"]>;
-  Magazine: ResolverTypeWrapper<Magazine>;
+  ExtraCharacter: ResolverTypeWrapper<
+    Omit<ExtraCharacter, "appearsIn" | "lastAppearsIn"> & {
+      appearsIn: Array<ResolversTypes["Readable"]>;
+      lastAppearsIn?: Maybe<ResolversTypes["Readable"]>;
+    }
+  >;
+  Fighter: ResolverTypeWrapper<
+    Omit<Fighter, "appearsIn" | "lastAppearsIn"> & {
+      appearsIn: Array<ResolversTypes["Readable"]>;
+      lastAppearsIn?: Maybe<ResolversTypes["Readable"]>;
+    }
+  >;
   Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
+  Magazine: ResolverTypeWrapper<Magazine>;
+  MainCharacter: ResolverTypeWrapper<
+    ResolversInterfaceTypes<ResolversTypes>["MainCharacter"]
+  >;
   PayloadError: ResolverTypeWrapper<PayloadError>;
   PayloadErrorType: PayloadErrorType;
   Query: ResolverTypeWrapper<{}>;
@@ -243,6 +333,7 @@ export type ResolversTypes = {
   >;
   ShortNovel: ResolverTypeWrapper<ShortNovel>;
   User: ResolverTypeWrapper<UserMapper>;
+  Wizard: ResolverTypeWrapper<WizardMapper>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
 };
 
@@ -255,14 +346,25 @@ export type ResolversParentTypes = {
   BookResult: Omit<BookResult, "result"> & {
     result?: Maybe<ResolversParentTypes["Book"]>;
   };
+  CharacterNode: ResolversInterfaceTypes<ResolversParentTypes>["CharacterNode"];
   DateTime: Scalars["DateTime"]["output"];
-  Magazine: Magazine;
+  ExtraCharacter: Omit<ExtraCharacter, "appearsIn" | "lastAppearsIn"> & {
+    appearsIn: Array<ResolversParentTypes["Readable"]>;
+    lastAppearsIn?: Maybe<ResolversParentTypes["Readable"]>;
+  };
+  Fighter: Omit<Fighter, "appearsIn" | "lastAppearsIn"> & {
+    appearsIn: Array<ResolversParentTypes["Readable"]>;
+    lastAppearsIn?: Maybe<ResolversParentTypes["Readable"]>;
+  };
   Int: Scalars["Int"]["output"];
+  Magazine: Magazine;
+  MainCharacter: ResolversInterfaceTypes<ResolversParentTypes>["MainCharacter"];
   PayloadError: PayloadError;
   Query: {};
   Readable: ResolversUnionTypes<ResolversParentTypes>["Readable"];
   ShortNovel: ShortNovel;
   User: UserMapper;
+  Wizard: WizardMapper;
   Boolean: Scalars["Boolean"]["output"];
 };
 
@@ -294,10 +396,101 @@ export type BookResultResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type CharacterNodeResolvers<
+  ContextType = ResolverContext,
+  ParentType extends ResolversParentTypes["CharacterNode"] = ResolversParentTypes["CharacterNode"]
+> = {
+  __resolveType?: TypeResolveFn<
+    "ExtraCharacter" | "Fighter" | "Wizard",
+    ParentType,
+    ContextType
+  >;
+  appearsIn?: Resolver<
+    Array<ResolversTypes["Readable"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  lastAppearsIn?: Resolver<
+    Maybe<ResolversTypes["Readable"]>,
+    ParentType,
+    ContextType
+  >;
+  mostRelatedCharacter?: Resolver<
+    Maybe<ResolversTypes["CharacterNode"]>,
+    ParentType,
+    ContextType
+  >;
+  relatedCharacters?: Resolver<
+    Array<ResolversTypes["CharacterNode"]>,
+    ParentType,
+    ContextType
+  >;
+};
+
 export interface DateTimeScalarConfig
   extends GraphQLScalarTypeConfig<ResolversTypes["DateTime"], any> {
   name: "DateTime";
 }
+
+export type ExtraCharacterResolvers<
+  ContextType = ResolverContext,
+  ParentType extends ResolversParentTypes["ExtraCharacter"] = ResolversParentTypes["ExtraCharacter"]
+> = {
+  appearsIn?: Resolver<
+    Array<ResolversTypes["Readable"]>,
+    ParentType,
+    ContextType
+  >;
+  creditName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  lastAppearsIn?: Resolver<
+    Maybe<ResolversTypes["Readable"]>,
+    ParentType,
+    ContextType
+  >;
+  mostRelatedCharacter?: Resolver<
+    Maybe<ResolversTypes["CharacterNode"]>,
+    ParentType,
+    ContextType
+  >;
+  relatedCharacters?: Resolver<
+    Array<ResolversTypes["CharacterNode"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type FighterResolvers<
+  ContextType = ResolverContext,
+  ParentType extends ResolversParentTypes["Fighter"] = ResolversParentTypes["Fighter"]
+> = {
+  appearsIn?: Resolver<
+    Array<ResolversTypes["Readable"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  lastAppearsIn?: Resolver<
+    Maybe<ResolversTypes["Readable"]>,
+    ParentType,
+    ContextType
+  >;
+  mostRelatedCharacter?: Resolver<
+    Maybe<ResolversTypes["CharacterNode"]>,
+    ParentType,
+    ContextType
+  >;
+  powerLevel?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  relatedCharacters?: Resolver<
+    Array<ResolversTypes["CharacterNode"]>,
+    ParentType,
+    ContextType
+  >;
+  screenName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
 
 export type MagazineResolvers<
   ContextType = ResolverContext,
@@ -306,6 +499,14 @@ export type MagazineResolvers<
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   issueNumber?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MainCharacterResolvers<
+  ContextType = ResolverContext,
+  ParentType extends ResolversParentTypes["MainCharacter"] = ResolversParentTypes["MainCharacter"]
+> = {
+  __resolveType?: TypeResolveFn<"Fighter" | "Wizard", ParentType, ContextType>;
+  screenName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 };
 
 export type PayloadErrorResolvers<
@@ -325,6 +526,12 @@ export type QueryResolvers<
     ParentType,
     ContextType,
     RequireFields<QueryBookArgs, "id">
+  >;
+  character?: Resolver<
+    Maybe<ResolversTypes["CharacterNode"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryCharacterArgs, "id">
   >;
   readable?: Resolver<
     Maybe<ResolversTypes["Readable"]>,
@@ -370,15 +577,50 @@ export type UserResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type WizardResolvers<
+  ContextType = ResolverContext,
+  ParentType extends ResolversParentTypes["Wizard"] = ResolversParentTypes["Wizard"]
+> = {
+  appearsIn?: Resolver<
+    Array<ResolversTypes["Readable"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  lastAppearsIn?: Resolver<
+    Maybe<ResolversTypes["Readable"]>,
+    ParentType,
+    ContextType
+  >;
+  mostRelatedCharacter?: Resolver<
+    Maybe<ResolversTypes["CharacterNode"]>,
+    ParentType,
+    ContextType
+  >;
+  relatedCharacters?: Resolver<
+    Array<ResolversTypes["CharacterNode"]>,
+    ParentType,
+    ContextType
+  >;
+  screenName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  spells?: Resolver<Array<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = ResolverContext> = {
   Book?: BookResolvers<ContextType>;
   BookPayload?: BookPayloadResolvers<ContextType>;
   BookResult?: BookResultResolvers<ContextType>;
+  CharacterNode?: CharacterNodeResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
+  ExtraCharacter?: ExtraCharacterResolvers<ContextType>;
+  Fighter?: FighterResolvers<ContextType>;
   Magazine?: MagazineResolvers<ContextType>;
+  MainCharacter?: MainCharacterResolvers<ContextType>;
   PayloadError?: PayloadErrorResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Readable?: ReadableResolvers<ContextType>;
   ShortNovel?: ShortNovelResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
+  Wizard?: WizardResolvers<ContextType>;
 };

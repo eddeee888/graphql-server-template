@@ -1,5 +1,5 @@
 import type { CodegenConfig } from "@graphql-codegen/cli";
-import { preset } from "@eddeee888/gcg-typescript-resolver-files";
+import { defineConfig } from "@eddeee888/gcg-typescript-resolver-files";
 
 const config: CodegenConfig = {
   schema: "**/schema.graphql",
@@ -7,14 +7,11 @@ const config: CodegenConfig = {
     afterAllFileWrite: ["prettier --write"],
   },
   generates: {
-    "src/schema": {
-      preset,
-      presetConfig: {
-        typesPluginsConfig: {
-          contextType: "../index#ResolverContext",
-        },
+    "src/schema": defineConfig({
+      typesPluginsConfig: {
+        contextType: "../index#ResolverContext",
       },
-    },
+    }),
   },
 };
 export default config;

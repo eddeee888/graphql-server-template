@@ -200,12 +200,30 @@ export type DirectiveResolverFn<
   info: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
+/** Mapping of union types */
+export type ResolversUnionTypes = {
+  BookPayload:
+    | (Omit<BookResult, "result"> & { result?: Maybe<ResolversTypes["Book"]> })
+    | PayloadError;
+  Readable: Magazine | ShortNovel;
+};
+
+/** Mapping of union parent types */
+export type ResolversUnionParentTypes = {
+  BookPayload:
+    | (Omit<BookResult, "result"> & {
+        result?: Maybe<ResolversParentTypes["Book"]>;
+      })
+    | PayloadError;
+  Readable: Magazine | ShortNovel;
+};
+
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Book: ResolverTypeWrapper<BookMapper>;
   ID: ResolverTypeWrapper<Scalars["ID"]>;
   String: ResolverTypeWrapper<Scalars["String"]>;
-  BookPayload: ResolversTypes["BookResult"] | ResolversTypes["PayloadError"];
+  BookPayload: ResolverTypeWrapper<ResolversUnionTypes["BookPayload"]>;
   BookResult: ResolverTypeWrapper<
     Omit<BookResult, "result"> & { result?: Maybe<ResolversTypes["Book"]> }
   >;
@@ -215,7 +233,7 @@ export type ResolversTypes = {
   PayloadError: ResolverTypeWrapper<PayloadError>;
   PayloadErrorType: PayloadErrorType;
   Query: ResolverTypeWrapper<{}>;
-  Readable: ResolversTypes["Magazine"] | ResolversTypes["ShortNovel"];
+  Readable: ResolverTypeWrapper<ResolversUnionTypes["Readable"]>;
   ShortNovel: ResolverTypeWrapper<ShortNovel>;
   User: ResolverTypeWrapper<UserMapper>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
@@ -226,9 +244,7 @@ export type ResolversParentTypes = {
   Book: BookMapper;
   ID: Scalars["ID"];
   String: Scalars["String"];
-  BookPayload:
-    | ResolversParentTypes["BookResult"]
-    | ResolversParentTypes["PayloadError"];
+  BookPayload: ResolversUnionParentTypes["BookPayload"];
   BookResult: Omit<BookResult, "result"> & {
     result?: Maybe<ResolversParentTypes["Book"]>;
   };
@@ -237,9 +253,7 @@ export type ResolversParentTypes = {
   Int: Scalars["Int"];
   PayloadError: PayloadError;
   Query: {};
-  Readable:
-    | ResolversParentTypes["Magazine"]
-    | ResolversParentTypes["ShortNovel"];
+  Readable: ResolversUnionParentTypes["Readable"];
   ShortNovel: ShortNovel;
   User: UserMapper;
   Boolean: Scalars["Boolean"];

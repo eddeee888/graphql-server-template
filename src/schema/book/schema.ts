@@ -1,0 +1,31 @@
+import gql from "graphql-tag";
+
+export const schema = gql`
+  extend type Query {
+    book(id: ID!): BookPayload!
+    readable(id: ID!): Readable
+  }
+
+  type Book {
+    id: ID!
+    isbn: String!
+  }
+
+  type BookResult {
+    result: Book
+  }
+
+  union BookPayload = BookResult | PayloadError
+
+  type ShortNovel {
+    id: ID!
+    summary: String!
+  }
+
+  type Magazine {
+    id: ID!
+    issueNumber: Int!
+  }
+
+  union Readable = ShortNovel | Magazine
+`;

@@ -1,17 +1,9 @@
 describe("User tests", () => {
-  it.each`
-    text
-    'a'
-    'b'
-  `(`should be truthy`, (text: string) => {
+  it.each(["a", "b"])("should be truthy", (text) => {
     expect(text).toBeTruthy();
   });
 
-  test.each`
-    text
-    'a'
-    'b'
-  `(`should be truthy`, (text: string) => {
+  test.each(["a", "b"])("should be truthy", (text) => {
     expect(text).toBeTruthy();
   });
 });

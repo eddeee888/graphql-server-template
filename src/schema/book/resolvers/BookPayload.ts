@@ -1,4 +1,4 @@
 import type { BookPayloadResolvers } from "./../../types.generated";
 export const BookPayload: BookPayloadResolvers = {
-  __resolveType: (parent) => parent.__typename,
+  /* Implement BookPayload union logic here */
 };

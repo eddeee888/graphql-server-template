@@ -1,0 +1,44 @@
+extend type Query {
+  character(id: ID!): CharacterNode
+}
+
+interface CharacterNode {
+  id: ID!
+  mostRelatedCharacter: CharacterNode
+  relatedCharacters: [CharacterNode!]!
+  lastAppearsIn: Readable
+  appearsIn: [Readable!]!
+}
+
+interface MainCharacter {
+  screenName: String!
+}
+
+type Wizard implements CharacterNode & MainCharacter {
+  id: ID!
+  mostRelatedCharacter: CharacterNode
+  relatedCharacters: [CharacterNode!]!
+  lastAppearsIn: Readable
+  appearsIn: [Readable!]!
+  screenName: String!
+  spells: [String!]!
+}
+
+type Fighter implements CharacterNode & MainCharacter {
+  id: ID!
+  mostRelatedCharacter: CharacterNode
+  relatedCharacters: [CharacterNode!]!
+  lastAppearsIn: Readable
+  appearsIn: [Readable!]!
+  screenName: String!
+  powerLevel: Int!
+}
+
+type ExtraCharacter implements CharacterNode {
+  id: ID!
+  mostRelatedCharacter: CharacterNode
+  relatedCharacters: [CharacterNode!]!
+  lastAppearsIn: Readable
+  appearsIn: [Readable!]!
+  creditName: String!
+}

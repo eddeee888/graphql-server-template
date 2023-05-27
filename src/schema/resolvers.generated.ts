@@ -3,9 +3,11 @@ import type { Resolvers } from "./types.generated";
 import { Book } from "./book/resolvers/Book";
 import { BookPayload } from "./book/resolvers/BookPayload";
 import { BookResult } from "./book/resolvers/BookResult";
+import { CharacterNode } from "./character/resolvers/CharacterNode";
 import { ExtraCharacter } from "./character/resolvers/ExtraCharacter";
 import { Fighter } from "./character/resolvers/Fighter";
 import { Magazine } from "./book/resolvers/Magazine";
+import { MainCharacter } from "./character/resolvers/MainCharacter";
 import { PayloadError } from "./base/resolvers/PayloadError";
 import { book as Query_book } from "./book/resolvers/Query/book";
 import { character as Query_character } from "./character/resolvers/Query/character";
@@ -27,9 +29,11 @@ export const resolvers: Resolvers = {
   Book: Book,
   BookPayload: BookPayload,
   BookResult: BookResult,
+  CharacterNode: CharacterNode,
   ExtraCharacter: ExtraCharacter,
   Fighter: Fighter,
   Magazine: Magazine,
+  MainCharacter: MainCharacter,
   PayloadError: PayloadError,
   Readable: Readable,
   ShortNovel: ShortNovel,

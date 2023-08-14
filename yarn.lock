@@ -509,16 +509,25 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@eddeee888/gcg-typescript-resolver-files@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@eddeee888/gcg-typescript-resolver-files/-/gcg-typescript-resolver-files-0.5.0.tgz#629074ee9ec3d138cae478c2af94403a5d93e9d5"
-  integrity sha512-NKLi1+Z4VCIVGui4kOyr/6Do5hBSbMAKvalH4kPe8/3/yHzB+tNKIjVsppncccdZ8kGXWYckSv1qri8F54pJyQ==
+"@eddeee888/gcg-server-config@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@eddeee888/gcg-server-config/-/gcg-server-config-0.0.1.tgz#e16e03e6f4ea00c112e0df215ab3cb3c83cda4ec"
+  integrity sha512-NEX+qeT0LKv1AAnL2Lg6PPIm1nh41uQWuv5AuBOTpSPootMjx7ILkw7/SAkyBMXalnB98P9YM0agjg6KCNsqdg==
   dependencies:
+    "@graphql-codegen/typescript" "^4.0.0"
+    "@graphql-codegen/typescript-resolvers" "^4.0.0"
+
+"@eddeee888/gcg-typescript-resolver-files@0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@eddeee888/gcg-typescript-resolver-files/-/gcg-typescript-resolver-files-0.6.0.tgz#5107fa5ca6c8c3498d2487547013d76d24a82259"
+  integrity sha512-HKaE92+JqxQB1iZNA3U4TSHYbdb25/yszfeaUPCKgZSVXY9RPyqEyS3CtXTzGwGit/Ur+26eM36ep5ufdy0J5w==
+  dependencies:
+    "@eddeee888/gcg-server-config" "0.0.1"
     "@graphql-codegen/add" "^5.0.0"
     "@graphql-codegen/plugin-helpers" "^5.0.0"
     "@graphql-codegen/typescript" "^4.0.0"
     "@graphql-codegen/typescript-resolvers" "^4.0.0"
-    ts-morph "^18.0.0"
+    ts-morph "^19.0.0"
 
 "@envelop/core@^3.0.4":
   version "3.0.4"
@@ -1105,10 +1114,10 @@
   resolved "https://registry.yarnpkg.com/@repeaterjs/repeater/-/repeater-3.0.4.tgz#a04d63f4d1bf5540a41b01a921c9a7fddc3bd1ca"
   integrity sha512-AW8PKd6iX3vAZ0vA43nOUOnbq/X5ihgU+mSXXqunMkeQADGiqw/PY0JNeYtD5sr0PAy51YPgAPbDoeapv9r8WA==
 
-"@ts-morph/common@~0.19.0":
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/@ts-morph/common/-/common-0.19.0.tgz#927fcd81d1bbc09c89c4a310a84577fb55f3694e"
-  integrity sha512-Unz/WHmd4pGax91rdIKWi51wnVUW11QttMEPpBiBgIewnc9UQIX7UDLxr5vRlqeByXCwhkF6VabSsI0raWcyAQ==
+"@ts-morph/common@~0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@ts-morph/common/-/common-0.20.0.tgz#3f161996b085ba4519731e4d24c35f6cba5b80af"
+  integrity sha512-7uKjByfbPpwuzkstL3L5MQyuXPSKdoNG93Fmi2JoDcTf3pEP731JdRFAduRVkOs8oqxPsXKA+ScrWkdQ8t/I+Q==
   dependencies:
     fast-glob "^3.2.12"
     minimatch "^7.4.3"
@@ -3625,12 +3634,12 @@ ts-log@^2.2.3:
   resolved "https://registry.yarnpkg.com/ts-log/-/ts-log-2.2.5.tgz#aef3252f1143d11047e2cb6f7cfaac7408d96623"
   integrity sha512-PGcnJoTBnVGy6yYNFxWVNkdcAuAMstvutN9MgDJIV6L0oG8fB+ZNNy1T+wJzah8RPGor1mZuPQkVfXNDpy9eHA==
 
-ts-morph@^18.0.0:
-  version "18.0.0"
-  resolved "https://registry.yarnpkg.com/ts-morph/-/ts-morph-18.0.0.tgz#b9e7a898ea115064585a8a775d86da6edc9c5b4e"
-  integrity sha512-Kg5u0mk19PIIe4islUI/HWRvm9bC1lHejK4S0oh1zaZ77TMZAEmQC0sHQYiu2RgCQFZKXz1fMVi/7nOOeirznA==
+ts-morph@^19.0.0:
+  version "19.0.0"
+  resolved "https://registry.yarnpkg.com/ts-morph/-/ts-morph-19.0.0.tgz#43e95fb0156c3fe3c77c814ac26b7d0be2f93169"
+  integrity sha512-D6qcpiJdn46tUqV45vr5UGM2dnIEuTGNxVhg0sk5NX11orcouwj6i1bMqZIz2mZTZB1Hcgy7C3oEVhAT+f6mbQ==
   dependencies:
-    "@ts-morph/common" "~0.19.0"
+    "@ts-morph/common" "~0.20.0"
     code-block-writer "^12.0.0"
 
 ts-node-dev@2.0.0:

@@ -13,7 +13,7 @@
   "dependencies": {
     "graphql": "16.6.0",
     "graphql-scalars": "1.22.0",
-    "graphql-yoga": "3.9.1"
+    "graphql-yoga": "4.0.5"
   },
   "devDependencies": {
     "@eddeee888/gcg-typescript-resolver-files": "0.6.0",

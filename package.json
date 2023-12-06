@@ -11,7 +11,7 @@
     "dev": "run-p -l start:*"
   },
   "dependencies": {
-    "graphql": "16.6.0",
+    "graphql": "16.8.1",
     "graphql-scalars": "1.22.0",
     "graphql-yoga": "3.9.1"
   },

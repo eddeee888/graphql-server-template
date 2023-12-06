@@ -509,20 +509,20 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@eddeee888/gcg-server-config@0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@eddeee888/gcg-server-config/-/gcg-server-config-0.0.1.tgz#e16e03e6f4ea00c112e0df215ab3cb3c83cda4ec"
-  integrity sha512-NEX+qeT0LKv1AAnL2Lg6PPIm1nh41uQWuv5AuBOTpSPootMjx7ILkw7/SAkyBMXalnB98P9YM0agjg6KCNsqdg==
+"@eddeee888/gcg-server-config@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@eddeee888/gcg-server-config/-/gcg-server-config-0.1.0.tgz#5afc5c7ad277b186909d9e994cc8bd95bc069cce"
+  integrity sha512-ZM4Cfem3FWelpz5sdCfJ+fZTCyY1WDdcT6K5GZ/UZpr7JjMApSMKnf+o9VMT2T+BB91Hffr0AH8W4oLEWUEWuw==
   dependencies:
     "@graphql-codegen/typescript" "^4.0.0"
     "@graphql-codegen/typescript-resolvers" "^4.0.0"
 
-"@eddeee888/gcg-typescript-resolver-files@0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@eddeee888/gcg-typescript-resolver-files/-/gcg-typescript-resolver-files-0.6.0.tgz#5107fa5ca6c8c3498d2487547013d76d24a82259"
-  integrity sha512-HKaE92+JqxQB1iZNA3U4TSHYbdb25/yszfeaUPCKgZSVXY9RPyqEyS3CtXTzGwGit/Ur+26eM36ep5ufdy0J5w==
+"@eddeee888/gcg-typescript-resolver-files@0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@eddeee888/gcg-typescript-resolver-files/-/gcg-typescript-resolver-files-0.7.1.tgz#083b4b913be797d8984984b156c9ed77d91d59f0"
+  integrity sha512-2dppOIlLkBdd1k+LmjnRj3Ud808IXqpTfPzVNn6ZfmP4KwG2516rFuOH0IT1BW63GWgvyXIhbg4D9wmUbq4aIg==
   dependencies:
-    "@eddeee888/gcg-server-config" "0.0.1"
+    "@eddeee888/gcg-server-config" "0.1.0"
     "@graphql-codegen/add" "^5.0.0"
     "@graphql-codegen/plugin-helpers" "^5.0.0"
     "@graphql-codegen/typescript" "^4.0.0"

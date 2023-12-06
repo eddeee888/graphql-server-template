@@ -7,8 +7,8 @@ import { BookMapper } from "./book/schema.mappers";
 import { UserMapper } from "./user/schema.mappers";
 import { WizardMapper } from "./character/schema.mappers";
 import { ResolverContext } from "../index";
-export type Maybe<T> = T | null;
-export type InputMaybe<T> = Maybe<T>;
+export type Maybe<T> = T | null | undefined;
+export type InputMaybe<T> = T | null | undefined;
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K];
 };
@@ -113,19 +113,19 @@ export type Query = {
   user?: Maybe<User>;
 };
 
-export type QueryBookArgs = {
+export type QuerybookArgs = {
   id: Scalars["ID"]["input"];
 };
 
-export type QueryCharacterArgs = {
+export type QuerycharacterArgs = {
   id: Scalars["ID"]["input"];
 };
 
-export type QueryReadableArgs = {
+export type QueryreadableArgs = {
   id: Scalars["ID"]["input"];
 };
 
-export type QueryUserArgs = {
+export type QueryuserArgs = {
   id: Scalars["ID"]["input"];
 };
 
@@ -525,25 +525,25 @@ export type QueryResolvers<
     ResolversTypes["BookPayload"],
     ParentType,
     ContextType,
-    RequireFields<QueryBookArgs, "id">
+    RequireFields<QuerybookArgs, "id">
   >;
   character?: Resolver<
     Maybe<ResolversTypes["CharacterNode"]>,
     ParentType,
     ContextType,
-    RequireFields<QueryCharacterArgs, "id">
+    RequireFields<QuerycharacterArgs, "id">
   >;
   readable?: Resolver<
     Maybe<ResolversTypes["Readable"]>,
     ParentType,
     ContextType,
-    RequireFields<QueryReadableArgs, "id">
+    RequireFields<QueryreadableArgs, "id">
   >;
   user?: Resolver<
     Maybe<ResolversTypes["User"]>,
     ParentType,
     ContextType,
-    RequireFields<QueryUserArgs, "id">
+    RequireFields<QueryuserArgs, "id">
   >;
 };
 

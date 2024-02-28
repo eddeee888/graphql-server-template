@@ -20,7 +20,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
 };
 export type MakeEmpty<
   T extends { [key: string]: unknown },
-  K extends keyof T
+  K extends keyof T,
 > = { [_ in K]?: never };
 export type Incremental<T> =
   | T
@@ -169,21 +169,21 @@ export type ResolverFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => Promise<TResult> | TResult;
 
 export type SubscriptionSubscribeFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => AsyncIterable<TResult> | Promise<AsyncIterable<TResult>>;
 
 export type SubscriptionResolveFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => TResult | Promise<TResult>;
 
 export interface SubscriptionSubscriberObject<
@@ -191,7 +191,7 @@ export interface SubscriptionSubscriberObject<
   TKey extends string,
   TParent,
   TContext,
-  TArgs
+  TArgs,
 > {
   subscribe: SubscriptionSubscribeFn<
     { [key in TKey]: TResult },
@@ -217,7 +217,7 @@ export type SubscriptionObject<
   TKey extends string,
   TParent,
   TContext,
-  TArgs
+  TArgs,
 > =
   | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
   | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
@@ -227,7 +227,7 @@ export type SubscriptionResolver<
   TKey extends string,
   TParent = {},
   TContext = {},
-  TArgs = {}
+  TArgs = {},
 > =
   | ((
       ...args: any[]
@@ -237,13 +237,13 @@ export type SubscriptionResolver<
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   parent: TParent,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
 export type IsTypeOfResolverFn<T = {}, TContext = {}> = (
   obj: T,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
@@ -252,13 +252,13 @@ export type DirectiveResolverFn<
   TResult = {},
   TParent = {},
   TContext = {},
-  TArgs = {}
+  TArgs = {},
 > = (
   next: NextResolverFn<TResult>,
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => TResult | Promise<TResult>;
 
 /** Mapping of union types */
@@ -370,7 +370,8 @@ export type ResolversParentTypes = {
 
 export type BookResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["Book"] = ResolversParentTypes["Book"]
+  ParentType extends
+    ResolversParentTypes["Book"] = ResolversParentTypes["Book"],
 > = {
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   isbn?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
@@ -379,7 +380,8 @@ export type BookResolvers<
 
 export type BookPayloadResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["BookPayload"] = ResolversParentTypes["BookPayload"]
+  ParentType extends
+    ResolversParentTypes["BookPayload"] = ResolversParentTypes["BookPayload"],
 > = {
   __resolveType?: TypeResolveFn<
     "BookResult" | "PayloadError",
@@ -390,7 +392,8 @@ export type BookPayloadResolvers<
 
 export type BookResultResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["BookResult"] = ResolversParentTypes["BookResult"]
+  ParentType extends
+    ResolversParentTypes["BookResult"] = ResolversParentTypes["BookResult"],
 > = {
   result?: Resolver<Maybe<ResolversTypes["Book"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -398,7 +401,8 @@ export type BookResultResolvers<
 
 export type CharacterNodeResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["CharacterNode"] = ResolversParentTypes["CharacterNode"]
+  ParentType extends
+    ResolversParentTypes["CharacterNode"] = ResolversParentTypes["CharacterNode"],
 > = {
   __resolveType?: TypeResolveFn<
     "ExtraCharacter" | "Fighter" | "Wizard",
@@ -435,7 +439,8 @@ export interface DateTimeScalarConfig
 
 export type ExtraCharacterResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["ExtraCharacter"] = ResolversParentTypes["ExtraCharacter"]
+  ParentType extends
+    ResolversParentTypes["ExtraCharacter"] = ResolversParentTypes["ExtraCharacter"],
 > = {
   appearsIn?: Resolver<
     Array<ResolversTypes["Readable"]>,
@@ -464,7 +469,8 @@ export type ExtraCharacterResolvers<
 
 export type FighterResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["Fighter"] = ResolversParentTypes["Fighter"]
+  ParentType extends
+    ResolversParentTypes["Fighter"] = ResolversParentTypes["Fighter"],
 > = {
   appearsIn?: Resolver<
     Array<ResolversTypes["Readable"]>,
@@ -494,7 +500,8 @@ export type FighterResolvers<
 
 export type MagazineResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["Magazine"] = ResolversParentTypes["Magazine"]
+  ParentType extends
+    ResolversParentTypes["Magazine"] = ResolversParentTypes["Magazine"],
 > = {
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   issueNumber?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
@@ -503,7 +510,8 @@ export type MagazineResolvers<
 
 export type MainCharacterResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["MainCharacter"] = ResolversParentTypes["MainCharacter"]
+  ParentType extends
+    ResolversParentTypes["MainCharacter"] = ResolversParentTypes["MainCharacter"],
 > = {
   __resolveType?: TypeResolveFn<"Fighter" | "Wizard", ParentType, ContextType>;
   screenName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
@@ -511,7 +519,8 @@ export type MainCharacterResolvers<
 
 export type PayloadErrorResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["PayloadError"] = ResolversParentTypes["PayloadError"]
+  ParentType extends
+    ResolversParentTypes["PayloadError"] = ResolversParentTypes["PayloadError"],
 > = {
   error?: Resolver<ResolversTypes["PayloadErrorType"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -519,7 +528,8 @@ export type PayloadErrorResolvers<
 
 export type QueryResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
+  ParentType extends
+    ResolversParentTypes["Query"] = ResolversParentTypes["Query"],
 > = {
   book?: Resolver<
     ResolversTypes["BookPayload"],
@@ -549,7 +559,8 @@ export type QueryResolvers<
 
 export type ReadableResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["Readable"] = ResolversParentTypes["Readable"]
+  ParentType extends
+    ResolversParentTypes["Readable"] = ResolversParentTypes["Readable"],
 > = {
   __resolveType?: TypeResolveFn<
     "Magazine" | "ShortNovel",
@@ -560,7 +571,8 @@ export type ReadableResolvers<
 
 export type ShortNovelResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["ShortNovel"] = ResolversParentTypes["ShortNovel"]
+  ParentType extends
+    ResolversParentTypes["ShortNovel"] = ResolversParentTypes["ShortNovel"],
 > = {
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   summary?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
@@ -569,7 +581,8 @@ export type ShortNovelResolvers<
 
 export type UserResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["User"] = ResolversParentTypes["User"]
+  ParentType extends
+    ResolversParentTypes["User"] = ResolversParentTypes["User"],
 > = {
   booksRead?: Resolver<Array<ResolversTypes["Book"]>, ParentType, ContextType>;
   fullName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
@@ -579,7 +592,8 @@ export type UserResolvers<
 
 export type WizardResolvers<
   ContextType = ResolverContext,
-  ParentType extends ResolversParentTypes["Wizard"] = ResolversParentTypes["Wizard"]
+  ParentType extends
+    ResolversParentTypes["Wizard"] = ResolversParentTypes["Wizard"],
 > = {
   appearsIn?: Resolver<
     Array<ResolversTypes["Readable"]>,

@@ -2,7 +2,7 @@ import type { QueryResolvers } from "./../../../types.generated";
 export const character: NonNullable<QueryResolvers["character"]> = async (
   _parent,
   { id },
-  { data }
+  { data },
 ) => {
   const foundCharacter = data.characters[id];
 

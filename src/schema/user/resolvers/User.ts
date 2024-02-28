@@ -10,7 +10,7 @@ export const User: UserResolvers = {
         }
         return res;
       },
-      []
+      [],
     );
 
     return books;

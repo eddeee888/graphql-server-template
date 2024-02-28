@@ -2,7 +2,7 @@ import type { QueryResolvers } from "./../../../types.generated";
 export const readable: NonNullable<QueryResolvers["readable"]> = async (
   _parent,
   { id }, // id is something like this: Magazine:1, ShortNovel:2, etc.
-  { data }
+  { data },
 ) => {
   const [readableType, readableId] = id.split(":");
 

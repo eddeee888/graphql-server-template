@@ -9,7 +9,7 @@ const config: CodegenConfig = {
   generates: {
     "src/schema": defineConfig({
       typesPluginsConfig: {
-        contextType: "../index#ResolverContext",
+        contextType: "../types.context#ResolverContext",
       },
     }),
   },

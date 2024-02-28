@@ -6,11 +6,13 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start:server": "ts-node-dev src/index.ts",
+    "start:yoga": "ts-node-dev src/server.yoga.ts",
+    "start:apollo": "ts-node-dev src/server.apollo.ts",
     "start:codegen": "graphql-codegen --watch",
     "dev": "run-p -l start:*"
   },
   "dependencies": {
+    "@apollo/server": "4.10.0",
     "graphql": "16.8.1",
     "graphql-scalars": "1.22.4",
     "graphql-yoga": "5.0.1"

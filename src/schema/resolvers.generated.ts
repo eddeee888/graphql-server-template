@@ -11,7 +11,8 @@ import { character as Query_character } from "./character/resolvers/Query/charac
 import { readable as Query_readable } from "./book/resolvers/Query/readable";
 import { user as Query_user } from "./user/resolvers/Query/user";
 import { ShortNovel } from "./book/resolvers/ShortNovel";
-import { User } from "./user/resolvers/User";
+import { User as book_User } from "./book/resolvers/User";
+import { User as user_User } from "./user/resolvers/User";
 import { Wizard } from "./character/resolvers/Wizard";
 import { DateTimeResolver } from "graphql-scalars";
 export const resolvers: Resolvers = {
@@ -29,7 +30,7 @@ export const resolvers: Resolvers = {
   Magazine: Magazine,
   PayloadError: PayloadError,
   ShortNovel: ShortNovel,
-  User: User,
+  User: { ...book_User, ...user_User },
   Wizard: Wizard,
   DateTime: DateTimeResolver,
 };

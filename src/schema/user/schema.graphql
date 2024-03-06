@@ -4,5 +4,4 @@ extend type Query {
 type User {
   id: ID!
   fullName: String!
-  booksRead: [Book!]!
 }

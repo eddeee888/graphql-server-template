@@ -1,0 +1,13 @@
+{
+  "plugins": ["@eddeee888"],
+  "parserOptions": {
+    "project": ["tsconfig.json"]
+  },
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "extends": ["plugin:@eddeee888/typescript"],
+      "rules": {}
+    }
+  ]
+}

@@ -8,7 +8,9 @@
   "scripts": {
     "start:server": "ts-node-dev src/index.ts",
     "start:codegen": "graphql-codegen --watch",
-    "dev": "run-p -l start:*"
+    "dev": "run-p -l start:*",
+    "lint": "eslint .",
+    "format": "prettier . --write"
   },
   "dependencies": {
     "graphql": "16.8.1",
@@ -16,8 +18,12 @@
     "graphql-yoga": "5.0.1"
   },
   "devDependencies": {
+    "@eddeee888/eslint-plugin": "0.0.1",
     "@eddeee888/gcg-typescript-resolver-files": "0.7.2",
     "@graphql-codegen/cli": "4.0.1",
+    "@typescript-eslint/eslint-plugin": "7.1.1",
+    "@typescript-eslint/parser": "7.1.1",
+    "eslint": "8.57.0",
     "npm-run-all": "4.1.5",
     "prettier": "3.1.0",
     "ts-node": "10.9.1",

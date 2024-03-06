@@ -1,6 +1,6 @@
-import { WizardMapper } from "../schema/character/schema.mappers";
-import { BookMapper } from "../schema/book/schema.mappers";
-import { UserMapper } from "../schema/user/schema.mappers";
+import type { WizardMapper } from "../schema/character/schema.mappers";
+import type { BookMapper } from "../schema/book/schema.mappers";
+import type { UserMapper } from "../schema/user/schema.mappers";
 
 type DatabaseMagazine = {
   id: string;

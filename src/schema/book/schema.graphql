@@ -25,3 +25,7 @@ type Magazine {
 }
 
 union Readable = ShortNovel | Magazine
+
+extend type User {
+  booksRead: [Book!]!
+}

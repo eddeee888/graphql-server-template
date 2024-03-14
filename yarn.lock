@@ -529,10 +529,10 @@
     "@graphql-codegen/typescript" "^4.0.0"
     "@graphql-codegen/typescript-resolvers" "^4.0.0"
 
-"@eddeee888/gcg-typescript-resolver-files@0.7.2":
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/@eddeee888/gcg-typescript-resolver-files/-/gcg-typescript-resolver-files-0.7.2.tgz#4c46039a4878cfb458eabd4208f26799995325bf"
-  integrity sha512-9LBkn6pGtXSQmH9rLoF/CkUUlsNwX4A539pRolr/yS++arGN871IptmZ89ezM4iGbbW/OPwp+Zp7AmNTgBExmA==
+"@eddeee888/gcg-typescript-resolver-files@0.7.3":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@eddeee888/gcg-typescript-resolver-files/-/gcg-typescript-resolver-files-0.7.3.tgz#62aa3222eb072cb1d5ae0ea8968707893332c86b"
+  integrity sha512-EeOn9Qyj1JV0cXXny7bgmcyqBCRIv3bwdX7P1xIQxuE798u5bfNRbQbHbDIPep01vo+p85MeeY6pyn9TipgKnQ==
   dependencies:
     "@eddeee888/gcg-server-config" "0.1.0"
     "@graphql-codegen/add" "^5.0.0"

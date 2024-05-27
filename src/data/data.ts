@@ -1,27 +1,47 @@
-interface DatabaseUser {
+export interface DatabaseUser {
   id: string;
   age: number;
   firstName: string;
   lastName: string;
+  petId: string | null;
 }
 
-const createUser = (id: string): DatabaseUser => {
+interface DatabasePet {
+  id: string;
+  name: string;
+}
+
+const createUser = (id: string, petId: string | null): DatabaseUser => {
   return {
     id,
-    age: parseInt(id, 10),
-    firstName: `firstName${id}`,
-    lastName: `lastName${id}`,
+    age: parseInt(id.split(":")[1], 10),
+    firstName: `firstName-${id}`,
+    lastName: `lastName-${id}`,
+    petId,
+  };
+};
+
+const createPet = (id: string): DatabasePet => {
+  return {
+    id,
+    name: `petName-${id}`,
   };
 };
 
 export const data: {
   users: Record<string, DatabaseUser>;
+  pets: Record<string, DatabasePet>;
 } = {
   users: {
-    "1": createUser("1"),
-    "2": createUser("2"),
-    "3": createUser("3"),
-    "4": createUser("4"),
-    "5": createUser("5"),
+    "u:1": createUser("u:1", "p:1"),
+    "u:2": createUser("u:2", null),
+    "u:3": createUser("u:3", null),
+    "u:4": createUser("u:4", "p:2"),
+    "u:5": createUser("u:5", "p:3"),
+  },
+  pets: {
+    "p:1": createPet("p:1"),
+    "p:2": createPet("p:2"),
+    "p:3": createPet("p:3"),
   },
 };

@@ -102,63 +102,14 @@ export const typeDefs = {
       loc: { start: 163, end: 178 },
     },
     {
-      kind: "ObjectTypeExtension",
-      name: { kind: "Name", value: "Query", loc: { start: 191, end: 196 } },
-      interfaces: [],
-      directives: [],
-      fields: [
-        {
-          kind: "FieldDefinition",
-          name: { kind: "Name", value: "user", loc: { start: 201, end: 205 } },
-          arguments: [
-            {
-              kind: "InputValueDefinition",
-              name: {
-                kind: "Name",
-                value: "id",
-                loc: { start: 206, end: 208 },
-              },
-              type: {
-                kind: "NonNullType",
-                type: {
-                  kind: "NamedType",
-                  name: {
-                    kind: "Name",
-                    value: "ID",
-                    loc: { start: 210, end: 212 },
-                  },
-                  loc: { start: 210, end: 212 },
-                },
-                loc: { start: 210, end: 213 },
-              },
-              directives: [],
-              loc: { start: 206, end: 213 },
-            },
-          ],
-          type: {
-            kind: "NamedType",
-            name: {
-              kind: "Name",
-              value: "User",
-              loc: { start: 216, end: 220 },
-            },
-            loc: { start: 216, end: 220 },
-          },
-          directives: [],
-          loc: { start: 201, end: 220 },
-        },
-      ],
-      loc: { start: 179, end: 222 },
-    },
-    {
       kind: "ObjectTypeDefinition",
-      name: { kind: "Name", value: "User", loc: { start: 229, end: 233 } },
+      name: { kind: "Name", value: "User", loc: { start: 184, end: 188 } },
       interfaces: [],
       directives: [],
       fields: [
         {
           kind: "FieldDefinition",
-          name: { kind: "Name", value: "id", loc: { start: 238, end: 240 } },
+          name: { kind: "Name", value: "id", loc: { start: 193, end: 195 } },
           arguments: [],
           type: {
             kind: "NonNullType",
@@ -167,18 +118,18 @@ export const typeDefs = {
               name: {
                 kind: "Name",
                 value: "ID",
-                loc: { start: 242, end: 244 },
+                loc: { start: 197, end: 199 },
               },
-              loc: { start: 242, end: 244 },
+              loc: { start: 197, end: 199 },
             },
-            loc: { start: 242, end: 245 },
+            loc: { start: 197, end: 200 },
           },
           directives: [],
-          loc: { start: 238, end: 245 },
+          loc: { start: 193, end: 200 },
         },
         {
           kind: "FieldDefinition",
-          name: { kind: "Name", value: "age", loc: { start: 248, end: 251 } },
+          name: { kind: "Name", value: "age", loc: { start: 203, end: 206 } },
           arguments: [],
           type: {
             kind: "NonNullType",
@@ -187,18 +138,18 @@ export const typeDefs = {
               name: {
                 kind: "Name",
                 value: "Int",
-                loc: { start: 253, end: 256 },
+                loc: { start: 208, end: 211 },
               },
-              loc: { start: 253, end: 256 },
+              loc: { start: 208, end: 211 },
             },
-            loc: { start: 253, end: 257 },
+            loc: { start: 208, end: 212 },
           },
           directives: [],
-          loc: { start: 248, end: 257 },
+          loc: { start: 203, end: 212 },
         },
       ],
-      loc: { start: 224, end: 259 },
+      loc: { start: 179, end: 214 },
     },
   ],
-  loc: { start: 0, end: 260 },
+  loc: { start: 0, end: 215 },
 } as unknown as DocumentNode;

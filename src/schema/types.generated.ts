@@ -24,9 +24,6 @@ export type Incremental<T> =
   | {
       [P in keyof T]?: P extends " $fragmentName" | "__typename" ? T[P] : never;
     };
-export type RequireFields<T, K extends keyof T> = Omit<T, K> & {
-  [P in K]-?: NonNullable<T[P]>;
-};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string | number };
@@ -50,11 +47,6 @@ export type PayloadErrorType =
 
 export type Query = {
   __typename?: "Query";
-  user?: Maybe<User>;
-};
-
-export type QueryuserArgs = {
-  id: Scalars["ID"]["input"];
 };
 
 export type User = {
@@ -174,9 +166,9 @@ export type ResolversTypes = {
   PayloadError: ResolverTypeWrapper<PayloadError>;
   PayloadErrorType: PayloadErrorType;
   Query: ResolverTypeWrapper<{}>;
-  ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
   User: ResolverTypeWrapper<User>;
   Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
+  ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
   String: ResolverTypeWrapper<Scalars["String"]["output"]>;
 };
@@ -186,9 +178,9 @@ export type ResolversParentTypes = {
   DateTime: Scalars["DateTime"]["output"];
   PayloadError: PayloadError;
   Query: {};
-  ID: Scalars["ID"]["output"];
   User: User;
   Int: Scalars["Int"]["output"];
+  ID: Scalars["ID"]["output"];
   Boolean: Scalars["Boolean"]["output"];
   String: Scalars["String"]["output"];
 };
@@ -211,14 +203,7 @@ export type QueryResolvers<
   ContextType = ResolverContext,
   ParentType extends
     ResolversParentTypes["Query"] = ResolversParentTypes["Query"],
-> = {
-  user?: Resolver<
-    Maybe<ResolversTypes["User"]>,
-    ParentType,
-    ContextType,
-    RequireFields<QueryuserArgs, "id">
-  >;
-};
+> = {};
 
 export type UserResolvers<
   ContextType = ResolverContext,

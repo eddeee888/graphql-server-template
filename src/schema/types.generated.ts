@@ -262,9 +262,9 @@ export type DirectiveResolverFn<
 ) => TResult | Promise<TResult>;
 
 /** Mapping of union types */
-export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
+export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
   BookPayload:
-    | (Omit<BookResult, "result"> & { result?: Maybe<RefType["Book"]> } & {
+    | (Omit<BookResult, "result"> & { result?: Maybe<_RefType["Book"]> } & {
         __typename: "BookResult";
       })
     | (PayloadError & { __typename: "PayloadError" });
@@ -274,24 +274,49 @@ export type ResolversUnionTypes<RefType extends Record<string, unknown>> = {
 };
 
 /** Mapping of interface types */
-export type ResolversInterfaceTypes<RefType extends Record<string, unknown>> = {
-  CharacterNode:
-    | (Omit<ExtraCharacter, "appearsIn" | "lastAppearsIn"> & {
-        appearsIn: Array<RefType["Readable"]>;
-        lastAppearsIn?: Maybe<RefType["Readable"]>;
-      } & { __typename: "ExtraCharacter" })
-    | (Omit<Fighter, "appearsIn" | "lastAppearsIn"> & {
-        appearsIn: Array<RefType["Readable"]>;
-        lastAppearsIn?: Maybe<RefType["Readable"]>;
-      } & { __typename: "Fighter" })
-    | (WizardMapper & { __typename: "Wizard" });
-  MainCharacter:
-    | (Omit<Fighter, "appearsIn" | "lastAppearsIn"> & {
-        appearsIn: Array<RefType["Readable"]>;
-        lastAppearsIn?: Maybe<RefType["Readable"]>;
-      } & { __typename: "Fighter" })
-    | (WizardMapper & { __typename: "Wizard" });
-};
+export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> =
+  {
+    CharacterNode:
+      | (Omit<
+          ExtraCharacter,
+          | "appearsIn"
+          | "lastAppearsIn"
+          | "mostRelatedCharacter"
+          | "relatedCharacters"
+        > & {
+          appearsIn: Array<_RefType["Readable"]>;
+          lastAppearsIn?: Maybe<_RefType["Readable"]>;
+          mostRelatedCharacter?: Maybe<_RefType["CharacterNode"]>;
+          relatedCharacters: Array<_RefType["CharacterNode"]>;
+        } & { __typename: "ExtraCharacter" })
+      | (Omit<
+          Fighter,
+          | "appearsIn"
+          | "lastAppearsIn"
+          | "mostRelatedCharacter"
+          | "relatedCharacters"
+        > & {
+          appearsIn: Array<_RefType["Readable"]>;
+          lastAppearsIn?: Maybe<_RefType["Readable"]>;
+          mostRelatedCharacter?: Maybe<_RefType["CharacterNode"]>;
+          relatedCharacters: Array<_RefType["CharacterNode"]>;
+        } & { __typename: "Fighter" })
+      | (WizardMapper & { __typename: "Wizard" });
+    MainCharacter:
+      | (Omit<
+          Fighter,
+          | "appearsIn"
+          | "lastAppearsIn"
+          | "mostRelatedCharacter"
+          | "relatedCharacters"
+        > & {
+          appearsIn: Array<_RefType["Readable"]>;
+          lastAppearsIn?: Maybe<_RefType["Readable"]>;
+          mostRelatedCharacter?: Maybe<_RefType["CharacterNode"]>;
+          relatedCharacters: Array<_RefType["CharacterNode"]>;
+        } & { __typename: "Fighter" })
+      | (WizardMapper & { __typename: "Wizard" });
+  };
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
@@ -309,15 +334,31 @@ export type ResolversTypes = {
   >;
   DateTime: ResolverTypeWrapper<Scalars["DateTime"]["output"]>;
   ExtraCharacter: ResolverTypeWrapper<
-    Omit<ExtraCharacter, "appearsIn" | "lastAppearsIn"> & {
+    Omit<
+      ExtraCharacter,
+      | "appearsIn"
+      | "lastAppearsIn"
+      | "mostRelatedCharacter"
+      | "relatedCharacters"
+    > & {
       appearsIn: Array<ResolversTypes["Readable"]>;
       lastAppearsIn?: Maybe<ResolversTypes["Readable"]>;
+      mostRelatedCharacter?: Maybe<ResolversTypes["CharacterNode"]>;
+      relatedCharacters: Array<ResolversTypes["CharacterNode"]>;
     }
   >;
   Fighter: ResolverTypeWrapper<
-    Omit<Fighter, "appearsIn" | "lastAppearsIn"> & {
+    Omit<
+      Fighter,
+      | "appearsIn"
+      | "lastAppearsIn"
+      | "mostRelatedCharacter"
+      | "relatedCharacters"
+    > & {
       appearsIn: Array<ResolversTypes["Readable"]>;
       lastAppearsIn?: Maybe<ResolversTypes["Readable"]>;
+      mostRelatedCharacter?: Maybe<ResolversTypes["CharacterNode"]>;
+      relatedCharacters: Array<ResolversTypes["CharacterNode"]>;
     }
   >;
   Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
@@ -348,13 +389,23 @@ export type ResolversParentTypes = {
   };
   CharacterNode: ResolversInterfaceTypes<ResolversParentTypes>["CharacterNode"];
   DateTime: Scalars["DateTime"]["output"];
-  ExtraCharacter: Omit<ExtraCharacter, "appearsIn" | "lastAppearsIn"> & {
+  ExtraCharacter: Omit<
+    ExtraCharacter,
+    "appearsIn" | "lastAppearsIn" | "mostRelatedCharacter" | "relatedCharacters"
+  > & {
     appearsIn: Array<ResolversParentTypes["Readable"]>;
     lastAppearsIn?: Maybe<ResolversParentTypes["Readable"]>;
+    mostRelatedCharacter?: Maybe<ResolversParentTypes["CharacterNode"]>;
+    relatedCharacters: Array<ResolversParentTypes["CharacterNode"]>;
   };
-  Fighter: Omit<Fighter, "appearsIn" | "lastAppearsIn"> & {
+  Fighter: Omit<
+    Fighter,
+    "appearsIn" | "lastAppearsIn" | "mostRelatedCharacter" | "relatedCharacters"
+  > & {
     appearsIn: Array<ResolversParentTypes["Readable"]>;
     lastAppearsIn?: Maybe<ResolversParentTypes["Readable"]>;
+    mostRelatedCharacter?: Maybe<ResolversParentTypes["CharacterNode"]>;
+    relatedCharacters: Array<ResolversParentTypes["CharacterNode"]>;
   };
   Int: Scalars["Int"]["output"];
   Magazine: Magazine;

@@ -8,6 +8,7 @@ const config: CodegenConfig = {
   },
   generates: {
     "src/schema": defineConfig({
+      resolverGeneration: "minimal",
       typesPluginsConfig: {
         contextType: "../index#ResolverContext",
       },

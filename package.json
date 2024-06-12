@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@eddeee888/eslint-plugin": "0.0.1",
-    "@eddeee888/gcg-typescript-resolver-files": "0.9.0",
+    "@eddeee888/gcg-typescript-resolver-files": "0.9.4",
     "@graphql-codegen/cli": "4.0.1",
     "@typescript-eslint/eslint-plugin": "7.1.1",
     "@typescript-eslint/parser": "7.1.1",

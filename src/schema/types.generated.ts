@@ -28,6 +28,9 @@ export type Incremental<T> =
       [P in keyof T]?: P extends " $fragmentName" | "__typename" ? T[P] : never;
     };
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+export type EnumResolverSignature<T, AllowedValues = any> = {
+  [key in keyof T]?: AllowedValues;
+};
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & {
   [P in K]-?: NonNullable<T[P]>;
 };
@@ -267,7 +270,9 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
     | (Omit<BookResult, "result"> & { result?: Maybe<_RefType["Book"]> } & {
         __typename: "BookResult";
       })
-    | (PayloadError & { __typename: "PayloadError" });
+    | (Omit<PayloadError, "error"> & { error: _RefType["PayloadErrorType"] } & {
+        __typename: "PayloadError";
+      });
   Readable:
     | (Magazine & { __typename: "Magazine" })
     | (ShortNovel & { __typename: "ShortNovel" });
@@ -366,8 +371,15 @@ export type ResolversTypes = {
   MainCharacter: ResolverTypeWrapper<
     ResolversInterfaceTypes<ResolversTypes>["MainCharacter"]
   >;
-  PayloadError: ResolverTypeWrapper<PayloadError>;
-  PayloadErrorType: PayloadErrorType;
+  PayloadError: ResolverTypeWrapper<
+    Omit<PayloadError, "error"> & { error: ResolversTypes["PayloadErrorType"] }
+  >;
+  PayloadErrorType: ResolverTypeWrapper<
+    | "NOT_FOUND"
+    | "INPUT_VALIDATION_ERROR"
+    | "FORBIDDEN_ERROR"
+    | "UNEXPECTED_ERROR"
+  >;
   Query: ResolverTypeWrapper<{}>;
   Readable: ResolverTypeWrapper<
     ResolversUnionTypes<ResolversTypes>["Readable"]
@@ -577,6 +589,16 @@ export type PayloadErrorResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type PayloadErrorTypeResolvers = EnumResolverSignature<
+  {
+    FORBIDDEN_ERROR?: any;
+    INPUT_VALIDATION_ERROR?: any;
+    NOT_FOUND?: any;
+    UNEXPECTED_ERROR?: any;
+  },
+  ResolversTypes["PayloadErrorType"]
+>;
+
 export type QueryResolvers<
   ContextType = ResolverContext,
   ParentType extends
@@ -683,6 +705,7 @@ export type Resolvers<ContextType = ResolverContext> = {
   Magazine?: MagazineResolvers<ContextType>;
   MainCharacter?: MainCharacterResolvers<ContextType>;
   PayloadError?: PayloadErrorResolvers<ContextType>;
+  PayloadErrorType?: PayloadErrorTypeResolvers;
   Query?: QueryResolvers<ContextType>;
   Readable?: ReadableResolvers<ContextType>;
   ShortNovel?: ShortNovelResolvers<ContextType>;

@@ -1,0 +1,89 @@
+type Book {
+  id: ID!
+  isbn: String!
+}
+
+union BookPayload = BookResult | PayloadError
+
+type BookResult {
+  result: Book
+}
+
+interface CharacterNode {
+  appearsIn: [Readable!]!
+  id: ID!
+  lastAppearsIn: Readable
+  mostRelatedCharacter: CharacterNode
+  relatedCharacters: [CharacterNode!]!
+}
+
+scalar DateTime
+
+type ExtraCharacter implements CharacterNode {
+  appearsIn: [Readable!]!
+  creditName: String!
+  id: ID!
+  lastAppearsIn: Readable
+  mostRelatedCharacter: CharacterNode
+  relatedCharacters: [CharacterNode!]!
+}
+
+type Fighter implements CharacterNode & MainCharacter {
+  appearsIn: [Readable!]!
+  id: ID!
+  lastAppearsIn: Readable
+  mostRelatedCharacter: CharacterNode
+  powerLevel: Int!
+  relatedCharacters: [CharacterNode!]!
+  screenName: String!
+}
+
+type Magazine {
+  id: ID!
+  issueNumber: Int!
+}
+
+interface MainCharacter {
+  screenName: String!
+}
+
+type PayloadError {
+  error: PayloadErrorType!
+}
+
+enum PayloadErrorType {
+  FORBIDDEN_ERROR
+  INPUT_VALIDATION_ERROR
+  NOT_FOUND
+  UNEXPECTED_ERROR
+}
+
+type Query {
+  book(id: ID!): BookPayload!
+  character(id: ID!): CharacterNode
+  readable(id: ID!): Readable
+  user(id: ID!): User
+}
+
+union Readable = Magazine | ShortNovel
+
+type ShortNovel {
+  id: ID!
+  summary: String!
+}
+
+type User {
+  booksRead: [Book!]!
+  fullName: String!
+  id: ID!
+}
+
+type Wizard implements CharacterNode & MainCharacter {
+  appearsIn: [Readable!]!
+  id: ID!
+  lastAppearsIn: Readable
+  mostRelatedCharacter: CharacterNode
+  relatedCharacters: [CharacterNode!]!
+  screenName: String!
+  spells: [String!]!
+}

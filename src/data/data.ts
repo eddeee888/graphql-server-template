@@ -95,7 +95,6 @@ export const data: {
     "4": createShortNovel("4"),
     "5": createShortNovel("5"),
   },
-
   characters: {
     "1": { ...createFighter("1", "Gohan"), type: "Fighter" },
     "2": { ...createFighter("2", "Ichigo"), type: "Fighter" },

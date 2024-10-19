@@ -1,14 +1,10 @@
-type Query
-
-type PayloadError {
-  error: PayloadErrorType!
+type Query {
+  user(id: ID!): User
+  users: [User!]!
 }
 
-enum PayloadErrorType {
-  NOT_FOUND
-  INPUT_VALIDATION_ERROR
-  FORBIDDEN_ERROR
-  UNEXPECTED_ERROR
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
 }
-
-scalar DateTime

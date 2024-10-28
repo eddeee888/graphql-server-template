@@ -9,7 +9,6 @@ const config: CodegenConfig = {
   generates: {
     "src/schema": defineConfig({
       resolverGeneration: "minimal",
-      blacklistedModules: ["base"],
       typesPluginsConfig: {
         contextType: "../index#ResolverContext",
       },

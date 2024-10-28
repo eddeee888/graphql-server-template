@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo } from "graphql";
+import { UserMapper } from "./base/schema.mappers";
 import { ResolverContext } from "../index";
 export type Maybe<T> = T | null | undefined;
 export type InputMaybe<T> = T | null | undefined;
@@ -32,6 +33,26 @@ export type Scalars = {
   Float: { input: number; output: number };
 };
 
+export type CreateUserInput = {
+  firstName: Scalars["String"]["input"];
+  id: Scalars["ID"]["input"];
+  lastName: Scalars["String"]["input"];
+};
+
+export type Mutation = {
+  __typename?: "Mutation";
+  createUser: User;
+  deleteUser: Scalars["Boolean"]["output"];
+};
+
+export type MutationcreateUserArgs = {
+  input: CreateUserInput;
+};
+
+export type MutationdeleteUserArgs = {
+  id: Scalars["ID"]["input"];
+};
+
 export type Query = {
   __typename?: "Query";
   user?: Maybe<User>;
@@ -44,8 +65,11 @@ export type QueryuserArgs = {
 
 export type User = {
   __typename?: "User";
+  bestFriend?: Maybe<User>;
   firstName: Scalars["String"]["output"];
+  fullName: Scalars["String"]["output"];
   id: Scalars["ID"]["output"];
+  initials: Scalars["String"]["output"];
   lastName: Scalars["String"]["output"];
 };
 
@@ -156,20 +180,43 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Query: ResolverTypeWrapper<{}>;
-  ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
-  User: ResolverTypeWrapper<User>;
+  CreateUserInput: CreateUserInput;
   String: ResolverTypeWrapper<Scalars["String"]["output"]>;
+  ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
+  Mutation: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
+  Query: ResolverTypeWrapper<{}>;
+  User: ResolverTypeWrapper<UserMapper>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Query: {};
-  ID: Scalars["ID"]["output"];
-  User: User;
+  CreateUserInput: CreateUserInput;
   String: Scalars["String"]["output"];
+  ID: Scalars["ID"]["output"];
+  Mutation: {};
   Boolean: Scalars["Boolean"]["output"];
+  Query: {};
+  User: UserMapper;
+};
+
+export type MutationResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"],
+> = {
+  createUser?: Resolver<
+    ResolversTypes["User"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationcreateUserArgs, "input">
+  >;
+  deleteUser?: Resolver<
+    ResolversTypes["Boolean"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationdeleteUserArgs, "id">
+  >;
 };
 
 export type QueryResolvers<
@@ -191,13 +238,17 @@ export type UserResolvers<
   ParentType extends
     ResolversParentTypes["User"] = ResolversParentTypes["User"],
 > = {
+  bestFriend?: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
   firstName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  fullName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  initials?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   lastName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = ResolverContext> = {
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };

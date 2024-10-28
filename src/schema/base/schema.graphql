@@ -3,8 +3,22 @@ type Query {
   users: [User!]!
 }
 
+type Mutation {
+  createUser(input: CreateUserInput!): User!
+  deleteUser(id: ID!): Boolean!
+}
+
+input CreateUserInput {
+  id: ID!
+  firstName: String!
+  lastName: String!
+}
+
 type User {
   id: ID!
   firstName: String!
   lastName: String!
+  fullName: String!
+  initials: String!
+  bestFriend: User
 }

@@ -8,7 +8,10 @@
   "scripts": {
     "start:server": "ts-node-dev src/index.ts",
     "start:codegen": "graphql-codegen --watch",
-    "dev": "run-p -l start:*",
+    "start:test": "node -r ts-node/register --test --watch src/**/*.spec.ts",
+    "dev": "run-p -l start:codegen start:server",
+    "test": "run-p -l start:codegen start:test",
+    "test:once": "node -r ts-node/register --test src/**/*.spec.ts",
     "lint": "eslint .",
     "format": "prettier . --write"
   },
@@ -21,6 +24,7 @@
     "@eddeee888/eslint-plugin": "0.0.2",
     "@eddeee888/gcg-typescript-resolver-files": "0.11.0",
     "@graphql-codegen/cli": "5.0.3",
+    "@graphql-typed-document-node/core": "3.2.0",
     "@parcel/watcher": "2.5.0",
     "@typescript-eslint/eslint-plugin": "8.20.0",
     "@typescript-eslint/parser": "8.20.0",

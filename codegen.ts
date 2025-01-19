@@ -2,7 +2,9 @@ import type { CodegenConfig } from "@graphql-codegen/cli";
 import { defineConfig } from "@eddeee888/gcg-typescript-resolver-files";
 
 const config: CodegenConfig = {
-  schema: "**/schema.graphql",
+  schema: "src/**/schema.graphql",
+  documents: "src/**/*.spec.ts",
+  ignoreNoDocuments: true,
   hooks: {
     afterAllFileWrite: ["prettier --write"],
   },
@@ -10,9 +12,12 @@ const config: CodegenConfig = {
     "src/schema": defineConfig({
       resolverGeneration: "minimal",
       typesPluginsConfig: {
-        contextType: "../index#ResolverContext",
+        contextType: "../yoga#ResolverContext",
       },
     }),
+    "./src/gql/": {
+      preset: "client-preset",
+    },
   },
 };
 export default config;

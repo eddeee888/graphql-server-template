@@ -646,10 +646,10 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@eddeee888/eslint-plugin@0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@eddeee888/eslint-plugin/-/eslint-plugin-0.0.1.tgz#55c9671a8a0d0dda8514002ff01f2014d0c491d5"
-  integrity sha512-FniKAkPiH9xxtRqaq54ce2ExdJZ9161UDcE6QxAoqKCxvP6CkIjfF03HnCA5kTZLfeCHbLEFygZVaYPhNr536w==
+"@eddeee888/eslint-plugin@0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@eddeee888/eslint-plugin/-/eslint-plugin-0.0.2.tgz#ad681cc77ead9279cf7dc14a1409d3c73a46e6e9"
+  integrity sha512-q4o8IL0/u3E4kJVBJ/p5mydP0QTbGrBS9+MfqiO76xl4Dxw/Ta/cZA+jbqtPCCmzRdnTxPq3XJcclND8FGXfMg==
   dependencies:
     tslib "^2.3.0"
 

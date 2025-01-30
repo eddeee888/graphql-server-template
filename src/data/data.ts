@@ -1,6 +1,27 @@
 import type { WizardMapper } from "../schema/character/schema.mappers";
-import type { BookMapper } from "../schema/book/schema.mappers";
 import type { UserMapper } from "../schema/user/schema.mappers";
+
+const simulateRequest = async (
+  params: {
+    minLatency: number;
+    maxLatency: number;
+    errorRate: number;
+  } = {
+    minLatency: 50,
+    maxLatency: 1000,
+    errorRate: 0.5, // error rate, from 0-1
+  },
+): Promise<void> => {
+  const { minLatency, maxLatency, errorRate } = params;
+
+  const randomLatency =
+    Math.floor(Math.random() * (maxLatency - minLatency + 1)) + minLatency;
+  await new Promise((r) => setTimeout(r, randomLatency));
+
+  if (Math.random() < errorRate) {
+    throw new Error("Server Error");
+  }
+};
 
 type DatabaseMagazine = {
   id: string;
@@ -30,12 +51,18 @@ const createUser = (id: string): UserMapper => {
     lastName: `lastName${id}`,
   };
 };
-const createBook = (id: string): BookMapper => {
+
+export type DatabaseBook = {
+  id: string;
+  isbn: string;
+};
+const createBook = (id: string): DatabaseBook => {
   return {
     id,
-    isbn: `isbn${id}`,
+    isbn: `isbn:${id}`,
   };
 };
+
 const createMagazine = (id: string): DatabaseMagazine => {
   return {
     id,
@@ -56,7 +83,13 @@ const createFighter = (id: string, screenName: string): DatabaseFighter => ({
 
 export const data: {
   users: Record<string, UserMapper>;
-  books: Record<string, BookMapper>;
+  books: Record<string, DatabaseBook>;
+  $books: {
+    findMany: (params: {
+      offset: number;
+      limit: number;
+    }) => Promise<DatabaseBook[]>;
+  };
   magazines: Record<string, DatabaseMagazine>;
   shortNovels: Record<string, DatabaseShortNovel>;
   characters: Record<
@@ -80,6 +113,20 @@ export const data: {
     "3": createBook("3"),
     "4": createBook("4"),
     "5": createBook("5"),
+    "6": createBook("6"),
+    "7": createBook("7"),
+    "8": createBook("8"),
+    "9": createBook("9"),
+    "10": createBook("10"),
+    "11": createBook("11"),
+    "12": createBook("12"),
+    "13": createBook("13"),
+  },
+  $books: {
+    findMany: async ({ limit, offset }) => {
+      await simulateRequest();
+      return Object.values(data.books).slice(offset, offset + limit);
+    },
   },
   magazines: {
     "1": createMagazine("1"),

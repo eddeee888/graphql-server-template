@@ -1,4 +1,3 @@
-export type BookMapper = {
-  id: string;
-  isbn: string;
-};
+import type { DatabaseBook } from "../../data";
+
+export type BookMapper = DatabaseBook;

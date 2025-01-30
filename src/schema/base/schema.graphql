@@ -11,4 +11,9 @@ enum PayloadErrorType {
   UNEXPECTED_ERROR
 }
 
+input PaginationInput {
+  limit: Int
+  offset: Int
+}
+
 scalar DateTime

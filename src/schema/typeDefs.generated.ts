@@ -34,6 +34,32 @@ export const typeDefs = {
         },
         {
           kind: "FieldDefinition",
+          name: { kind: "Name", value: "books" },
+          arguments: [
+            {
+              kind: "InputValueDefinition",
+              name: { kind: "Name", value: "input" },
+              type: {
+                kind: "NonNullType",
+                type: {
+                  kind: "NamedType",
+                  name: { kind: "Name", value: "PaginationInput" },
+                },
+              },
+              directives: [],
+            },
+          ],
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "BooksPayload" },
+            },
+          },
+          directives: [],
+        },
+        {
+          kind: "FieldDefinition",
           name: { kind: "Name", value: "readable" },
           arguments: [
             {
@@ -151,6 +177,25 @@ export const typeDefs = {
       ],
     },
     {
+      kind: "InputObjectTypeDefinition",
+      name: { kind: "Name", value: "PaginationInput" },
+      directives: [],
+      fields: [
+        {
+          kind: "InputValueDefinition",
+          name: { kind: "Name", value: "limit" },
+          type: { kind: "NamedType", name: { kind: "Name", value: "Int" } },
+          directives: [],
+        },
+        {
+          kind: "InputValueDefinition",
+          name: { kind: "Name", value: "offset" },
+          type: { kind: "NamedType", name: { kind: "Name", value: "Int" } },
+          directives: [],
+        },
+      ],
+    },
+    {
       kind: "ScalarTypeDefinition",
       name: { kind: "Name", value: "DateTime" },
       directives: [],
@@ -207,6 +252,42 @@ export const typeDefs = {
       directives: [],
       types: [
         { kind: "NamedType", name: { kind: "Name", value: "BookResult" } },
+        { kind: "NamedType", name: { kind: "Name", value: "PayloadError" } },
+      ],
+    },
+    {
+      kind: "ObjectTypeDefinition",
+      name: { kind: "Name", value: "BooksResult" },
+      interfaces: [],
+      directives: [],
+      fields: [
+        {
+          kind: "FieldDefinition",
+          name: { kind: "Name", value: "result" },
+          arguments: [],
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "ListType",
+              type: {
+                kind: "NonNullType",
+                type: {
+                  kind: "NamedType",
+                  name: { kind: "Name", value: "Book" },
+                },
+              },
+            },
+          },
+          directives: [],
+        },
+      ],
+    },
+    {
+      kind: "UnionTypeDefinition",
+      name: { kind: "Name", value: "BooksPayload" },
+      directives: [],
+      types: [
+        { kind: "NamedType", name: { kind: "Name", value: "BooksResult" } },
         { kind: "NamedType", name: { kind: "Name", value: "PayloadError" } },
       ],
     },

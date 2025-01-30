@@ -12,6 +12,7 @@ type BookResult {
 union BooksPayload = BooksResult | PayloadError
 
 type BooksResult {
+  pagination: Pagination!
   result: [Book!]!
 }
 
@@ -53,9 +54,13 @@ interface MainCharacter {
   screenName: String!
 }
 
+type Pagination {
+  totalPageCount: Int!
+}
+
 input PaginationInput {
-  limit: Int
-  offset: Int
+  page: Int
+  recordsPerPage: Int
 }
 
 type PayloadError {

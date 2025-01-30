@@ -183,14 +183,32 @@ export const typeDefs = {
       fields: [
         {
           kind: "InputValueDefinition",
-          name: { kind: "Name", value: "limit" },
+          name: { kind: "Name", value: "page" },
           type: { kind: "NamedType", name: { kind: "Name", value: "Int" } },
           directives: [],
         },
         {
           kind: "InputValueDefinition",
-          name: { kind: "Name", value: "offset" },
+          name: { kind: "Name", value: "recordsPerPage" },
           type: { kind: "NamedType", name: { kind: "Name", value: "Int" } },
+          directives: [],
+        },
+      ],
+    },
+    {
+      kind: "ObjectTypeDefinition",
+      name: { kind: "Name", value: "Pagination" },
+      interfaces: [],
+      directives: [],
+      fields: [
+        {
+          kind: "FieldDefinition",
+          name: { kind: "Name", value: "totalPageCount" },
+          arguments: [],
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "Int" } },
+          },
           directives: [],
         },
       ],
@@ -276,6 +294,19 @@ export const typeDefs = {
                   name: { kind: "Name", value: "Book" },
                 },
               },
+            },
+          },
+          directives: [],
+        },
+        {
+          kind: "FieldDefinition",
+          name: { kind: "Name", value: "pagination" },
+          arguments: [],
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "Pagination" },
             },
           },
           directives: [],

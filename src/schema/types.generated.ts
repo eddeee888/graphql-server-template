@@ -61,6 +61,7 @@ export type BooksPayload = BooksResult | PayloadError;
 
 export type BooksResult = {
   __typename?: "BooksResult";
+  pagination: Pagination;
   result: Array<Book>;
 };
 
@@ -104,9 +105,14 @@ export type MainCharacter = {
   screenName: Scalars["String"]["output"];
 };
 
+export type Pagination = {
+  __typename?: "Pagination";
+  totalPageCount: Scalars["Int"]["output"];
+};
+
 export type PaginationInput = {
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  page?: InputMaybe<Scalars["Int"]["input"]>;
+  recordsPerPage?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type PayloadError = {
@@ -401,6 +407,7 @@ export type ResolversTypes = {
   MainCharacter: ResolverTypeWrapper<
     ResolversInterfaceTypes<ResolversTypes>["MainCharacter"]
   >;
+  Pagination: ResolverTypeWrapper<Pagination>;
   PaginationInput: PaginationInput;
   PayloadError: ResolverTypeWrapper<
     Omit<PayloadError, "error"> & { error: ResolversTypes["PayloadErrorType"] }
@@ -457,6 +464,7 @@ export type ResolversParentTypes = {
   Int: Scalars["Int"]["output"];
   Magazine: Magazine;
   MainCharacter: ResolversInterfaceTypes<ResolversParentTypes>["MainCharacter"];
+  Pagination: Pagination;
   PaginationInput: PaginationInput;
   PayloadError: PayloadError;
   Query: {};
@@ -515,6 +523,7 @@ export type BooksResultResolvers<
   ParentType extends
     ResolversParentTypes["BooksResult"] = ResolversParentTypes["BooksResult"],
 > = {
+  pagination?: Resolver<ResolversTypes["Pagination"], ParentType, ContextType>;
   result?: Resolver<Array<ResolversTypes["Book"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -635,6 +644,15 @@ export type MainCharacterResolvers<
 > = {
   __resolveType?: TypeResolveFn<"Fighter" | "Wizard", ParentType, ContextType>;
   screenName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+};
+
+export type PaginationResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["Pagination"] = ResolversParentTypes["Pagination"],
+> = {
+  totalPageCount?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type PayloadErrorResolvers<
@@ -769,6 +787,7 @@ export type Resolvers<ContextType = ResolverContext> = {
   Fighter?: FighterResolvers<ContextType>;
   Magazine?: MagazineResolvers<ContextType>;
   MainCharacter?: MainCharacterResolvers<ContextType>;
+  Pagination?: PaginationResolvers<ContextType>;
   PayloadError?: PayloadErrorResolvers<ContextType>;
   PayloadErrorType?: PayloadErrorTypeResolvers;
   Query?: QueryResolvers<ContextType>;

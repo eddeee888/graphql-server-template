@@ -4,13 +4,17 @@ export const books: NonNullable<QueryResolvers["books"]> = async (
   { input },
   { data },
 ) => {
-  const limit = input.limit || 10;
-  const offset = input.offset || 0;
+  const page = input.page || 1;
+  const recordsPerPage = input.recordsPerPage || 10;
 
-  const result = await data.$books.findMany({ limit, offset });
+  const { result, pagination } = await data.$books.findMany({
+    page,
+    recordsPerPage,
+  });
 
   return {
     __typename: "BooksResult",
     result,
+    pagination,
   };
 };

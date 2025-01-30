@@ -12,8 +12,12 @@ enum PayloadErrorType {
 }
 
 input PaginationInput {
-  limit: Int
-  offset: Int
+  page: Int
+  recordsPerPage: Int
+}
+
+type Pagination {
+  totalPageCount: Int!
 }
 
 scalar DateTime

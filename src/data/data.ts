@@ -9,7 +9,7 @@ const simulateRequest = async (
   } = {
     minLatency: 50,
     maxLatency: 1000,
-    errorRate: 0.5, // error rate, from 0-1
+    errorRate: 0, // error rate, from 0-1
   },
 ): Promise<void> => {
   const { minLatency, maxLatency, errorRate } = params;
@@ -85,10 +85,10 @@ export const data: {
   users: Record<string, UserMapper>;
   books: Record<string, DatabaseBook>;
   $books: {
-    findMany: (params: {
-      offset: number;
-      limit: number;
-    }) => Promise<DatabaseBook[]>;
+    findMany: (params: { page: number; recordsPerPage: number }) => Promise<{
+      result: DatabaseBook[];
+      pagination: { totalPageCount: number };
+    }>;
   };
   magazines: Record<string, DatabaseMagazine>;
   shortNovels: Record<string, DatabaseShortNovel>;
@@ -123,9 +123,22 @@ export const data: {
     "13": createBook("13"),
   },
   $books: {
-    findMany: async ({ limit, offset }) => {
+    findMany: async ({ page, recordsPerPage }) => {
       await simulateRequest();
-      return Object.values(data.books).slice(offset, offset + limit);
+
+      const limit = recordsPerPage;
+      const offset = (page - 1) * recordsPerPage;
+
+      const booksArray = Object.values(data.books);
+
+      const result = booksArray.slice(offset, offset + limit);
+
+      return {
+        result,
+        pagination: {
+          totalPageCount: Math.ceil(booksArray.length / recordsPerPage),
+        },
+      };
     },
   },
   magazines: {

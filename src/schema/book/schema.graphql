@@ -17,6 +17,7 @@ union BookPayload = BookResult | PayloadError
 
 type BooksResult {
   result: [Book!]!
+  pagination: Pagination!
 }
 
 union BooksPayload = BooksResult | PayloadError

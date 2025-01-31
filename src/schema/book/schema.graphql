@@ -1,5 +1,6 @@
 extend type Query {
   book(id: ID!): BookPayload!
+  books(input: PaginationInput!): BooksPayload!
   readable(id: ID!): Readable
 }
 
@@ -13,6 +14,13 @@ type BookResult {
 }
 
 union BookPayload = BookResult | PayloadError
+
+type BooksResult {
+  result: [Book!]!
+  pagination: Pagination!
+}
+
+union BooksPayload = BooksResult | PayloadError
 
 type ShortNovel {
   id: ID!

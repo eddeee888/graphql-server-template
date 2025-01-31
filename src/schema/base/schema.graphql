@@ -11,4 +11,13 @@ enum PayloadErrorType {
   UNEXPECTED_ERROR
 }
 
+input PaginationInput {
+  page: Int
+  recordsPerPage: Int
+}
+
+type Pagination {
+  totalPageCount: Int!
+}
+
 scalar DateTime

@@ -57,6 +57,14 @@ export type BookResult = {
   result?: Maybe<Book>;
 };
 
+export type BooksPayload = BooksResult | PayloadError;
+
+export type BooksResult = {
+  __typename?: "BooksResult";
+  pagination: Pagination;
+  result: Array<Book>;
+};
+
 export type CharacterNode = {
   appearsIn: Array<Readable>;
   id: Scalars["ID"]["output"];
@@ -97,6 +105,16 @@ export type MainCharacter = {
   screenName: Scalars["String"]["output"];
 };
 
+export type Pagination = {
+  __typename?: "Pagination";
+  totalPageCount: Scalars["Int"]["output"];
+};
+
+export type PaginationInput = {
+  page?: InputMaybe<Scalars["Int"]["input"]>;
+  recordsPerPage?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
 export type PayloadError = {
   __typename?: "PayloadError";
   error: PayloadErrorType;
@@ -111,6 +129,7 @@ export type PayloadErrorType =
 export type Query = {
   __typename?: "Query";
   book: BookPayload;
+  books: BooksPayload;
   character?: Maybe<CharacterNode>;
   readable?: Maybe<Readable>;
   user?: Maybe<User>;
@@ -118,6 +137,10 @@ export type Query = {
 
 export type QuerybookArgs = {
   id: Scalars["ID"]["input"];
+};
+
+export type QuerybooksArgs = {
+  input: PaginationInput;
 };
 
 export type QuerycharacterArgs = {
@@ -273,6 +296,13 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
     | (Omit<PayloadError, "error"> & { error: _RefType["PayloadErrorType"] } & {
         __typename: "PayloadError";
       });
+  BooksPayload:
+    | (Omit<BooksResult, "result"> & { result: Array<_RefType["Book"]> } & {
+        __typename: "BooksResult";
+      })
+    | (Omit<PayloadError, "error"> & { error: _RefType["PayloadErrorType"] } & {
+        __typename: "PayloadError";
+      });
   Readable:
     | (Magazine & { __typename: "Magazine" })
     | (ShortNovel & { __typename: "ShortNovel" });
@@ -334,6 +364,12 @@ export type ResolversTypes = {
   BookResult: ResolverTypeWrapper<
     Omit<BookResult, "result"> & { result?: Maybe<ResolversTypes["Book"]> }
   >;
+  BooksPayload: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["BooksPayload"]
+  >;
+  BooksResult: ResolverTypeWrapper<
+    Omit<BooksResult, "result"> & { result: Array<ResolversTypes["Book"]> }
+  >;
   CharacterNode: ResolverTypeWrapper<
     ResolversInterfaceTypes<ResolversTypes>["CharacterNode"]
   >;
@@ -371,6 +407,8 @@ export type ResolversTypes = {
   MainCharacter: ResolverTypeWrapper<
     ResolversInterfaceTypes<ResolversTypes>["MainCharacter"]
   >;
+  Pagination: ResolverTypeWrapper<Pagination>;
+  PaginationInput: PaginationInput;
   PayloadError: ResolverTypeWrapper<
     Omit<PayloadError, "error"> & { error: ResolversTypes["PayloadErrorType"] }
   >;
@@ -399,6 +437,10 @@ export type ResolversParentTypes = {
   BookResult: Omit<BookResult, "result"> & {
     result?: Maybe<ResolversParentTypes["Book"]>;
   };
+  BooksPayload: ResolversUnionTypes<ResolversParentTypes>["BooksPayload"];
+  BooksResult: Omit<BooksResult, "result"> & {
+    result: Array<ResolversParentTypes["Book"]>;
+  };
   CharacterNode: ResolversInterfaceTypes<ResolversParentTypes>["CharacterNode"];
   DateTime: Scalars["DateTime"]["output"];
   ExtraCharacter: Omit<
@@ -422,6 +464,8 @@ export type ResolversParentTypes = {
   Int: Scalars["Int"]["output"];
   Magazine: Magazine;
   MainCharacter: ResolversInterfaceTypes<ResolversParentTypes>["MainCharacter"];
+  Pagination: Pagination;
+  PaginationInput: PaginationInput;
   PayloadError: PayloadError;
   Query: {};
   Readable: ResolversUnionTypes<ResolversParentTypes>["Readable"];
@@ -459,6 +503,28 @@ export type BookResultResolvers<
     ResolversParentTypes["BookResult"] = ResolversParentTypes["BookResult"],
 > = {
   result?: Resolver<Maybe<ResolversTypes["Book"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BooksPayloadResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["BooksPayload"] = ResolversParentTypes["BooksPayload"],
+> = {
+  __resolveType?: TypeResolveFn<
+    "BooksResult" | "PayloadError",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type BooksResultResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["BooksResult"] = ResolversParentTypes["BooksResult"],
+> = {
+  pagination?: Resolver<ResolversTypes["Pagination"], ParentType, ContextType>;
+  result?: Resolver<Array<ResolversTypes["Book"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -580,6 +646,15 @@ export type MainCharacterResolvers<
   screenName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 };
 
+export type PaginationResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["Pagination"] = ResolversParentTypes["Pagination"],
+> = {
+  totalPageCount?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type PayloadErrorResolvers<
   ContextType = ResolverContext,
   ParentType extends
@@ -609,6 +684,12 @@ export type QueryResolvers<
     ParentType,
     ContextType,
     RequireFields<QuerybookArgs, "id">
+  >;
+  books?: Resolver<
+    ResolversTypes["BooksPayload"],
+    ParentType,
+    ContextType,
+    RequireFields<QuerybooksArgs, "input">
   >;
   character?: Resolver<
     Maybe<ResolversTypes["CharacterNode"]>,
@@ -698,12 +779,15 @@ export type Resolvers<ContextType = ResolverContext> = {
   Book?: BookResolvers<ContextType>;
   BookPayload?: BookPayloadResolvers<ContextType>;
   BookResult?: BookResultResolvers<ContextType>;
+  BooksPayload?: BooksPayloadResolvers<ContextType>;
+  BooksResult?: BooksResultResolvers<ContextType>;
   CharacterNode?: CharacterNodeResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   ExtraCharacter?: ExtraCharacterResolvers<ContextType>;
   Fighter?: FighterResolvers<ContextType>;
   Magazine?: MagazineResolvers<ContextType>;
   MainCharacter?: MainCharacterResolvers<ContextType>;
+  Pagination?: PaginationResolvers<ContextType>;
   PayloadError?: PayloadErrorResolvers<ContextType>;
   PayloadErrorType?: PayloadErrorTypeResolvers;
   Query?: QueryResolvers<ContextType>;

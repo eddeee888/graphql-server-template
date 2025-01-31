@@ -9,6 +9,13 @@ type BookResult {
   result: Book
 }
 
+union BooksPayload = BooksResult | PayloadError
+
+type BooksResult {
+  pagination: Pagination!
+  result: [Book!]!
+}
+
 interface CharacterNode {
   appearsIn: [Readable!]!
   id: ID!
@@ -47,6 +54,15 @@ interface MainCharacter {
   screenName: String!
 }
 
+type Pagination {
+  totalPageCount: Int!
+}
+
+input PaginationInput {
+  page: Int
+  recordsPerPage: Int
+}
+
 type PayloadError {
   error: PayloadErrorType!
 }
@@ -60,6 +76,7 @@ enum PayloadErrorType {
 
 type Query {
   book(id: ID!): BookPayload!
+  books(input: PaginationInput!): BooksPayload!
   character(id: ID!): CharacterNode
   readable(id: ID!): Readable
   user(id: ID!): User

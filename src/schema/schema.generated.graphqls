@@ -17,9 +17,7 @@ type BooksResult {
 }
 
 interface CharacterNode {
-  appearsIn: [Readable!]!
   id: ID!
-  lastAppearsIn: Readable
   mostRelatedCharacter: CharacterNode
   relatedCharacters: [CharacterNode!]!
 }
@@ -27,27 +25,18 @@ interface CharacterNode {
 scalar DateTime
 
 type ExtraCharacter implements CharacterNode {
-  appearsIn: [Readable!]!
   creditName: String!
   id: ID!
-  lastAppearsIn: Readable
   mostRelatedCharacter: CharacterNode
   relatedCharacters: [CharacterNode!]!
 }
 
 type Fighter implements CharacterNode & MainCharacter {
-  appearsIn: [Readable!]!
   id: ID!
-  lastAppearsIn: Readable
   mostRelatedCharacter: CharacterNode
   powerLevel: Int!
   relatedCharacters: [CharacterNode!]!
   screenName: String!
-}
-
-type Magazine {
-  id: ID!
-  issueNumber: Int!
 }
 
 interface MainCharacter {
@@ -78,15 +67,7 @@ type Query {
   book(id: ID!): BookPayload!
   books(input: PaginationInput!): BooksPayload!
   character(id: ID!): CharacterNode
-  readable(id: ID!): Readable
   user(id: ID!): User
-}
-
-union Readable = Magazine | ShortNovel
-
-type ShortNovel {
-  id: ID!
-  summary: String!
 }
 
 type User {
@@ -96,9 +77,7 @@ type User {
 }
 
 type Wizard implements CharacterNode & MainCharacter {
-  appearsIn: [Readable!]!
   id: ID!
-  lastAppearsIn: Readable
   mostRelatedCharacter: CharacterNode
   relatedCharacters: [CharacterNode!]!
   screenName: String!

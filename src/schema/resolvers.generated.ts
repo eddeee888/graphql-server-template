@@ -3,7 +3,6 @@ import type { Resolvers } from "./types.generated";
 import { book as Query_book } from "./book/resolvers/Query/book";
 import { books as Query_books } from "./book/resolvers/Query/books";
 import { character as Query_character } from "./character/resolvers/Query/character";
-import { readable as Query_readable } from "./book/resolvers/Query/readable";
 import { user as Query_user } from "./user/resolvers/Query/user";
 import { Book } from "./book/resolvers/Book";
 import { User as book_User } from "./book/resolvers/User";
@@ -15,7 +14,6 @@ export const resolvers: Resolvers = {
     book: Query_book,
     books: Query_books,
     character: Query_character,
-    readable: Query_readable,
     user: Query_user,
   },
 

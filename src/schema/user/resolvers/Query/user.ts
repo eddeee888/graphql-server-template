@@ -4,5 +4,7 @@ export const user: NonNullable<QueryResolvers["user"]> = async (
   { id },
   { data },
 ) => {
-  return data.users[id];
+  const userRecord = await data.$users.findById({ id });
+
+  return userRecord;
 };

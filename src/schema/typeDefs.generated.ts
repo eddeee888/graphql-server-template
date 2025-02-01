@@ -60,29 +60,6 @@ export const typeDefs = {
         },
         {
           kind: "FieldDefinition",
-          name: { kind: "Name", value: "readable" },
-          arguments: [
-            {
-              kind: "InputValueDefinition",
-              name: { kind: "Name", value: "id" },
-              type: {
-                kind: "NonNullType",
-                type: {
-                  kind: "NamedType",
-                  name: { kind: "Name", value: "ID" },
-                },
-              },
-              directives: [],
-            },
-          ],
-          type: {
-            kind: "NamedType",
-            name: { kind: "Name", value: "Readable" },
-          },
-          directives: [],
-        },
-        {
-          kind: "FieldDefinition",
           name: { kind: "Name", value: "character" },
           arguments: [
             {
@@ -323,74 +300,6 @@ export const typeDefs = {
       ],
     },
     {
-      kind: "ObjectTypeDefinition",
-      name: { kind: "Name", value: "ShortNovel" },
-      interfaces: [],
-      directives: [],
-      fields: [
-        {
-          kind: "FieldDefinition",
-          name: { kind: "Name", value: "id" },
-          arguments: [],
-          type: {
-            kind: "NonNullType",
-            type: { kind: "NamedType", name: { kind: "Name", value: "ID" } },
-          },
-          directives: [],
-        },
-        {
-          kind: "FieldDefinition",
-          name: { kind: "Name", value: "summary" },
-          arguments: [],
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "String" },
-            },
-          },
-          directives: [],
-        },
-      ],
-    },
-    {
-      kind: "ObjectTypeDefinition",
-      name: { kind: "Name", value: "Magazine" },
-      interfaces: [],
-      directives: [],
-      fields: [
-        {
-          kind: "FieldDefinition",
-          name: { kind: "Name", value: "id" },
-          arguments: [],
-          type: {
-            kind: "NonNullType",
-            type: { kind: "NamedType", name: { kind: "Name", value: "ID" } },
-          },
-          directives: [],
-        },
-        {
-          kind: "FieldDefinition",
-          name: { kind: "Name", value: "issueNumber" },
-          arguments: [],
-          type: {
-            kind: "NonNullType",
-            type: { kind: "NamedType", name: { kind: "Name", value: "Int" } },
-          },
-          directives: [],
-        },
-      ],
-    },
-    {
-      kind: "UnionTypeDefinition",
-      name: { kind: "Name", value: "Readable" },
-      directives: [],
-      types: [
-        { kind: "NamedType", name: { kind: "Name", value: "ShortNovel" } },
-        { kind: "NamedType", name: { kind: "Name", value: "Magazine" } },
-      ],
-    },
-    {
       name: { kind: "Name", value: "User" },
       kind: "ObjectTypeDefinition",
       fields: [
@@ -485,35 +394,6 @@ export const typeDefs = {
           },
           directives: [],
         },
-        {
-          kind: "FieldDefinition",
-          name: { kind: "Name", value: "lastAppearsIn" },
-          arguments: [],
-          type: {
-            kind: "NamedType",
-            name: { kind: "Name", value: "Readable" },
-          },
-          directives: [],
-        },
-        {
-          kind: "FieldDefinition",
-          name: { kind: "Name", value: "appearsIn" },
-          arguments: [],
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "ListType",
-              type: {
-                kind: "NonNullType",
-                type: {
-                  kind: "NamedType",
-                  name: { kind: "Name", value: "Readable" },
-                },
-              },
-            },
-          },
-          directives: [],
-        },
       ],
     },
     {
@@ -579,35 +459,6 @@ export const typeDefs = {
                 type: {
                   kind: "NamedType",
                   name: { kind: "Name", value: "CharacterNode" },
-                },
-              },
-            },
-          },
-          directives: [],
-        },
-        {
-          kind: "FieldDefinition",
-          name: { kind: "Name", value: "lastAppearsIn" },
-          arguments: [],
-          type: {
-            kind: "NamedType",
-            name: { kind: "Name", value: "Readable" },
-          },
-          directives: [],
-        },
-        {
-          kind: "FieldDefinition",
-          name: { kind: "Name", value: "appearsIn" },
-          arguments: [],
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "ListType",
-              type: {
-                kind: "NonNullType",
-                type: {
-                  kind: "NamedType",
-                  name: { kind: "Name", value: "Readable" },
                 },
               },
             },
@@ -698,35 +549,6 @@ export const typeDefs = {
         },
         {
           kind: "FieldDefinition",
-          name: { kind: "Name", value: "lastAppearsIn" },
-          arguments: [],
-          type: {
-            kind: "NamedType",
-            name: { kind: "Name", value: "Readable" },
-          },
-          directives: [],
-        },
-        {
-          kind: "FieldDefinition",
-          name: { kind: "Name", value: "appearsIn" },
-          arguments: [],
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "ListType",
-              type: {
-                kind: "NonNullType",
-                type: {
-                  kind: "NamedType",
-                  name: { kind: "Name", value: "Readable" },
-                },
-              },
-            },
-          },
-          directives: [],
-        },
-        {
-          kind: "FieldDefinition",
           name: { kind: "Name", value: "screenName" },
           arguments: [],
           type: {
@@ -791,35 +613,6 @@ export const typeDefs = {
                 type: {
                   kind: "NamedType",
                   name: { kind: "Name", value: "CharacterNode" },
-                },
-              },
-            },
-          },
-          directives: [],
-        },
-        {
-          kind: "FieldDefinition",
-          name: { kind: "Name", value: "lastAppearsIn" },
-          arguments: [],
-          type: {
-            kind: "NamedType",
-            name: { kind: "Name", value: "Readable" },
-          },
-          directives: [],
-        },
-        {
-          kind: "FieldDefinition",
-          name: { kind: "Name", value: "appearsIn" },
-          arguments: [],
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "ListType",
-              type: {
-                kind: "NonNullType",
-                type: {
-                  kind: "NamedType",
-                  name: { kind: "Name", value: "Readable" },
                 },
               },
             },

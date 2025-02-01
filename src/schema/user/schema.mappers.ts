@@ -1,5 +1,3 @@
-export type UserMapper = {
-  id: string;
-  firstName: string;
-  lastName: string;
-};
+import type { DatabaseUser } from "../../data";
+
+export type UserMapper = DatabaseUser;

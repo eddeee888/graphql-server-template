@@ -4,7 +4,7 @@ export const character: NonNullable<QueryResolvers["character"]> = async (
   { id },
   { data },
 ) => {
-  const foundCharacter = data.characters[id];
+  const foundCharacter = await data.$characters.findById({ id });
 
   if (!foundCharacter) {
     return null;
@@ -16,7 +16,6 @@ export const character: NonNullable<QueryResolvers["character"]> = async (
       id: foundCharacter.id,
       mostRelatedCharacter: null,
       relatedCharacters: [],
-      appearsIn: [],
       screenName: foundCharacter.screenName,
       powerLevel: foundCharacter.power,
     };
@@ -33,7 +32,6 @@ export const character: NonNullable<QueryResolvers["character"]> = async (
       __typename: "ExtraCharacter",
       id: foundCharacter.id,
       relatedCharacters: [],
-      appearsIn: [],
       creditName: foundCharacter.creditName,
     };
   }

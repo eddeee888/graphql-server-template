@@ -28,11 +28,11 @@ export type Incremental<T> =
       [P in keyof T]?: P extends " $fragmentName" | "__typename" ? T[P] : never;
     };
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-export type EnumResolverSignature<T, AllowedValues = any> = {
-  [key in keyof T]?: AllowedValues;
-};
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & {
   [P in K]-?: NonNullable<T[P]>;
+};
+export type EnumResolverSignature<T, AllowedValues = any> = {
+  [key in keyof T]?: AllowedValues;
 };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -71,6 +71,17 @@ export type CharacterNode = {
   relatedCharacters: Array<CharacterNode>;
 };
 
+export type CreateBookInput = {
+  isbn: Scalars["String"]["input"];
+};
+
+export type CreateBookPayload = CreateBookResult | PayloadError;
+
+export type CreateBookResult = {
+  __typename?: "CreateBookResult";
+  result: Book;
+};
+
 export type ExtraCharacter = CharacterNode & {
   __typename?: "ExtraCharacter";
   creditName: Scalars["String"]["output"];
@@ -91,6 +102,20 @@ export type Fighter = CharacterNode &
 
 export type MainCharacter = {
   screenName: Scalars["String"]["output"];
+};
+
+export type Mutation = {
+  __typename?: "Mutation";
+  createBook: CreateBookPayload;
+  updateBook: UpdateBookPayload;
+};
+
+export type MutationcreateBookArgs = {
+  input: CreateBookInput;
+};
+
+export type MutationupdateBookArgs = {
+  input: UpdateBookInput;
 };
 
 export type Pagination = {
@@ -136,6 +161,18 @@ export type QuerycharacterArgs = {
 
 export type QueryuserArgs = {
   id: Scalars["ID"]["input"];
+};
+
+export type UpdateBookInput = {
+  id: Scalars["ID"]["input"];
+  isbn: Scalars["String"]["input"];
+};
+
+export type UpdateBookPayload = PayloadError | UpdateBookResult;
+
+export type UpdateBookResult = {
+  __typename?: "UpdateBookResult";
+  result: Book;
 };
 
 export type User = {
@@ -276,6 +313,20 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
     | (Omit<PayloadError, "error"> & { error: _RefType["PayloadErrorType"] } & {
         __typename: "PayloadError";
       });
+  CreateBookPayload:
+    | (Omit<CreateBookResult, "result"> & { result: _RefType["Book"] } & {
+        __typename: "CreateBookResult";
+      })
+    | (Omit<PayloadError, "error"> & { error: _RefType["PayloadErrorType"] } & {
+        __typename: "PayloadError";
+      });
+  UpdateBookPayload:
+    | (Omit<PayloadError, "error"> & { error: _RefType["PayloadErrorType"] } & {
+        __typename: "PayloadError";
+      })
+    | (Omit<UpdateBookResult, "result"> & { result: _RefType["Book"] } & {
+        __typename: "UpdateBookResult";
+      });
 };
 
 /** Mapping of interface types */
@@ -319,6 +370,13 @@ export type ResolversTypes = {
   CharacterNode: ResolverTypeWrapper<
     ResolversInterfaceTypes<ResolversTypes>["CharacterNode"]
   >;
+  CreateBookInput: CreateBookInput;
+  CreateBookPayload: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["CreateBookPayload"]
+  >;
+  CreateBookResult: ResolverTypeWrapper<
+    Omit<CreateBookResult, "result"> & { result: ResolversTypes["Book"] }
+  >;
   DateTime: ResolverTypeWrapper<Scalars["DateTime"]["output"]>;
   ExtraCharacter: ResolverTypeWrapper<
     Omit<ExtraCharacter, "mostRelatedCharacter" | "relatedCharacters"> & {
@@ -336,6 +394,7 @@ export type ResolversTypes = {
   MainCharacter: ResolverTypeWrapper<
     ResolversInterfaceTypes<ResolversTypes>["MainCharacter"]
   >;
+  Mutation: ResolverTypeWrapper<{}>;
   Pagination: ResolverTypeWrapper<Pagination>;
   PaginationInput: PaginationInput;
   PayloadError: ResolverTypeWrapper<
@@ -348,6 +407,13 @@ export type ResolversTypes = {
     | "UNEXPECTED_ERROR"
   >;
   Query: ResolverTypeWrapper<{}>;
+  UpdateBookInput: UpdateBookInput;
+  UpdateBookPayload: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["UpdateBookPayload"]
+  >;
+  UpdateBookResult: ResolverTypeWrapper<
+    Omit<UpdateBookResult, "result"> & { result: ResolversTypes["Book"] }
+  >;
   User: ResolverTypeWrapper<UserMapper>;
   Wizard: ResolverTypeWrapper<WizardMapper>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
@@ -367,6 +433,11 @@ export type ResolversParentTypes = {
     result: Array<ResolversParentTypes["Book"]>;
   };
   CharacterNode: ResolversInterfaceTypes<ResolversParentTypes>["CharacterNode"];
+  CreateBookInput: CreateBookInput;
+  CreateBookPayload: ResolversUnionTypes<ResolversParentTypes>["CreateBookPayload"];
+  CreateBookResult: Omit<CreateBookResult, "result"> & {
+    result: ResolversParentTypes["Book"];
+  };
   DateTime: Scalars["DateTime"]["output"];
   ExtraCharacter: Omit<
     ExtraCharacter,
@@ -381,10 +452,16 @@ export type ResolversParentTypes = {
   };
   Int: Scalars["Int"]["output"];
   MainCharacter: ResolversInterfaceTypes<ResolversParentTypes>["MainCharacter"];
+  Mutation: {};
   Pagination: Pagination;
   PaginationInput: PaginationInput;
   PayloadError: PayloadError;
   Query: {};
+  UpdateBookInput: UpdateBookInput;
+  UpdateBookPayload: ResolversUnionTypes<ResolversParentTypes>["UpdateBookPayload"];
+  UpdateBookResult: Omit<UpdateBookResult, "result"> & {
+    result: ResolversParentTypes["Book"];
+  };
   User: UserMapper;
   Wizard: WizardMapper;
   Boolean: Scalars["Boolean"]["output"];
@@ -466,6 +543,27 @@ export type CharacterNodeResolvers<
   >;
 };
 
+export type CreateBookPayloadResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["CreateBookPayload"] = ResolversParentTypes["CreateBookPayload"],
+> = {
+  __resolveType?: TypeResolveFn<
+    "CreateBookResult" | "PayloadError",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type CreateBookResultResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["CreateBookResult"] = ResolversParentTypes["CreateBookResult"],
+> = {
+  result?: Resolver<ResolversTypes["Book"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export interface DateTimeScalarConfig
   extends GraphQLScalarTypeConfig<ResolversTypes["DateTime"], any> {
   name: "DateTime";
@@ -519,6 +617,25 @@ export type MainCharacterResolvers<
 > = {
   __resolveType?: TypeResolveFn<"Fighter" | "Wizard", ParentType, ContextType>;
   screenName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+};
+
+export type MutationResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"],
+> = {
+  createBook?: Resolver<
+    ResolversTypes["CreateBookPayload"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationcreateBookArgs, "input">
+  >;
+  updateBook?: Resolver<
+    ResolversTypes["UpdateBookPayload"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationupdateBookArgs, "input">
+  >;
 };
 
 export type PaginationResolvers<
@@ -580,6 +697,27 @@ export type QueryResolvers<
   >;
 };
 
+export type UpdateBookPayloadResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["UpdateBookPayload"] = ResolversParentTypes["UpdateBookPayload"],
+> = {
+  __resolveType?: TypeResolveFn<
+    "PayloadError" | "UpdateBookResult",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type UpdateBookResultResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["UpdateBookResult"] = ResolversParentTypes["UpdateBookResult"],
+> = {
+  result?: Resolver<ResolversTypes["Book"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type UserResolvers<
   ContextType = ResolverContext,
   ParentType extends
@@ -619,14 +757,19 @@ export type Resolvers<ContextType = ResolverContext> = {
   BooksPayload?: BooksPayloadResolvers<ContextType>;
   BooksResult?: BooksResultResolvers<ContextType>;
   CharacterNode?: CharacterNodeResolvers<ContextType>;
+  CreateBookPayload?: CreateBookPayloadResolvers<ContextType>;
+  CreateBookResult?: CreateBookResultResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   ExtraCharacter?: ExtraCharacterResolvers<ContextType>;
   Fighter?: FighterResolvers<ContextType>;
   MainCharacter?: MainCharacterResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Pagination?: PaginationResolvers<ContextType>;
   PayloadError?: PayloadErrorResolvers<ContextType>;
   PayloadErrorType?: PayloadErrorTypeResolvers;
   Query?: QueryResolvers<ContextType>;
+  UpdateBookPayload?: UpdateBookPayloadResolvers<ContextType>;
+  UpdateBookResult?: UpdateBookResultResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   Wizard?: WizardResolvers<ContextType>;
 };

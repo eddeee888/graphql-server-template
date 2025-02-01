@@ -4,7 +4,7 @@ export const character: NonNullable<QueryResolvers["character"]> = async (
   { id },
   { data },
 ) => {
-  const foundCharacter = data.characters[id];
+  const foundCharacter = await data.$characters.findById({ id });
 
   if (!foundCharacter) {
     return null;

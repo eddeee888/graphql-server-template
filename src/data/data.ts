@@ -140,6 +140,7 @@ export const data: {
     findById: (params: { id: string }) => Promise<DatabaseUser | null>;
   };
   $books: {
+    create: (params: { isbn: string }) => Promise<DatabaseBook>;
     findById: (params: { id: string }) => Promise<DatabaseBook | null>;
     findMany: (params: { page: number; recordsPerPage: number }) => Promise<{
       result: DatabaseBook[];
@@ -162,6 +163,16 @@ export const data: {
     },
   },
   $books: {
+    create: async ({ isbn }) => {
+      await simulateRequest();
+      const id = String(Object.keys(books).length + 1);
+      const book: DatabaseBook = {
+        id,
+        isbn,
+      };
+      books[id] = book;
+      return book;
+    },
     findById: async ({ id }) => {
       await simulateRequest();
       return books[id] || null;

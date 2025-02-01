@@ -1,4 +1,5 @@
 type Query
+type Mutation
 
 type PayloadError {
   error: PayloadErrorType!

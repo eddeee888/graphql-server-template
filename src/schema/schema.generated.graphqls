@@ -55,6 +55,7 @@ interface MainCharacter {
 
 type Mutation {
   createBook(input: CreateBookInput!): CreateBookPayload!
+  updateBook(input: UpdateBookInput!): UpdateBookPayload!
 }
 
 type Pagination {
@@ -82,6 +83,17 @@ type Query {
   books(input: PaginationInput!): BooksPayload!
   character(id: ID!): CharacterNode
   user(id: ID!): User
+}
+
+input UpdateBookInput {
+  id: ID!
+  isbn: String!
+}
+
+union UpdateBookPayload = PayloadError | UpdateBookResult
+
+type UpdateBookResult {
+  result: Book!
 }
 
 type User {

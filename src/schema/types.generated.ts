@@ -107,10 +107,15 @@ export type MainCharacter = {
 export type Mutation = {
   __typename?: "Mutation";
   createBook: CreateBookPayload;
+  updateBook: UpdateBookPayload;
 };
 
 export type MutationcreateBookArgs = {
   input: CreateBookInput;
+};
+
+export type MutationupdateBookArgs = {
+  input: UpdateBookInput;
 };
 
 export type Pagination = {
@@ -156,6 +161,18 @@ export type QuerycharacterArgs = {
 
 export type QueryuserArgs = {
   id: Scalars["ID"]["input"];
+};
+
+export type UpdateBookInput = {
+  id: Scalars["ID"]["input"];
+  isbn: Scalars["String"]["input"];
+};
+
+export type UpdateBookPayload = PayloadError | UpdateBookResult;
+
+export type UpdateBookResult = {
+  __typename?: "UpdateBookResult";
+  result: Book;
 };
 
 export type User = {
@@ -303,6 +320,13 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
     | (Omit<PayloadError, "error"> & { error: _RefType["PayloadErrorType"] } & {
         __typename: "PayloadError";
       });
+  UpdateBookPayload:
+    | (Omit<PayloadError, "error"> & { error: _RefType["PayloadErrorType"] } & {
+        __typename: "PayloadError";
+      })
+    | (Omit<UpdateBookResult, "result"> & { result: _RefType["Book"] } & {
+        __typename: "UpdateBookResult";
+      });
 };
 
 /** Mapping of interface types */
@@ -383,6 +407,13 @@ export type ResolversTypes = {
     | "UNEXPECTED_ERROR"
   >;
   Query: ResolverTypeWrapper<{}>;
+  UpdateBookInput: UpdateBookInput;
+  UpdateBookPayload: ResolverTypeWrapper<
+    ResolversUnionTypes<ResolversTypes>["UpdateBookPayload"]
+  >;
+  UpdateBookResult: ResolverTypeWrapper<
+    Omit<UpdateBookResult, "result"> & { result: ResolversTypes["Book"] }
+  >;
   User: ResolverTypeWrapper<UserMapper>;
   Wizard: ResolverTypeWrapper<WizardMapper>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
@@ -426,6 +457,11 @@ export type ResolversParentTypes = {
   PaginationInput: PaginationInput;
   PayloadError: PayloadError;
   Query: {};
+  UpdateBookInput: UpdateBookInput;
+  UpdateBookPayload: ResolversUnionTypes<ResolversParentTypes>["UpdateBookPayload"];
+  UpdateBookResult: Omit<UpdateBookResult, "result"> & {
+    result: ResolversParentTypes["Book"];
+  };
   User: UserMapper;
   Wizard: WizardMapper;
   Boolean: Scalars["Boolean"]["output"];
@@ -594,6 +630,12 @@ export type MutationResolvers<
     ContextType,
     RequireFields<MutationcreateBookArgs, "input">
   >;
+  updateBook?: Resolver<
+    ResolversTypes["UpdateBookPayload"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationupdateBookArgs, "input">
+  >;
 };
 
 export type PaginationResolvers<
@@ -655,6 +697,27 @@ export type QueryResolvers<
   >;
 };
 
+export type UpdateBookPayloadResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["UpdateBookPayload"] = ResolversParentTypes["UpdateBookPayload"],
+> = {
+  __resolveType?: TypeResolveFn<
+    "PayloadError" | "UpdateBookResult",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type UpdateBookResultResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["UpdateBookResult"] = ResolversParentTypes["UpdateBookResult"],
+> = {
+  result?: Resolver<ResolversTypes["Book"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type UserResolvers<
   ContextType = ResolverContext,
   ParentType extends
@@ -705,6 +768,8 @@ export type Resolvers<ContextType = ResolverContext> = {
   PayloadError?: PayloadErrorResolvers<ContextType>;
   PayloadErrorType?: PayloadErrorTypeResolvers;
   Query?: QueryResolvers<ContextType>;
+  UpdateBookPayload?: UpdateBookPayloadResolvers<ContextType>;
+  UpdateBookResult?: UpdateBookResultResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   Wizard?: WizardResolvers<ContextType>;
 };

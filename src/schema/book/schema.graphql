@@ -5,6 +5,7 @@ extend type Query {
 
 extend type Mutation {
   createBook(input: CreateBookInput!): CreateBookPayload!
+  updateBook(input: UpdateBookInput!): UpdateBookPayload!
 }
 
 type Book {
@@ -34,6 +35,17 @@ type CreateBookResult {
 }
 
 union CreateBookPayload = CreateBookResult | PayloadError
+
+input UpdateBookInput {
+  id: ID!
+  isbn: String!
+}
+
+type UpdateBookResult {
+  result: Book!
+}
+
+union UpdateBookPayload = UpdateBookResult | PayloadError
 
 extend type User {
   booksRead: [Book!]!

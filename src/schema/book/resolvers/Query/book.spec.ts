@@ -14,12 +14,12 @@ const document = graphql(/* GraphQL */ `
   query book_spec_QueryBook($id: ID!) {
     book(id: $id) {
       __typename
-      ... on BookResult {
+      ... on BookResultOk {
         result {
           ...Query_book_spec_Book
         }
       }
-      ... on PayloadError {
+      ... on ResultError {
         error
       }
     }
@@ -32,10 +32,10 @@ void test("Query.book - returns book data if exists in data", async (t) => {
   t.assert.deepEqual(result, {
     data: {
       book: {
-        __typename: "BookResult",
+        __typename: "BookResultOk",
         result: {
           id: "1",
-          isbn: "isbn1",
+          isbn: "isbn:1",
         },
       },
     },
@@ -48,7 +48,7 @@ void test("Query.book - returns null if cannot find book data", async (t) => {
   t.assert.deepEqual(result, {
     data: {
       book: {
-        __typename: "BookResult",
+        __typename: "BookResultOk",
         result: null,
       },
     },

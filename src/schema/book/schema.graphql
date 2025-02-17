@@ -1,11 +1,11 @@
 extend type Query {
-  book(id: ID!): BookPayload!
-  books(input: PaginationInput!): BooksPayload!
+  book(id: ID!): BookResult!
+  books(input: PaginationInput!): BooksResult!
 }
 
 extend type Mutation {
-  createBook(input: CreateBookInput!): CreateBookPayload!
-  updateBook(input: UpdateBookInput!): UpdateBookPayload!
+  createBook(input: CreateBookInput!): CreateBookResult!
+  updateBook(input: UpdateBookInput!): UpdateBookResult!
 }
 
 type Book {
@@ -13,39 +13,39 @@ type Book {
   isbn: String!
 }
 
-type BookResult {
+type BookResultOk {
   result: Book
 }
 
-union BookPayload = BookResult | PayloadError
+union BookResult = BookResultOk | ResultError
 
-type BooksResult {
+type BooksResultOk {
   result: [Book!]!
   pagination: Pagination!
 }
 
-union BooksPayload = BooksResult | PayloadError
+union BooksResult = BooksResultOk | ResultError
 
 input CreateBookInput {
   isbn: String!
 }
 
-type CreateBookResult {
+type CreateBookResultOk {
   result: Book!
 }
 
-union CreateBookPayload = CreateBookResult | PayloadError
+union CreateBookResult = CreateBookResultOk | ResultError
 
 input UpdateBookInput {
   id: ID!
   isbn: String!
 }
 
-type UpdateBookResult {
+type UpdateBookResultOk {
   result: Book!
 }
 
-union UpdateBookPayload = UpdateBookResult | PayloadError
+union UpdateBookResult = UpdateBookResultOk | ResultError
 
 extend type User {
   booksRead: [Book!]!

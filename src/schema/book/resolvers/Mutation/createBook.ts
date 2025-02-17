@@ -7,7 +7,7 @@ export const createBook: NonNullable<MutationResolvers["createBook"]> = async (
   const result = await data.$books.create({ isbn });
 
   return {
-    __typename: "CreateBookResult",
+    __typename: "CreateBookResultOk",
     result,
   };
 };

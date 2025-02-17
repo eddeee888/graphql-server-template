@@ -14,12 +14,12 @@ const document = graphql(/* GraphQL */ `
   query book_spec_QueryBook($id: ID!) {
     book(id: $id) {
       __typename
-      ... on BookResult {
+      ... on BookResultOk {
         result {
           ...Query_book_spec_Book
         }
       }
-      ... on PayloadError {
+      ... on ResultError {
         error
       }
     }

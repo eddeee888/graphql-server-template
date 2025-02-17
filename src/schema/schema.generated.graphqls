@@ -3,15 +3,15 @@ type Book {
   isbn: String!
 }
 
-union BookPayload = BookResult | PayloadError
+union BookResult = BookResultOk | ResultError
 
-type BookResult {
+type BookResultOk {
   result: Book
 }
 
-union BooksPayload = BooksResult | PayloadError
+union BooksResult = BooksResultOk | ResultError
 
-type BooksResult {
+type BooksResultOk {
   pagination: Pagination!
   result: [Book!]!
 }
@@ -26,9 +26,9 @@ input CreateBookInput {
   isbn: String!
 }
 
-union CreateBookPayload = CreateBookResult | PayloadError
+union CreateBookResult = CreateBookResultOk | ResultError
 
-type CreateBookResult {
+type CreateBookResultOk {
   result: Book!
 }
 
@@ -54,8 +54,8 @@ interface MainCharacter {
 }
 
 type Mutation {
-  createBook(input: CreateBookInput!): CreateBookPayload!
-  updateBook(input: UpdateBookInput!): UpdateBookPayload!
+  createBook(input: CreateBookInput!): CreateBookResult!
+  updateBook(input: UpdateBookInput!): UpdateBookResult!
 }
 
 type Pagination {
@@ -67,22 +67,22 @@ input PaginationInput {
   recordsPerPage: Int
 }
 
-type PayloadError {
-  error: PayloadErrorType!
+type Query {
+  book(id: ID!): BookResult!
+  books(input: PaginationInput!): BooksResult!
+  character(id: ID!): CharacterNode
+  user(id: ID!): User
 }
 
-enum PayloadErrorType {
+type ResultError {
+  error: ResultErrorType!
+}
+
+enum ResultErrorType {
   FORBIDDEN_ERROR
   INPUT_VALIDATION_ERROR
   NOT_FOUND
   UNEXPECTED_ERROR
-}
-
-type Query {
-  book(id: ID!): BookPayload!
-  books(input: PaginationInput!): BooksPayload!
-  character(id: ID!): CharacterNode
-  user(id: ID!): User
 }
 
 input UpdateBookInput {
@@ -90,9 +90,9 @@ input UpdateBookInput {
   isbn: String!
 }
 
-union UpdateBookPayload = PayloadError | UpdateBookResult
+union UpdateBookResult = ResultError | UpdateBookResultOk
 
-type UpdateBookResult {
+type UpdateBookResultOk {
   result: Book!
 }
 

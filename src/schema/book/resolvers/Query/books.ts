@@ -13,7 +13,7 @@ export const books: NonNullable<QueryResolvers["books"]> = async (
   });
 
   return {
-    __typename: "BooksResult",
+    __typename: "BooksResultOk",
     result,
     pagination,
   };

@@ -20,7 +20,7 @@
   "dependencies": {
     "graphql": "16.10.0",
     "graphql-scalars": "1.24.1",
-    "graphql-yoga": "5.10.11"
+    "graphql-yoga": "5.11.0"
   },
   "devDependencies": {
     "@eddeee888/eslint-plugin": "0.0.2",

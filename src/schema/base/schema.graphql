@@ -10,6 +10,7 @@ enum ResultErrorType {
   INPUT_VALIDATION_ERROR
   FORBIDDEN_ERROR
   UNEXPECTED_ERROR
+  TEST
 }
 
 input PaginationInput {

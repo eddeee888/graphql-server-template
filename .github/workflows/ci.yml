@@ -32,14 +32,17 @@ jobs:
       - name: Install deps
         run: yarn install --prefer-offline
 
+      - name: Codegen & check
+        run: ./bin/codegen-check.sh
+
+      - name: Build
+        run: yarn build
+
       - name: Lint
         run: yarn lint
 
       - name: Format check
         run: yarn prettier . --list-different
-
-      - name: Codegen & check
-        run: ./bin/codegen-check.sh
 
       - name: Test
         run: yarn test:once

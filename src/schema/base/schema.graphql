@@ -1,11 +1,11 @@
 type Query
 type Mutation
 
-type PayloadError {
-  error: PayloadErrorType!
+type ResultError {
+  error: ResultErrorType!
 }
 
-enum PayloadErrorType {
+enum ResultErrorType {
   NOT_FOUND
   INPUT_VALIDATION_ERROR
   FORBIDDEN_ERROR

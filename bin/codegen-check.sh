@@ -2,7 +2,7 @@
 
 echo -e "\n=> Running codegen and checking diff..."
 
-yarn graphql-codegen
+yarn codegen
 
 echo "=> Check if commited files matches generated sample"
 if [[ `git status --porcelain` ]]; then
@@ -10,7 +10,7 @@ if [[ `git status --porcelain` ]]; then
   echo "=> Following files do not have expected result:"
   git --no-pager diff HEAD --color
   git ls-files --others --exclude-standard
-  echo -e "\n=> Have you tried running 'yarn graphql-codegen'?"
+  echo -e "\n=> Have you tried running 'yarn codegen'?"
   exit 1
 fi
 

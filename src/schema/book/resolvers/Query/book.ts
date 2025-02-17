@@ -7,7 +7,7 @@ export const book: NonNullable<QueryResolvers["book"]> = async (
   const result = await data.$books.findById({ id });
 
   return {
-    __typename: "BookResult",
+    __typename: "BookResultOk",
     result,
   };
 };

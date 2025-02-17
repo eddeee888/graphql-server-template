@@ -27,7 +27,7 @@ export const typeDefs = {
             kind: "NonNullType",
             type: {
               kind: "NamedType",
-              name: { kind: "Name", value: "BookPayload" },
+              name: { kind: "Name", value: "BookResult" },
             },
           },
           directives: [],
@@ -53,7 +53,7 @@ export const typeDefs = {
             kind: "NonNullType",
             type: {
               kind: "NamedType",
-              name: { kind: "Name", value: "BooksPayload" },
+              name: { kind: "Name", value: "BooksResult" },
             },
           },
           directives: [],
@@ -130,7 +130,7 @@ export const typeDefs = {
             kind: "NonNullType",
             type: {
               kind: "NamedType",
-              name: { kind: "Name", value: "CreateBookPayload" },
+              name: { kind: "Name", value: "CreateBookResult" },
             },
           },
           directives: [],
@@ -156,7 +156,7 @@ export const typeDefs = {
             kind: "NonNullType",
             type: {
               kind: "NamedType",
-              name: { kind: "Name", value: "UpdateBookPayload" },
+              name: { kind: "Name", value: "UpdateBookResult" },
             },
           },
           directives: [],
@@ -167,7 +167,7 @@ export const typeDefs = {
     },
     {
       kind: "ObjectTypeDefinition",
-      name: { kind: "Name", value: "PayloadError" },
+      name: { kind: "Name", value: "ResultError" },
       interfaces: [],
       directives: [],
       fields: [
@@ -179,7 +179,7 @@ export const typeDefs = {
             kind: "NonNullType",
             type: {
               kind: "NamedType",
-              name: { kind: "Name", value: "PayloadErrorType" },
+              name: { kind: "Name", value: "ResultErrorType" },
             },
           },
           directives: [],
@@ -188,7 +188,7 @@ export const typeDefs = {
     },
     {
       kind: "EnumTypeDefinition",
-      name: { kind: "Name", value: "PayloadErrorType" },
+      name: { kind: "Name", value: "ResultErrorType" },
       directives: [],
       values: [
         {
@@ -288,7 +288,7 @@ export const typeDefs = {
     },
     {
       kind: "ObjectTypeDefinition",
-      name: { kind: "Name", value: "BookResult" },
+      name: { kind: "Name", value: "BookResultOk" },
       interfaces: [],
       directives: [],
       fields: [
@@ -303,16 +303,16 @@ export const typeDefs = {
     },
     {
       kind: "UnionTypeDefinition",
-      name: { kind: "Name", value: "BookPayload" },
+      name: { kind: "Name", value: "BookResult" },
       directives: [],
       types: [
-        { kind: "NamedType", name: { kind: "Name", value: "BookResult" } },
-        { kind: "NamedType", name: { kind: "Name", value: "PayloadError" } },
+        { kind: "NamedType", name: { kind: "Name", value: "BookResultOk" } },
+        { kind: "NamedType", name: { kind: "Name", value: "ResultError" } },
       ],
     },
     {
       kind: "ObjectTypeDefinition",
-      name: { kind: "Name", value: "BooksResult" },
+      name: { kind: "Name", value: "BooksResultOk" },
       interfaces: [],
       directives: [],
       fields: [
@@ -352,11 +352,11 @@ export const typeDefs = {
     },
     {
       kind: "UnionTypeDefinition",
-      name: { kind: "Name", value: "BooksPayload" },
+      name: { kind: "Name", value: "BooksResult" },
       directives: [],
       types: [
-        { kind: "NamedType", name: { kind: "Name", value: "BooksResult" } },
-        { kind: "NamedType", name: { kind: "Name", value: "PayloadError" } },
+        { kind: "NamedType", name: { kind: "Name", value: "BooksResultOk" } },
+        { kind: "NamedType", name: { kind: "Name", value: "ResultError" } },
       ],
     },
     {
@@ -380,7 +380,7 @@ export const typeDefs = {
     },
     {
       kind: "ObjectTypeDefinition",
-      name: { kind: "Name", value: "CreateBookResult" },
+      name: { kind: "Name", value: "CreateBookResultOk" },
       interfaces: [],
       directives: [],
       fields: [
@@ -398,14 +398,14 @@ export const typeDefs = {
     },
     {
       kind: "UnionTypeDefinition",
-      name: { kind: "Name", value: "CreateBookPayload" },
+      name: { kind: "Name", value: "CreateBookResult" },
       directives: [],
       types: [
         {
           kind: "NamedType",
-          name: { kind: "Name", value: "CreateBookResult" },
+          name: { kind: "Name", value: "CreateBookResultOk" },
         },
-        { kind: "NamedType", name: { kind: "Name", value: "PayloadError" } },
+        { kind: "NamedType", name: { kind: "Name", value: "ResultError" } },
       ],
     },
     {
@@ -438,7 +438,7 @@ export const typeDefs = {
     },
     {
       kind: "ObjectTypeDefinition",
-      name: { kind: "Name", value: "UpdateBookResult" },
+      name: { kind: "Name", value: "UpdateBookResultOk" },
       interfaces: [],
       directives: [],
       fields: [
@@ -456,14 +456,14 @@ export const typeDefs = {
     },
     {
       kind: "UnionTypeDefinition",
-      name: { kind: "Name", value: "UpdateBookPayload" },
+      name: { kind: "Name", value: "UpdateBookResult" },
       directives: [],
       types: [
         {
           kind: "NamedType",
-          name: { kind: "Name", value: "UpdateBookResult" },
+          name: { kind: "Name", value: "UpdateBookResultOk" },
         },
-        { kind: "NamedType", name: { kind: "Name", value: "PayloadError" } },
+        { kind: "NamedType", name: { kind: "Name", value: "ResultError" } },
       ],
     },
     {

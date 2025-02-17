@@ -50,17 +50,17 @@ export type Book = {
   isbn: Scalars["String"]["output"];
 };
 
-export type BookPayload = BookResult | PayloadError;
+export type BookResult = BookResultOk | ResultError;
 
-export type BookResult = {
-  __typename?: "BookResult";
+export type BookResultOk = {
+  __typename?: "BookResultOk";
   result?: Maybe<Book>;
 };
 
-export type BooksPayload = BooksResult | PayloadError;
+export type BooksResult = BooksResultOk | ResultError;
 
-export type BooksResult = {
-  __typename?: "BooksResult";
+export type BooksResultOk = {
+  __typename?: "BooksResultOk";
   pagination: Pagination;
   result: Array<Book>;
 };
@@ -75,10 +75,10 @@ export type CreateBookInput = {
   isbn: Scalars["String"]["input"];
 };
 
-export type CreateBookPayload = CreateBookResult | PayloadError;
+export type CreateBookResult = CreateBookResultOk | ResultError;
 
-export type CreateBookResult = {
-  __typename?: "CreateBookResult";
+export type CreateBookResultOk = {
+  __typename?: "CreateBookResultOk";
   result: Book;
 };
 
@@ -106,8 +106,8 @@ export type MainCharacter = {
 
 export type Mutation = {
   __typename?: "Mutation";
-  createBook: CreateBookPayload;
-  updateBook: UpdateBookPayload;
+  createBook: CreateBookResult;
+  updateBook: UpdateBookResult;
 };
 
 export type MutationcreateBookArgs = {
@@ -128,21 +128,10 @@ export type PaginationInput = {
   recordsPerPage?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
-export type PayloadError = {
-  __typename?: "PayloadError";
-  error: PayloadErrorType;
-};
-
-export type PayloadErrorType =
-  | "FORBIDDEN_ERROR"
-  | "INPUT_VALIDATION_ERROR"
-  | "NOT_FOUND"
-  | "UNEXPECTED_ERROR";
-
 export type Query = {
   __typename?: "Query";
-  book: BookPayload;
-  books: BooksPayload;
+  book: BookResult;
+  books: BooksResult;
   character?: Maybe<CharacterNode>;
   user?: Maybe<User>;
 };
@@ -163,15 +152,26 @@ export type QueryuserArgs = {
   id: Scalars["ID"]["input"];
 };
 
+export type ResultError = {
+  __typename?: "ResultError";
+  error: ResultErrorType;
+};
+
+export type ResultErrorType =
+  | "FORBIDDEN_ERROR"
+  | "INPUT_VALIDATION_ERROR"
+  | "NOT_FOUND"
+  | "UNEXPECTED_ERROR";
+
 export type UpdateBookInput = {
   id: Scalars["ID"]["input"];
   isbn: Scalars["String"]["input"];
 };
 
-export type UpdateBookPayload = PayloadError | UpdateBookResult;
+export type UpdateBookResult = ResultError | UpdateBookResultOk;
 
-export type UpdateBookResult = {
-  __typename?: "UpdateBookResult";
+export type UpdateBookResultOk = {
+  __typename?: "UpdateBookResultOk";
   result: Book;
 };
 
@@ -299,33 +299,33 @@ export type DirectiveResolverFn<
 
 /** Mapping of union types */
 export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
-  BookPayload:
-    | (Omit<BookResult, "result"> & { result?: Maybe<_RefType["Book"]> } & {
-        __typename: "BookResult";
+  BookResult:
+    | (Omit<BookResultOk, "result"> & { result?: Maybe<_RefType["Book"]> } & {
+        __typename: "BookResultOk";
       })
-    | (Omit<PayloadError, "error"> & { error: _RefType["PayloadErrorType"] } & {
-        __typename: "PayloadError";
+    | (Omit<ResultError, "error"> & { error: _RefType["ResultErrorType"] } & {
+        __typename: "ResultError";
       });
-  BooksPayload:
-    | (Omit<BooksResult, "result"> & { result: Array<_RefType["Book"]> } & {
-        __typename: "BooksResult";
+  BooksResult:
+    | (Omit<BooksResultOk, "result"> & { result: Array<_RefType["Book"]> } & {
+        __typename: "BooksResultOk";
       })
-    | (Omit<PayloadError, "error"> & { error: _RefType["PayloadErrorType"] } & {
-        __typename: "PayloadError";
+    | (Omit<ResultError, "error"> & { error: _RefType["ResultErrorType"] } & {
+        __typename: "ResultError";
       });
-  CreateBookPayload:
-    | (Omit<CreateBookResult, "result"> & { result: _RefType["Book"] } & {
-        __typename: "CreateBookResult";
+  CreateBookResult:
+    | (Omit<CreateBookResultOk, "result"> & { result: _RefType["Book"] } & {
+        __typename: "CreateBookResultOk";
       })
-    | (Omit<PayloadError, "error"> & { error: _RefType["PayloadErrorType"] } & {
-        __typename: "PayloadError";
+    | (Omit<ResultError, "error"> & { error: _RefType["ResultErrorType"] } & {
+        __typename: "ResultError";
       });
-  UpdateBookPayload:
-    | (Omit<PayloadError, "error"> & { error: _RefType["PayloadErrorType"] } & {
-        __typename: "PayloadError";
+  UpdateBookResult:
+    | (Omit<ResultError, "error"> & { error: _RefType["ResultErrorType"] } & {
+        __typename: "ResultError";
       })
-    | (Omit<UpdateBookResult, "result"> & { result: _RefType["Book"] } & {
-        __typename: "UpdateBookResult";
+    | (Omit<UpdateBookResultOk, "result"> & { result: _RefType["Book"] } & {
+        __typename: "UpdateBookResultOk";
       });
 };
 
@@ -355,27 +355,27 @@ export type ResolversTypes = {
   Book: ResolverTypeWrapper<BookMapper>;
   ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
   String: ResolverTypeWrapper<Scalars["String"]["output"]>;
-  BookPayload: ResolverTypeWrapper<
-    ResolversUnionTypes<ResolversTypes>["BookPayload"]
-  >;
   BookResult: ResolverTypeWrapper<
-    Omit<BookResult, "result"> & { result?: Maybe<ResolversTypes["Book"]> }
+    ResolversUnionTypes<ResolversTypes>["BookResult"]
   >;
-  BooksPayload: ResolverTypeWrapper<
-    ResolversUnionTypes<ResolversTypes>["BooksPayload"]
+  BookResultOk: ResolverTypeWrapper<
+    Omit<BookResultOk, "result"> & { result?: Maybe<ResolversTypes["Book"]> }
   >;
   BooksResult: ResolverTypeWrapper<
-    Omit<BooksResult, "result"> & { result: Array<ResolversTypes["Book"]> }
+    ResolversUnionTypes<ResolversTypes>["BooksResult"]
+  >;
+  BooksResultOk: ResolverTypeWrapper<
+    Omit<BooksResultOk, "result"> & { result: Array<ResolversTypes["Book"]> }
   >;
   CharacterNode: ResolverTypeWrapper<
     ResolversInterfaceTypes<ResolversTypes>["CharacterNode"]
   >;
   CreateBookInput: CreateBookInput;
-  CreateBookPayload: ResolverTypeWrapper<
-    ResolversUnionTypes<ResolversTypes>["CreateBookPayload"]
-  >;
   CreateBookResult: ResolverTypeWrapper<
-    Omit<CreateBookResult, "result"> & { result: ResolversTypes["Book"] }
+    ResolversUnionTypes<ResolversTypes>["CreateBookResult"]
+  >;
+  CreateBookResultOk: ResolverTypeWrapper<
+    Omit<CreateBookResultOk, "result"> & { result: ResolversTypes["Book"] }
   >;
   DateTime: ResolverTypeWrapper<Scalars["DateTime"]["output"]>;
   ExtraCharacter: ResolverTypeWrapper<
@@ -397,22 +397,22 @@ export type ResolversTypes = {
   Mutation: ResolverTypeWrapper<{}>;
   Pagination: ResolverTypeWrapper<Pagination>;
   PaginationInput: PaginationInput;
-  PayloadError: ResolverTypeWrapper<
-    Omit<PayloadError, "error"> & { error: ResolversTypes["PayloadErrorType"] }
+  Query: ResolverTypeWrapper<{}>;
+  ResultError: ResolverTypeWrapper<
+    Omit<ResultError, "error"> & { error: ResolversTypes["ResultErrorType"] }
   >;
-  PayloadErrorType: ResolverTypeWrapper<
+  ResultErrorType: ResolverTypeWrapper<
     | "NOT_FOUND"
     | "INPUT_VALIDATION_ERROR"
     | "FORBIDDEN_ERROR"
     | "UNEXPECTED_ERROR"
   >;
-  Query: ResolverTypeWrapper<{}>;
   UpdateBookInput: UpdateBookInput;
-  UpdateBookPayload: ResolverTypeWrapper<
-    ResolversUnionTypes<ResolversTypes>["UpdateBookPayload"]
-  >;
   UpdateBookResult: ResolverTypeWrapper<
-    Omit<UpdateBookResult, "result"> & { result: ResolversTypes["Book"] }
+    ResolversUnionTypes<ResolversTypes>["UpdateBookResult"]
+  >;
+  UpdateBookResultOk: ResolverTypeWrapper<
+    Omit<UpdateBookResultOk, "result"> & { result: ResolversTypes["Book"] }
   >;
   User: ResolverTypeWrapper<UserMapper>;
   Wizard: ResolverTypeWrapper<WizardMapper>;
@@ -424,18 +424,18 @@ export type ResolversParentTypes = {
   Book: BookMapper;
   ID: Scalars["ID"]["output"];
   String: Scalars["String"]["output"];
-  BookPayload: ResolversUnionTypes<ResolversParentTypes>["BookPayload"];
-  BookResult: Omit<BookResult, "result"> & {
+  BookResult: ResolversUnionTypes<ResolversParentTypes>["BookResult"];
+  BookResultOk: Omit<BookResultOk, "result"> & {
     result?: Maybe<ResolversParentTypes["Book"]>;
   };
-  BooksPayload: ResolversUnionTypes<ResolversParentTypes>["BooksPayload"];
-  BooksResult: Omit<BooksResult, "result"> & {
+  BooksResult: ResolversUnionTypes<ResolversParentTypes>["BooksResult"];
+  BooksResultOk: Omit<BooksResultOk, "result"> & {
     result: Array<ResolversParentTypes["Book"]>;
   };
   CharacterNode: ResolversInterfaceTypes<ResolversParentTypes>["CharacterNode"];
   CreateBookInput: CreateBookInput;
-  CreateBookPayload: ResolversUnionTypes<ResolversParentTypes>["CreateBookPayload"];
-  CreateBookResult: Omit<CreateBookResult, "result"> & {
+  CreateBookResult: ResolversUnionTypes<ResolversParentTypes>["CreateBookResult"];
+  CreateBookResultOk: Omit<CreateBookResultOk, "result"> & {
     result: ResolversParentTypes["Book"];
   };
   DateTime: Scalars["DateTime"]["output"];
@@ -455,11 +455,11 @@ export type ResolversParentTypes = {
   Mutation: {};
   Pagination: Pagination;
   PaginationInput: PaginationInput;
-  PayloadError: PayloadError;
   Query: {};
+  ResultError: ResultError;
   UpdateBookInput: UpdateBookInput;
-  UpdateBookPayload: ResolversUnionTypes<ResolversParentTypes>["UpdateBookPayload"];
-  UpdateBookResult: Omit<UpdateBookResult, "result"> & {
+  UpdateBookResult: ResolversUnionTypes<ResolversParentTypes>["UpdateBookResult"];
+  UpdateBookResultOk: Omit<UpdateBookResultOk, "result"> & {
     result: ResolversParentTypes["Book"];
   };
   User: UserMapper;
@@ -477,43 +477,43 @@ export type BookResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type BookPayloadResolvers<
-  ContextType = ResolverContext,
-  ParentType extends
-    ResolversParentTypes["BookPayload"] = ResolversParentTypes["BookPayload"],
-> = {
-  __resolveType?: TypeResolveFn<
-    "BookResult" | "PayloadError",
-    ParentType,
-    ContextType
-  >;
-};
-
 export type BookResultResolvers<
   ContextType = ResolverContext,
   ParentType extends
     ResolversParentTypes["BookResult"] = ResolversParentTypes["BookResult"],
 > = {
-  result?: Resolver<Maybe<ResolversTypes["Book"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type BooksPayloadResolvers<
-  ContextType = ResolverContext,
-  ParentType extends
-    ResolversParentTypes["BooksPayload"] = ResolversParentTypes["BooksPayload"],
-> = {
   __resolveType?: TypeResolveFn<
-    "BooksResult" | "PayloadError",
+    "BookResultOk" | "ResultError",
     ParentType,
     ContextType
   >;
+};
+
+export type BookResultOkResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["BookResultOk"] = ResolversParentTypes["BookResultOk"],
+> = {
+  result?: Resolver<Maybe<ResolversTypes["Book"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BooksResultResolvers<
   ContextType = ResolverContext,
   ParentType extends
     ResolversParentTypes["BooksResult"] = ResolversParentTypes["BooksResult"],
+> = {
+  __resolveType?: TypeResolveFn<
+    "BooksResultOk" | "ResultError",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type BooksResultOkResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["BooksResultOk"] = ResolversParentTypes["BooksResultOk"],
 > = {
   pagination?: Resolver<ResolversTypes["Pagination"], ParentType, ContextType>;
   result?: Resolver<Array<ResolversTypes["Book"]>, ParentType, ContextType>;
@@ -543,22 +543,22 @@ export type CharacterNodeResolvers<
   >;
 };
 
-export type CreateBookPayloadResolvers<
+export type CreateBookResultResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["CreateBookPayload"] = ResolversParentTypes["CreateBookPayload"],
+    ResolversParentTypes["CreateBookResult"] = ResolversParentTypes["CreateBookResult"],
 > = {
   __resolveType?: TypeResolveFn<
-    "CreateBookResult" | "PayloadError",
+    "CreateBookResultOk" | "ResultError",
     ParentType,
     ContextType
   >;
 };
 
-export type CreateBookResultResolvers<
+export type CreateBookResultOkResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["CreateBookResult"] = ResolversParentTypes["CreateBookResult"],
+    ResolversParentTypes["CreateBookResultOk"] = ResolversParentTypes["CreateBookResultOk"],
 > = {
   result?: Resolver<ResolversTypes["Book"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -625,13 +625,13 @@ export type MutationResolvers<
     ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"],
 > = {
   createBook?: Resolver<
-    ResolversTypes["CreateBookPayload"],
+    ResolversTypes["CreateBookResult"],
     ParentType,
     ContextType,
     RequireFields<MutationcreateBookArgs, "input">
   >;
   updateBook?: Resolver<
-    ResolversTypes["UpdateBookPayload"],
+    ResolversTypes["UpdateBookResult"],
     ParentType,
     ContextType,
     RequireFields<MutationupdateBookArgs, "input">
@@ -647,38 +647,19 @@ export type PaginationResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type PayloadErrorResolvers<
-  ContextType = ResolverContext,
-  ParentType extends
-    ResolversParentTypes["PayloadError"] = ResolversParentTypes["PayloadError"],
-> = {
-  error?: Resolver<ResolversTypes["PayloadErrorType"], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PayloadErrorTypeResolvers = EnumResolverSignature<
-  {
-    FORBIDDEN_ERROR?: any;
-    INPUT_VALIDATION_ERROR?: any;
-    NOT_FOUND?: any;
-    UNEXPECTED_ERROR?: any;
-  },
-  ResolversTypes["PayloadErrorType"]
->;
-
 export type QueryResolvers<
   ContextType = ResolverContext,
   ParentType extends
     ResolversParentTypes["Query"] = ResolversParentTypes["Query"],
 > = {
   book?: Resolver<
-    ResolversTypes["BookPayload"],
+    ResolversTypes["BookResult"],
     ParentType,
     ContextType,
     RequireFields<QuerybookArgs, "id">
   >;
   books?: Resolver<
-    ResolversTypes["BooksPayload"],
+    ResolversTypes["BooksResult"],
     ParentType,
     ContextType,
     RequireFields<QuerybooksArgs, "input">
@@ -697,22 +678,41 @@ export type QueryResolvers<
   >;
 };
 
-export type UpdateBookPayloadResolvers<
+export type ResultErrorResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["UpdateBookPayload"] = ResolversParentTypes["UpdateBookPayload"],
+    ResolversParentTypes["ResultError"] = ResolversParentTypes["ResultError"],
 > = {
-  __resolveType?: TypeResolveFn<
-    "PayloadError" | "UpdateBookResult",
-    ParentType,
-    ContextType
-  >;
+  error?: Resolver<ResolversTypes["ResultErrorType"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
+
+export type ResultErrorTypeResolvers = EnumResolverSignature<
+  {
+    FORBIDDEN_ERROR?: any;
+    INPUT_VALIDATION_ERROR?: any;
+    NOT_FOUND?: any;
+    UNEXPECTED_ERROR?: any;
+  },
+  ResolversTypes["ResultErrorType"]
+>;
 
 export type UpdateBookResultResolvers<
   ContextType = ResolverContext,
   ParentType extends
     ResolversParentTypes["UpdateBookResult"] = ResolversParentTypes["UpdateBookResult"],
+> = {
+  __resolveType?: TypeResolveFn<
+    "ResultError" | "UpdateBookResultOk",
+    ParentType,
+    ContextType
+  >;
+};
+
+export type UpdateBookResultOkResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["UpdateBookResultOk"] = ResolversParentTypes["UpdateBookResultOk"],
 > = {
   result?: Resolver<ResolversTypes["Book"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -752,24 +752,24 @@ export type WizardResolvers<
 
 export type Resolvers<ContextType = ResolverContext> = {
   Book?: BookResolvers<ContextType>;
-  BookPayload?: BookPayloadResolvers<ContextType>;
   BookResult?: BookResultResolvers<ContextType>;
-  BooksPayload?: BooksPayloadResolvers<ContextType>;
+  BookResultOk?: BookResultOkResolvers<ContextType>;
   BooksResult?: BooksResultResolvers<ContextType>;
+  BooksResultOk?: BooksResultOkResolvers<ContextType>;
   CharacterNode?: CharacterNodeResolvers<ContextType>;
-  CreateBookPayload?: CreateBookPayloadResolvers<ContextType>;
   CreateBookResult?: CreateBookResultResolvers<ContextType>;
+  CreateBookResultOk?: CreateBookResultOkResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   ExtraCharacter?: ExtraCharacterResolvers<ContextType>;
   Fighter?: FighterResolvers<ContextType>;
   MainCharacter?: MainCharacterResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Pagination?: PaginationResolvers<ContextType>;
-  PayloadError?: PayloadErrorResolvers<ContextType>;
-  PayloadErrorType?: PayloadErrorTypeResolvers;
   Query?: QueryResolvers<ContextType>;
-  UpdateBookPayload?: UpdateBookPayloadResolvers<ContextType>;
+  ResultError?: ResultErrorResolvers<ContextType>;
+  ResultErrorType?: ResultErrorTypeResolvers;
   UpdateBookResult?: UpdateBookResultResolvers<ContextType>;
+  UpdateBookResultOk?: UpdateBookResultOkResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   Wizard?: WizardResolvers<ContextType>;
 };

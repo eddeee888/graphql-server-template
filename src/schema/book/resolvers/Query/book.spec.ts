@@ -32,7 +32,7 @@ void test("Query.book - returns book data if exists in data", async (t) => {
   t.assert.deepEqual(result, {
     data: {
       book: {
-        __typename: "BookResult",
+        __typename: "BookResultOk",
         result: {
           id: "1",
           isbn: "isbn:1",
@@ -48,7 +48,7 @@ void test("Query.book - returns null if cannot find book data", async (t) => {
   t.assert.deepEqual(result, {
     data: {
       book: {
-        __typename: "BookResult",
+        __typename: "BookResultOk",
         result: null,
       },
     },

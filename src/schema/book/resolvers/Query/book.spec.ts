@@ -35,7 +35,7 @@ void test("Query.book - returns book data if exists in data", async (t) => {
         __typename: "BookResult",
         result: {
           id: "1",
-          isbn: "isbn1",
+          isbn: "isbn:1",
         },
       },
     },

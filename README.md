@@ -1,6 +1,7 @@
 # graphql-server-template
 
-Simple template with minimal schema to get started with GraphQL.
+Minimal GraphQL server.
+Check out Frontend React GraphQL template: https://github.com/eddeee888/graphql-react-template
 
 ## Main Stack
 

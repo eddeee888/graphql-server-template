@@ -284,6 +284,20 @@ export const typeDefs = {
           },
           directives: [],
         },
+        {
+          kind: "FieldDefinition",
+          name: { kind: "Name", value: "nextBookInSeries" },
+          arguments: [],
+          type: { kind: "NamedType", name: { kind: "Name", value: "Book" } },
+          directives: [],
+        },
+        {
+          kind: "FieldDefinition",
+          name: { kind: "Name", value: "previousBookInSeries" },
+          arguments: [],
+          type: { kind: "NamedType", name: { kind: "Name", value: "Book" } },
+          directives: [],
+        },
       ],
     },
     {

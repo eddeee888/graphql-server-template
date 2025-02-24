@@ -14,11 +14,16 @@ const createUser = (id: string): DatabaseUser => {
 export type DatabaseBook = {
   id: string;
   isbn: string;
+  bookSeriesId?: string;
 };
-const createBook = (id: string): DatabaseBook => {
+const createBook = (params: {
+  id: string;
+  bookSeriesId?: string;
+}): DatabaseBook => {
   return {
-    id,
-    isbn: `isbn:${id}`,
+    id: params.id,
+    isbn: `isbn:${params.id}`,
+    bookSeriesId: params.bookSeriesId,
   };
 };
 
@@ -58,19 +63,19 @@ const users: Record<string, DatabaseUser> = {
 };
 
 const books: Record<string, DatabaseBook> = {
-  "1": createBook("1"),
-  "2": createBook("2"),
-  "3": createBook("3"),
-  "4": createBook("4"),
-  "5": createBook("5"),
-  "6": createBook("6"),
-  "7": createBook("7"),
-  "8": createBook("8"),
-  "9": createBook("9"),
-  "10": createBook("10"),
-  "11": createBook("11"),
-  "12": createBook("12"),
-  "13": createBook("13"),
+  "1": createBook({ id: "1", bookSeriesId: "100" }),
+  "2": createBook({ id: "2", bookSeriesId: "100" }),
+  "3": createBook({ id: "3", bookSeriesId: "100" }),
+  "4": createBook({ id: "4", bookSeriesId: "100" }),
+  "5": createBook({ id: "5", bookSeriesId: "100" }),
+  "6": createBook({ id: "6", bookSeriesId: "100" }),
+  "7": createBook({ id: "7", bookSeriesId: "200" }),
+  "8": createBook({ id: "8", bookSeriesId: "200" }),
+  "9": createBook({ id: "9", bookSeriesId: "200" }),
+  "10": createBook({ id: "10" }),
+  "11": createBook({ id: "11" }),
+  "12": createBook({ id: "12" }),
+  "13": createBook({ id: "13" }),
 };
 
 const characters: Record<
@@ -135,6 +140,11 @@ const users_read_books: Record<string, [string, string]> = {
   "4": ["2", "1"],
 };
 
+const bookSeries_books: Record<string, string[]> = {
+  "100": ["1", "2", "3", "4", "5", "6"],
+  "200": ["7", "8", "9"],
+};
+
 export const data: {
   $users: {
     findById: (params: { id: string }) => Promise<DatabaseUser | null>;
@@ -150,6 +160,10 @@ export const data: {
     findBooksReadByUserId: (params: {
       userId: string;
     }) => Promise<DatabaseBook[]>;
+    findBooksInSeries: (params: {
+      bookId: string;
+      offset: number;
+    }) => Promise<DatabaseBook | null>;
   };
   $characters: {
     findById: (params: {
@@ -219,6 +233,22 @@ export const data: {
         },
         [],
       );
+    },
+    findBooksInSeries: async ({ bookId, offset }) => {
+      await simulateRequest();
+      const book = books[bookId];
+      if (!book) {
+        return null;
+      }
+      if (!book.bookSeriesId) {
+        return null;
+      }
+      const bookSeries = bookSeries_books[book.bookSeriesId];
+      const bookIndex = bookSeries.indexOf(bookId);
+      if (bookIndex === -1) {
+        return null;
+      }
+      return books[bookSeries[bookIndex + offset]] || null;
     },
   },
   $characters: {

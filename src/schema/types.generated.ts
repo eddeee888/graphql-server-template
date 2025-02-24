@@ -48,6 +48,8 @@ export type Book = {
   __typename?: "Book";
   id: Scalars["ID"]["output"];
   isbn: Scalars["String"]["output"];
+  nextBookInSeries?: Maybe<Book>;
+  previousBookInSeries?: Maybe<Book>;
 };
 
 export type BookResult = BookResultOk | ResultError;
@@ -474,6 +476,16 @@ export type BookResolvers<
 > = {
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   isbn?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  nextBookInSeries?: Resolver<
+    Maybe<ResolversTypes["Book"]>,
+    ParentType,
+    ContextType
+  >;
+  previousBookInSeries?: Resolver<
+    Maybe<ResolversTypes["Book"]>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

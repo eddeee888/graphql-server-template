@@ -259,18 +259,12 @@ export const data: {
   },
 };
 
-const simulateRequest = async (
-  params: {
-    minLatency: number;
-    maxLatency: number;
-    errorRate: number;
-  } = {
-    minLatency: 50,
-    maxLatency: 1000,
-    errorRate: 0, // error rate, from 0-1
-  },
-): Promise<void> => {
-  const { minLatency, maxLatency, errorRate } = params;
+const simulateRequest = async (params?: {
+  minLatency?: number; // min latency in ms
+  maxLatency?: number; // max latency in ms
+  errorRate?: number; // error rate, from 0-1
+}): Promise<void> => {
+  const { minLatency = 50, maxLatency = 1000, errorRate = 0 } = params || {};
 
   const randomLatency =
     Math.floor(Math.random() * (maxLatency - minLatency + 1)) + minLatency;

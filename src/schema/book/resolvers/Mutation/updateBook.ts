@@ -5,7 +5,7 @@ export const updateBook: NonNullable<MutationResolvers["updateBook"]> = async (
   { data },
 ) => {
   try {
-    const updatedBook = data.$books.update({ id, isbn });
+    const updatedBook = await data.$books.update({ id, isbn });
 
     return {
       __typename: "UpdateBookResultOk",

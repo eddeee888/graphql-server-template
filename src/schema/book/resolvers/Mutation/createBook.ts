@@ -4,10 +4,17 @@ export const createBook: NonNullable<MutationResolvers["createBook"]> = async (
   { input: { isbn } },
   { data },
 ) => {
-  const result = await data.$books.create({ isbn });
+  try {
+    const result = await data.$books.create({ isbn });
 
-  return {
-    __typename: "CreateBookResultOk",
-    result,
-  };
+    return {
+      __typename: "CreateBookResultOk",
+      result,
+    };
+  } catch {
+    return {
+      __typename: "ResultError",
+      error: "UNEXPECTED_ERROR",
+    };
+  }
 };

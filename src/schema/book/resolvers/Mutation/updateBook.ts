@@ -4,10 +4,17 @@ export const updateBook: NonNullable<MutationResolvers["updateBook"]> = async (
   { input: { id, isbn } },
   { data },
 ) => {
-  const updatedBook = data.$books.update({ id, isbn });
+  try {
+    const updatedBook = data.$books.update({ id, isbn });
 
-  return {
-    __typename: "UpdateBookResultOk",
-    result: updatedBook,
-  };
+    return {
+      __typename: "UpdateBookResultOk",
+      result: updatedBook,
+    };
+  } catch {
+    return {
+      __typename: "ResultError",
+      error: "UNEXPECTED_ERROR",
+    };
+  }
 };

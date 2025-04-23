@@ -4,10 +4,17 @@ export const book: NonNullable<QueryResolvers["book"]> = async (
   { id },
   { data },
 ) => {
-  const result = await data.$books.findById({ id });
+  try {
+    const result = await data.$books.findById({ id });
 
-  return {
-    __typename: "BookResultOk",
-    result,
-  };
+    return {
+      __typename: "BookResultOk",
+      result,
+    };
+  } catch {
+    return {
+      __typename: "ResultError",
+      error: "UNEXPECTED_ERROR",
+    };
+  }
 };

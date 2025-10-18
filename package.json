@@ -8,10 +8,10 @@
   "scripts": {
     "start:server": "tsx watch --clear-screen=false src/index.ts",
     "start:codegen": "graphql-codegen --watch",
-    "start:test": "node -r ts-node/register --test --watch src/**/*.spec.ts",
+    "start:test": "tsx --test --watch src/**/*.spec.ts",
     "dev": "run-p -l start:codegen start:server",
     "test": "run-p -l start:codegen start:test",
-    "test:once": "node -r ts-node/register --test src/**/*.spec.ts",
+    "test:once": "tsx --test src/**/*.spec.ts",
     "codegen": "graphql-codegen",
     "build": "tsc",
     "lint": "eslint .",

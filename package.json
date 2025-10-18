@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start:server": "ts-node-dev src/index.ts",
+    "start:server": "tsx watch --clear-screen=false src/index.ts",
     "start:codegen": "graphql-codegen --watch",
     "start:test": "node -r ts-node/register --test --watch src/**/*.spec.ts",
     "dev": "run-p -l start:codegen start:server",

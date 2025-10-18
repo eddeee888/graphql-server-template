@@ -6,12 +6,12 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start:server": "ts-node-dev src/index.ts",
+    "start:server": "tsx watch --clear-screen=false src/index.ts",
     "start:codegen": "graphql-codegen --watch",
-    "start:test": "node -r ts-node/register --test --watch src/**/*.spec.ts",
+    "start:test": "tsx --test --watch src/**/*.spec.ts",
     "dev": "run-p -l start:codegen start:server",
     "test": "run-p -l start:codegen start:test",
-    "test:once": "node -r ts-node/register --test src/**/*.spec.ts",
+    "test:once": "tsx --test src/**/*.spec.ts",
     "codegen": "graphql-codegen",
     "build": "tsc",
     "lint": "eslint .",
@@ -32,8 +32,7 @@
     "eslint": "9.38.0",
     "npm-run-all2": "8.0.4",
     "prettier": "3.6.2",
-    "ts-node": "10.9.2",
-    "ts-node-dev": "2.0.0",
+    "tsx": "4.20.6",
     "typescript": "5.9.3"
   }
 }

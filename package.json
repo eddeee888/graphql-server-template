@@ -31,7 +31,7 @@
     "@types/node": "22.18.11",
     "@typescript-eslint/eslint-plugin": "8.32.1",
     "@typescript-eslint/parser": "8.32.1",
-    "eslint": "8.57.1",
+    "eslint": "9.38.0",
     "npm-run-all2": "8.0.4",
     "prettier": "3.6.2",
     "ts-node": "10.9.2",

@@ -778,10 +778,10 @@
     "@babel/helper-string-parser" "^7.27.1"
     "@babel/helper-validator-identifier" "^7.27.1"
 
-"@eddeee888/eslint-plugin@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@eddeee888/eslint-plugin/-/eslint-plugin-1.0.0.tgz#99faf3508912f7f84d247d401b12830b78c69196"
-  integrity sha512-WmYvr0uOkP4QZ7XScWmOfOh34fVMoFtodBFNZAiPkOg3cZUokHk2qrxrQvqy5n6ozfFLQT4VT9UIvUqFu1BVUQ==
+"@eddeee888/eslint-plugin@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@eddeee888/eslint-plugin/-/eslint-plugin-1.0.1.tgz#9a123758c3c18a772b736e04e9b50dd6e1970376"
+  integrity sha512-rhPwjhnIzvIVoxzbhokcMUkyHw72nX4u54a7Ifz++wheGf58yoLuZO0Lcc3QQV1CLx02xQ4ohofWFnWs/Vcd3g==
   dependencies:
     "@eslint/js" "^9.37.0"
     eslint "^9.0.0"

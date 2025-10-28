@@ -202,7 +202,9 @@ export const data: {
       return updatedBook;
     },
     findById: async ({ id }) => {
-      await simulateRequest();
+      await simulateRequest(
+        id === "2" ? { minLatency: 10000, maxLatency: 10000 } : undefined,
+      );
       return books[id] || null;
     },
     findMany: async ({ page, recordsPerPage }) => {
@@ -248,7 +250,16 @@ export const data: {
       if (bookIndex === -1) {
         return null;
       }
-      return books[bookSeries[bookIndex + offset]] || null;
+
+      const targetBookId = bookSeries[bookIndex + offset];
+
+      await simulateRequest(
+        targetBookId === "2"
+          ? { minLatency: 10000, maxLatency: 10000 }
+          : undefined,
+      );
+
+      return books[targetBookId] || null;
     },
   },
   $characters: {

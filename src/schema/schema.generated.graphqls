@@ -36,6 +36,46 @@ type CreateBookResultOk {
 
 scalar DateTime
 
+"""
+ErrorSimulatorResult
+"""
+type ErrorSimulatorResult {
+  """
+  The field
+  """
+  field: String
+
+  """
+  Not banged
+  """
+  resolve(
+    """
+    Delay in ms
+    """
+    delay: Int
+
+    """
+    Should this error out
+    """
+    err: Boolean!
+  ): ErrorSimulatorResult
+
+  """
+  Banged
+  """
+  resolve2(
+    """
+    Delay in ms
+    """
+    delay: Int
+
+    """
+    Should this error out
+    """
+    err: Boolean!
+  ): ErrorSimulatorResult!
+}
+
 type ExtraCharacter implements CharacterNode {
   creditName: String!
   id: ID!
@@ -73,6 +113,11 @@ type Query {
   book(id: ID!): BookResult!
   books(input: PaginationInput!): BooksResult!
   character(id: ID!): CharacterNode
+
+  """
+  Error simulator
+  """
+  errorSimulator: ErrorSimulatorResult
   user(id: ID!): User
 }
 

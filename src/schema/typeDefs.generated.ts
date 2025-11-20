@@ -83,6 +83,21 @@ export const typeDefs = {
         },
         {
           kind: "FieldDefinition",
+          description: {
+            kind: "StringValue",
+            value: "Error simulator",
+            block: true,
+          },
+          name: { kind: "Name", value: "errorSimulator" },
+          arguments: [],
+          type: {
+            kind: "NamedType",
+            name: { kind: "Name", value: "ErrorSimulatorResult" },
+          },
+          directives: [],
+        },
+        {
+          kind: "FieldDefinition",
           name: { kind: "Name", value: "user" },
           arguments: [
             {
@@ -809,6 +824,114 @@ export const typeDefs = {
             type: {
               kind: "NamedType",
               name: { kind: "Name", value: "String" },
+            },
+          },
+          directives: [],
+        },
+      ],
+    },
+    {
+      kind: "ObjectTypeDefinition",
+      description: {
+        kind: "StringValue",
+        value: "ErrorSimulatorResult",
+        block: true,
+      },
+      name: { kind: "Name", value: "ErrorSimulatorResult" },
+      interfaces: [],
+      directives: [],
+      fields: [
+        {
+          kind: "FieldDefinition",
+          description: { kind: "StringValue", value: "The field", block: true },
+          name: { kind: "Name", value: "field" },
+          arguments: [],
+          type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+          directives: [],
+        },
+        {
+          kind: "FieldDefinition",
+          description: {
+            kind: "StringValue",
+            value: "Not banged",
+            block: true,
+          },
+          name: { kind: "Name", value: "resolve" },
+          arguments: [
+            {
+              kind: "InputValueDefinition",
+              description: {
+                kind: "StringValue",
+                value: "Delay in ms",
+                block: true,
+              },
+              name: { kind: "Name", value: "delay" },
+              type: { kind: "NamedType", name: { kind: "Name", value: "Int" } },
+              directives: [],
+            },
+            {
+              kind: "InputValueDefinition",
+              description: {
+                kind: "StringValue",
+                value: "Should this error out",
+                block: true,
+              },
+              name: { kind: "Name", value: "err" },
+              type: {
+                kind: "NonNullType",
+                type: {
+                  kind: "NamedType",
+                  name: { kind: "Name", value: "Boolean" },
+                },
+              },
+              directives: [],
+            },
+          ],
+          type: {
+            kind: "NamedType",
+            name: { kind: "Name", value: "ErrorSimulatorResult" },
+          },
+          directives: [],
+        },
+        {
+          kind: "FieldDefinition",
+          description: { kind: "StringValue", value: "Banged", block: true },
+          name: { kind: "Name", value: "resolve2" },
+          arguments: [
+            {
+              kind: "InputValueDefinition",
+              description: {
+                kind: "StringValue",
+                value: "Delay in ms",
+                block: true,
+              },
+              name: { kind: "Name", value: "delay" },
+              type: { kind: "NamedType", name: { kind: "Name", value: "Int" } },
+              directives: [],
+            },
+            {
+              kind: "InputValueDefinition",
+              description: {
+                kind: "StringValue",
+                value: "Should this error out",
+                block: true,
+              },
+              name: { kind: "Name", value: "err" },
+              type: {
+                kind: "NonNullType",
+                type: {
+                  kind: "NamedType",
+                  name: { kind: "Name", value: "Boolean" },
+                },
+              },
+              directives: [],
+            },
+          ],
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "ErrorSimulatorResult" },
             },
           },
           directives: [],

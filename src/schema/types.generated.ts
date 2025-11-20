@@ -4,6 +4,7 @@ import {
   GraphQLScalarTypeConfig,
 } from "graphql";
 import { BookMapper } from "./book/schema.mappers";
+import { ErrorSimulatorResultMapper } from "./test/schema.mappers";
 import { UserMapper } from "./user/schema.mappers";
 import { WizardMapper } from "./character/schema.mappers";
 import { ResolverContext } from "../yoga";
@@ -84,6 +85,29 @@ export type CreateBookResultOk = {
   result: Book;
 };
 
+/** ErrorSimulatorResult */
+export type ErrorSimulatorResult = {
+  __typename?: "ErrorSimulatorResult";
+  /** The field */
+  field?: Maybe<Scalars["String"]["output"]>;
+  /** Not banged */
+  resolve?: Maybe<ErrorSimulatorResult>;
+  /** Banged */
+  resolve2: ErrorSimulatorResult;
+};
+
+/** ErrorSimulatorResult */
+export type ErrorSimulatorResultresolveArgs = {
+  delay?: InputMaybe<Scalars["Int"]["input"]>;
+  err: Scalars["Boolean"]["input"];
+};
+
+/** ErrorSimulatorResult */
+export type ErrorSimulatorResultresolve2Args = {
+  delay?: InputMaybe<Scalars["Int"]["input"]>;
+  err: Scalars["Boolean"]["input"];
+};
+
 export type ExtraCharacter = CharacterNode & {
   __typename?: "ExtraCharacter";
   creditName: Scalars["String"]["output"];
@@ -135,6 +159,8 @@ export type Query = {
   book: BookResult;
   books: BooksResult;
   character?: Maybe<CharacterNode>;
+  /** Error simulator */
+  errorSimulator?: Maybe<ErrorSimulatorResult>;
   user?: Maybe<User>;
 };
 
@@ -392,6 +418,9 @@ export type ResolversTypes = {
     Omit<CreateBookResultOk, "result"> & { result: ResolversTypes["Book"] }
   >;
   DateTime: ResolverTypeWrapper<Scalars["DateTime"]["output"]>;
+  ErrorSimulatorResult: ResolverTypeWrapper<ErrorSimulatorResultMapper>;
+  Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
+  Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
   ExtraCharacter: ResolverTypeWrapper<
     Omit<ExtraCharacter, "mostRelatedCharacter" | "relatedCharacters"> & {
       mostRelatedCharacter?: Maybe<ResolversTypes["CharacterNode"]>;
@@ -404,7 +433,6 @@ export type ResolversTypes = {
       relatedCharacters: Array<ResolversTypes["CharacterNode"]>;
     }
   >;
-  Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
   MainCharacter: ResolverTypeWrapper<
     ResolversInterfaceTypes<ResolversTypes>["MainCharacter"]
   >;
@@ -430,7 +458,6 @@ export type ResolversTypes = {
   >;
   User: ResolverTypeWrapper<UserMapper>;
   Wizard: ResolverTypeWrapper<WizardMapper>;
-  Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -453,6 +480,9 @@ export type ResolversParentTypes = {
     result: ResolversParentTypes["Book"];
   };
   DateTime: Scalars["DateTime"]["output"];
+  ErrorSimulatorResult: ErrorSimulatorResultMapper;
+  Int: Scalars["Int"]["output"];
+  Boolean: Scalars["Boolean"]["output"];
   ExtraCharacter: Omit<
     ExtraCharacter,
     "mostRelatedCharacter" | "relatedCharacters"
@@ -464,7 +494,6 @@ export type ResolversParentTypes = {
     mostRelatedCharacter?: Maybe<ResolversParentTypes["CharacterNode"]>;
     relatedCharacters: Array<ResolversParentTypes["CharacterNode"]>;
   };
-  Int: Scalars["Int"]["output"];
   MainCharacter: ResolversInterfaceTypes<ResolversParentTypes>["MainCharacter"];
   Mutation: Record<PropertyKey, never>;
   Pagination: Pagination;
@@ -478,7 +507,6 @@ export type ResolversParentTypes = {
   };
   User: UserMapper;
   Wizard: WizardMapper;
-  Boolean: Scalars["Boolean"]["output"];
 };
 
 export type BookResolvers<
@@ -581,6 +609,26 @@ export interface DateTimeScalarConfig
   name: "DateTime";
 }
 
+export type ErrorSimulatorResultResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["ErrorSimulatorResult"] = ResolversParentTypes["ErrorSimulatorResult"],
+> = {
+  field?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  resolve?: Resolver<
+    Maybe<ResolversTypes["ErrorSimulatorResult"]>,
+    ParentType,
+    ContextType,
+    RequireFields<ErrorSimulatorResultresolveArgs, "err">
+  >;
+  resolve2?: Resolver<
+    ResolversTypes["ErrorSimulatorResult"],
+    ParentType,
+    ContextType,
+    RequireFields<ErrorSimulatorResultresolve2Args, "err">
+  >;
+};
+
 export type ExtraCharacterResolvers<
   ContextType = ResolverContext,
   ParentType extends
@@ -680,6 +728,11 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QuerycharacterArgs, "id">
   >;
+  errorSimulator?: Resolver<
+    Maybe<ResolversTypes["ErrorSimulatorResult"]>,
+    ParentType,
+    ContextType
+  >;
   user?: Resolver<
     Maybe<ResolversTypes["User"]>,
     ParentType,
@@ -769,6 +822,7 @@ export type Resolvers<ContextType = ResolverContext> = {
   CreateBookResult?: CreateBookResultResolvers<ContextType>;
   CreateBookResultOk?: CreateBookResultOkResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
+  ErrorSimulatorResult?: ErrorSimulatorResultResolvers<ContextType>;
   ExtraCharacter?: ExtraCharacterResolvers<ContextType>;
   Fighter?: FighterResolvers<ContextType>;
   MainCharacter?: MainCharacterResolvers<ContextType>;

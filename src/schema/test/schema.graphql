@@ -1,0 +1,46 @@
+extend type Query {
+  """
+  Error simulator
+  """
+  errorSimulator: ErrorSimulatorResult
+}
+
+"""
+ErrorSimulatorResult
+"""
+type ErrorSimulatorResult {
+  """
+  The field
+  """
+  field: String
+
+  """
+  Not banged
+  """
+  resolve(
+    """
+    Delay in ms
+    """
+    delay: Int
+
+    """
+    Should this error out
+    """
+    err: Boolean!
+  ): ErrorSimulatorResult
+
+  """
+  Banged
+  """
+  resolve2(
+    """
+    Delay in ms
+    """
+    delay: Int
+
+    """
+    Should this error out
+    """
+    err: Boolean!
+  ): ErrorSimulatorResult!
+}

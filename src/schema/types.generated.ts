@@ -130,11 +130,19 @@ export type PaginationInput = {
   recordsPerPage?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
+export type Project = {
+  __typename?: "Project";
+  id?: Maybe<Scalars["ID"]["output"]>;
+  myWorkflow?: Maybe<Workflow>;
+  title?: Maybe<Scalars["String"]["output"]>;
+};
+
 export type Query = {
   __typename?: "Query";
   book: BookResult;
   books: BooksResult;
   character?: Maybe<CharacterNode>;
+  project?: Maybe<Project>;
   user?: Maybe<User>;
 };
 
@@ -147,6 +155,10 @@ export type QuerybooksArgs = {
 };
 
 export type QuerycharacterArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type QueryprojectArgs = {
   id: Scalars["ID"]["input"];
 };
 
@@ -165,6 +177,13 @@ export type ResultErrorType =
   | "NOT_FOUND"
   | "UNEXPECTED_ERROR";
 
+export type Task = {
+  __typename?: "Task";
+  assignedTo?: Maybe<User>;
+  id?: Maybe<Scalars["ID"]["output"]>;
+  isAssignedToMe?: Maybe<Scalars["Boolean"]["output"]>;
+};
+
 export type UpdateBookInput = {
   id: Scalars["ID"]["input"];
   isbn: Scalars["String"]["input"];
@@ -182,6 +201,7 @@ export type User = {
   booksRead: Array<Book>;
   fullName: Scalars["String"]["output"];
   id: Scalars["ID"]["output"];
+  uuid?: Maybe<Scalars["ID"]["output"]>;
 };
 
 export type Wizard = CharacterNode &
@@ -193,6 +213,13 @@ export type Wizard = CharacterNode &
     screenName: Scalars["String"]["output"];
     spells: Array<Scalars["String"]["output"]>;
   };
+
+export type Workflow = {
+  __typename?: "Workflow";
+  id?: Maybe<Scalars["ID"]["output"]>;
+  nextTask?: Maybe<Task>;
+  status?: Maybe<Scalars["String"]["output"]>;
+};
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -411,6 +438,11 @@ export type ResolversTypes = {
   Mutation: ResolverTypeWrapper<Record<PropertyKey, never>>;
   Pagination: ResolverTypeWrapper<Pagination>;
   PaginationInput: PaginationInput;
+  Project: ResolverTypeWrapper<
+    Omit<Project, "myWorkflow"> & {
+      myWorkflow?: Maybe<ResolversTypes["Workflow"]>;
+    }
+  >;
   Query: ResolverTypeWrapper<Record<PropertyKey, never>>;
   ResultError: ResolverTypeWrapper<
     Omit<ResultError, "error"> & { error: ResolversTypes["ResultErrorType"] }
@@ -421,6 +453,10 @@ export type ResolversTypes = {
     | "FORBIDDEN_ERROR"
     | "UNEXPECTED_ERROR"
   >;
+  Task: ResolverTypeWrapper<
+    Omit<Task, "assignedTo"> & { assignedTo?: Maybe<ResolversTypes["User"]> }
+  >;
+  Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
   UpdateBookInput: UpdateBookInput;
   UpdateBookResult: ResolverTypeWrapper<
     ResolversUnionTypes<ResolversTypes>["UpdateBookResult"]
@@ -430,7 +466,9 @@ export type ResolversTypes = {
   >;
   User: ResolverTypeWrapper<UserMapper>;
   Wizard: ResolverTypeWrapper<WizardMapper>;
-  Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
+  Workflow: ResolverTypeWrapper<
+    Omit<Workflow, "nextTask"> & { nextTask?: Maybe<ResolversTypes["Task"]> }
+  >;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -469,8 +507,15 @@ export type ResolversParentTypes = {
   Mutation: Record<PropertyKey, never>;
   Pagination: Pagination;
   PaginationInput: PaginationInput;
+  Project: Omit<Project, "myWorkflow"> & {
+    myWorkflow?: Maybe<ResolversParentTypes["Workflow"]>;
+  };
   Query: Record<PropertyKey, never>;
   ResultError: ResultError;
+  Task: Omit<Task, "assignedTo"> & {
+    assignedTo?: Maybe<ResolversParentTypes["User"]>;
+  };
+  Boolean: Scalars["Boolean"]["output"];
   UpdateBookInput: UpdateBookInput;
   UpdateBookResult: ResolversUnionTypes<ResolversParentTypes>["UpdateBookResult"];
   UpdateBookResultOk: Omit<UpdateBookResultOk, "result"> & {
@@ -478,7 +523,9 @@ export type ResolversParentTypes = {
   };
   User: UserMapper;
   Wizard: WizardMapper;
-  Boolean: Scalars["Boolean"]["output"];
+  Workflow: Omit<Workflow, "nextTask"> & {
+    nextTask?: Maybe<ResolversParentTypes["Task"]>;
+  };
 };
 
 export type BookResolvers<
@@ -657,6 +704,20 @@ export type PaginationResolvers<
   totalPageCount?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
 };
 
+export type ProjectResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["Project"] = ResolversParentTypes["Project"],
+> = {
+  id?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>;
+  myWorkflow?: Resolver<
+    Maybe<ResolversTypes["Workflow"]>,
+    ParentType,
+    ContextType
+  >;
+  title?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+};
+
 export type QueryResolvers<
   ContextType = ResolverContext,
   ParentType extends
@@ -679,6 +740,12 @@ export type QueryResolvers<
     ParentType,
     ContextType,
     RequireFields<QuerycharacterArgs, "id">
+  >;
+  project?: Resolver<
+    Maybe<ResolversTypes["Project"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryprojectArgs, "id">
   >;
   user?: Resolver<
     Maybe<ResolversTypes["User"]>,
@@ -706,6 +773,20 @@ export type ResultErrorTypeResolvers = EnumResolverSignature<
   },
   ResolversTypes["ResultErrorType"]
 >;
+
+export type TaskResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["Task"] = ResolversParentTypes["Task"],
+> = {
+  assignedTo?: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>;
+  isAssignedToMe?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+};
 
 export type UpdateBookResultResolvers<
   ContextType = ResolverContext,
@@ -736,6 +817,7 @@ export type UserResolvers<
   booksRead?: Resolver<Array<ResolversTypes["Book"]>, ParentType, ContextType>;
   fullName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  uuid?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>;
 };
 
 export type WizardResolvers<
@@ -759,6 +841,16 @@ export type WizardResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type WorkflowResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["Workflow"] = ResolversParentTypes["Workflow"],
+> = {
+  id?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>;
+  nextTask?: Resolver<Maybe<ResolversTypes["Task"]>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = ResolverContext> = {
   Book?: BookResolvers<ContextType>;
   BookResult?: BookResultResolvers<ContextType>;
@@ -774,11 +866,14 @@ export type Resolvers<ContextType = ResolverContext> = {
   MainCharacter?: MainCharacterResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Pagination?: PaginationResolvers<ContextType>;
+  Project?: ProjectResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   ResultError?: ResultErrorResolvers<ContextType>;
   ResultErrorType?: ResultErrorTypeResolvers;
+  Task?: TaskResolvers<ContextType>;
   UpdateBookResult?: UpdateBookResultResolvers<ContextType>;
   UpdateBookResultOk?: UpdateBookResultOkResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   Wizard?: WizardResolvers<ContextType>;
+  Workflow?: WorkflowResolvers<ContextType>;
 };

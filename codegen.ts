@@ -8,6 +8,9 @@ const config: CodegenConfig = {
   hooks: {
     afterAllFileWrite: ["prettier --write"],
   },
+  config: {
+    skipDocumentsValidation: false,
+  },
   generates: {
     "src/schema": defineConfig({
       resolverGeneration: "minimal",

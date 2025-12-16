@@ -69,10 +69,17 @@ input PaginationInput {
   recordsPerPage: Int
 }
 
+type Project {
+  id: ID
+  myWorkflow: Workflow
+  title: String
+}
+
 type Query {
   book(id: ID!): BookResult!
   books(input: PaginationInput!): BooksResult!
   character(id: ID!): CharacterNode
+  project(id: ID!): Project
   user(id: ID!): User
 }
 
@@ -85,6 +92,12 @@ enum ResultErrorType {
   INPUT_VALIDATION_ERROR
   NOT_FOUND
   UNEXPECTED_ERROR
+}
+
+type Task {
+  assignedTo: User
+  id: ID
+  isAssignedToMe: Boolean
 }
 
 input UpdateBookInput {
@@ -102,6 +115,7 @@ type User {
   booksRead: [Book!]!
   fullName: String!
   id: ID!
+  uuid: ID
 }
 
 type Wizard implements CharacterNode & MainCharacter {
@@ -110,4 +124,10 @@ type Wizard implements CharacterNode & MainCharacter {
   relatedCharacters: [CharacterNode!]!
   screenName: String!
   spells: [String!]!
+}
+
+type Workflow {
+  id: ID
+  nextTask: Task
+  status: String
 }

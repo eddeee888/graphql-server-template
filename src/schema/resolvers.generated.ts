@@ -3,6 +3,7 @@ import type { Resolvers } from "./types.generated";
 import { book as Query_book } from "./book/resolvers/Query/book";
 import { books as Query_books } from "./book/resolvers/Query/books";
 import { character as Query_character } from "./character/resolvers/Query/character";
+import { project as Query_project } from "./user/resolvers/Query/project";
 import { user as Query_user } from "./user/resolvers/Query/user";
 import { createBook as Mutation_createBook } from "./book/resolvers/Mutation/createBook";
 import { updateBook as Mutation_updateBook } from "./book/resolvers/Mutation/updateBook";
@@ -16,6 +17,7 @@ export const resolvers: Resolvers = {
     book: Query_book,
     books: Query_books,
     character: Query_character,
+    project: Query_project,
     user: Query_user,
   },
   Mutation: {

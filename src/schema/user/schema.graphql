@@ -1,7 +1,27 @@
 extend type Query {
   user(id: ID!): User
+  project(id: ID!): Project
 }
 type User {
   id: ID!
+  uuid: ID
   fullName: String!
+}
+
+type Task {
+  id: ID
+  assignedTo: User
+  isAssignedToMe: Boolean
+}
+
+type Workflow {
+  id: ID
+  status: String
+  nextTask: Task
+}
+
+type Project {
+  id: ID
+  title: String
+  myWorkflow: Workflow
 }

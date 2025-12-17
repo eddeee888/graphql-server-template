@@ -1,5 +1,4 @@
 import type { CodegenConfig } from "@graphql-codegen/cli";
-import { defineConfig } from "@eddeee888/gcg-typescript-resolver-files";
 
 const config: CodegenConfig = {
   schema: "src/**/schema.graphql",
@@ -12,14 +11,14 @@ const config: CodegenConfig = {
     skipDocumentsValidation: false,
   },
   generates: {
-    "src/schema": defineConfig({
-      resolverGeneration: "minimal",
-      typesPluginsConfig: {
-        contextType: "../yoga#ResolverContext",
+    "src/test.ts": {
+      plugins: ["typescript", "typescript-operations"],
+    },
+    "src/": {
+      preset: "near-operation-file",
+      presetConfig: {
+        baseTypesPath: "./src/test.ts",
       },
-    }),
-    "./src/gql/": {
-      preset: "client-preset",
     },
   },
 };

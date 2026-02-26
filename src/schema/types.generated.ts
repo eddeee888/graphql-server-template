@@ -3,6 +3,7 @@ import {
   GraphQLScalarType,
   GraphQLScalarTypeConfig,
 } from "graphql";
+import { BazMapper } from "./demo/schema.mappers";
 import { BookMapper } from "./book/schema.mappers";
 import { UserMapper } from "./user/schema.mappers";
 import { WizardMapper } from "./character/schema.mappers";
@@ -42,6 +43,24 @@ export type Scalars = {
   Int: { input: number; output: number };
   Float: { input: number; output: number };
   DateTime: { input: Date | string; output: Date | string };
+};
+
+export type Bar = SomeFooType & {
+  __typename?: "Bar";
+  name: Scalars["String"]["output"];
+  properties: Scalars["String"]["output"];
+};
+
+export type BarBaz = Bar | Baz;
+
+export type Baz = SomeFooType & {
+  __typename?: "Baz";
+  name: Scalars["String"]["output"];
+  properties: Scalars["String"]["output"];
+};
+
+export type BazpropertiesArgs = {
+  someArg: Scalars["String"]["input"];
 };
 
 export type Book = {
@@ -135,6 +154,7 @@ export type Query = {
   book: BookResult;
   books: BooksResult;
   character?: Maybe<CharacterNode>;
+  foo: Array<BarBaz>;
   user?: Maybe<User>;
 };
 
@@ -164,6 +184,10 @@ export type ResultErrorType =
   | "INPUT_VALIDATION_ERROR"
   | "NOT_FOUND"
   | "UNEXPECTED_ERROR";
+
+export type SomeFooType = {
+  name: Scalars["String"]["output"];
+};
 
 export type UpdateBookInput = {
   id: Scalars["ID"]["input"];
@@ -313,6 +337,7 @@ export type DirectiveResolverFn<
 
 /** Mapping of union types */
 export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
+  BarBaz: (Bar & { __typename: "Bar" }) | (BazMapper & { __typename: "Baz" });
   BookResult:
     | (Omit<BookResultOk, "result"> & { result?: Maybe<_RefType["Book"]> } & {
         __typename: "BookResultOk";
@@ -362,13 +387,19 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> =
           relatedCharacters: Array<_RefType["CharacterNode"]>;
         } & { __typename: "Fighter" })
       | (WizardMapper & { __typename: "Wizard" });
+    SomeFooType:
+      | (Bar & { __typename: "Bar" })
+      | (BazMapper & { __typename: "Baz" });
   };
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  Bar: ResolverTypeWrapper<Bar>;
+  String: ResolverTypeWrapper<Scalars["String"]["output"]>;
+  BarBaz: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>["BarBaz"]>;
+  Baz: ResolverTypeWrapper<BazMapper>;
   Book: ResolverTypeWrapper<BookMapper>;
   ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
-  String: ResolverTypeWrapper<Scalars["String"]["output"]>;
   BookResult: ResolverTypeWrapper<
     ResolversUnionTypes<ResolversTypes>["BookResult"]
   >;
@@ -421,6 +452,9 @@ export type ResolversTypes = {
     | "FORBIDDEN_ERROR"
     | "UNEXPECTED_ERROR"
   >;
+  SomeFooType: ResolverTypeWrapper<
+    ResolversInterfaceTypes<ResolversTypes>["SomeFooType"]
+  >;
   UpdateBookInput: UpdateBookInput;
   UpdateBookResult: ResolverTypeWrapper<
     ResolversUnionTypes<ResolversTypes>["UpdateBookResult"]
@@ -435,9 +469,12 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  Bar: Bar;
+  String: Scalars["String"]["output"];
+  BarBaz: ResolversUnionTypes<ResolversParentTypes>["BarBaz"];
+  Baz: BazMapper;
   Book: BookMapper;
   ID: Scalars["ID"]["output"];
-  String: Scalars["String"]["output"];
   BookResult: ResolversUnionTypes<ResolversParentTypes>["BookResult"];
   BookResultOk: Omit<BookResultOk, "result"> & {
     result?: Maybe<ResolversParentTypes["Book"]>;
@@ -471,6 +508,7 @@ export type ResolversParentTypes = {
   PaginationInput: PaginationInput;
   Query: Record<PropertyKey, never>;
   ResultError: ResultError;
+  SomeFooType: ResolversInterfaceTypes<ResolversParentTypes>["SomeFooType"];
   UpdateBookInput: UpdateBookInput;
   UpdateBookResult: ResolversUnionTypes<ResolversParentTypes>["UpdateBookResult"];
   UpdateBookResultOk: Omit<UpdateBookResultOk, "result"> & {
@@ -479,6 +517,37 @@ export type ResolversParentTypes = {
   User: UserMapper;
   Wizard: WizardMapper;
   Boolean: Scalars["Boolean"]["output"];
+};
+
+export type BarResolvers<
+  ContextType = ResolverContext,
+  ParentType extends ResolversParentTypes["Bar"] = ResolversParentTypes["Bar"],
+> = {
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  properties?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type BarBazResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["BarBaz"] = ResolversParentTypes["BarBaz"],
+> = {
+  __resolveType?: TypeResolveFn<"Bar" | "Baz", ParentType, ContextType>;
+};
+
+export type BazResolvers<
+  ContextType = ResolverContext,
+  ParentType extends ResolversParentTypes["Baz"] = ResolversParentTypes["Baz"],
+> = {
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  properties?: Resolver<
+    ResolversTypes["String"],
+    ParentType,
+    ContextType,
+    RequireFields<BazpropertiesArgs, "someArg">
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BookResolvers<
@@ -680,6 +749,7 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QuerycharacterArgs, "id">
   >;
+  foo?: Resolver<Array<ResolversTypes["BarBaz"]>, ParentType, ContextType>;
   user?: Resolver<
     Maybe<ResolversTypes["User"]>,
     ParentType,
@@ -706,6 +776,14 @@ export type ResultErrorTypeResolvers = EnumResolverSignature<
   },
   ResolversTypes["ResultErrorType"]
 >;
+
+export type SomeFooTypeResolvers<
+  ContextType = ResolverContext,
+  ParentType extends
+    ResolversParentTypes["SomeFooType"] = ResolversParentTypes["SomeFooType"],
+> = {
+  __resolveType?: TypeResolveFn<"Bar" | "Baz", ParentType, ContextType>;
+};
 
 export type UpdateBookResultResolvers<
   ContextType = ResolverContext,
@@ -760,6 +838,9 @@ export type WizardResolvers<
 };
 
 export type Resolvers<ContextType = ResolverContext> = {
+  Bar?: BarResolvers<ContextType>;
+  BarBaz?: BarBazResolvers<ContextType>;
+  Baz?: BazResolvers<ContextType>;
   Book?: BookResolvers<ContextType>;
   BookResult?: BookResultResolvers<ContextType>;
   BookResultOk?: BookResultOkResolvers<ContextType>;
@@ -777,6 +858,7 @@ export type Resolvers<ContextType = ResolverContext> = {
   Query?: QueryResolvers<ContextType>;
   ResultError?: ResultErrorResolvers<ContextType>;
   ResultErrorType?: ResultErrorTypeResolvers;
+  SomeFooType?: SomeFooTypeResolvers<ContextType>;
   UpdateBookResult?: UpdateBookResultResolvers<ContextType>;
   UpdateBookResultOk?: UpdateBookResultOkResolvers<ContextType>;
   User?: UserResolvers<ContextType>;

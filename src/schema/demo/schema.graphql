@@ -1,0 +1,21 @@
+interface SomeFooType {
+  name: String!
+}
+
+union BarBaz = Bar | Baz
+
+type Bar implements SomeFooType {
+  name: String!
+  # ...other fields
+  properties: String!
+}
+
+type Baz implements SomeFooType {
+  name: String!
+  # ...other fields
+  properties(someArg: String!): String!
+}
+
+type Query {
+  foo: [BarBaz!]!
+}

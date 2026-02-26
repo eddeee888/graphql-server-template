@@ -1,3 +1,15 @@
+type Bar implements SomeFooType {
+  name: String!
+  properties: String!
+}
+
+union BarBaz = Bar | Baz
+
+type Baz implements SomeFooType {
+  name: String!
+  properties(someArg: String!): String!
+}
+
 type Book {
   id: ID!
   isbn: String!
@@ -73,6 +85,7 @@ type Query {
   book(id: ID!): BookResult!
   books(input: PaginationInput!): BooksResult!
   character(id: ID!): CharacterNode
+  foo: [BarBaz!]!
   user(id: ID!): User
 }
 
@@ -85,6 +98,10 @@ enum ResultErrorType {
   INPUT_VALIDATION_ERROR
   NOT_FOUND
   UNEXPECTED_ERROR
+}
+
+interface SomeFooType {
+  name: String!
 }
 
 input UpdateBookInput {

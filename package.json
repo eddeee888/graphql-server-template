@@ -28,7 +28,7 @@
     "@eddeee888/gcg-typescript-resolver-files": "0.14.0",
     "@graphql-codegen/cli": "6.1.2",
     "@graphql-typed-document-node/core": "3.2.0",
-    "@parcel/watcher": "2.5.1",
+    "@parcel/watcher": "2.5.6",
     "@types/node": "22.18.12",
     "eslint": "9.38.0",
     "npm-run-all2": "8.0.4",

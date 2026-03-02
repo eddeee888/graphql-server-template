@@ -936,14 +936,14 @@
     "@graphql-codegen/typescript-resolvers" "^5.0.1"
     tslib "^2.3.0"
 
-"@eddeee888/gcg-typescript-resolver-files@0.14.0":
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/@eddeee888/gcg-typescript-resolver-files/-/gcg-typescript-resolver-files-0.14.0.tgz#35dbcf7a60c2173e173c8c6a12d19d4c7bad8406"
-  integrity sha512-GzL+I0rCRxvZw0s6tsA+1ojb07FpnnhtLsFf3hc3HzSh74mc3Sa5+c/qaUL3SSVxmXIZVFWjztnM6ykqoj2lRQ==
+"@eddeee888/gcg-typescript-resolver-files@0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@eddeee888/gcg-typescript-resolver-files/-/gcg-typescript-resolver-files-0.15.0.tgz#52b6245f17e27a39ba918d9c0e34b46c3780141f"
+  integrity sha512-l3YhvvQdvvHLsyWhODxUNWQLWJEuxMQ1L30npqf3xqUc64b+LlFJ06n+UGzOVoXqZNf475e9f2BC67TghRXuVw==
   dependencies:
     "@eddeee888/gcg-server-config" "0.3.0"
     "@graphql-codegen/add" "^6.0.0"
-    "@graphql-codegen/plugin-helpers" "^6.0.0"
+    "@graphql-codegen/plugin-helpers" "^6.1.0"
     "@graphql-codegen/schema-ast" "^5.0.0"
     "@graphql-codegen/typescript" "^5.0.1"
     "@graphql-codegen/typescript-resolvers" "^5.0.1"

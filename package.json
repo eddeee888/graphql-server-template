@@ -33,7 +33,7 @@
     "eslint": "9.38.0",
     "npm-run-all2": "8.0.4",
     "prettier": "3.6.2",
-    "tsx": "4.20.6",
+    "tsx": "4.21.0",
     "typescript": "5.9.3"
   }
 }

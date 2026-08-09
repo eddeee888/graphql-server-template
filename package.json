@@ -31,7 +31,7 @@
     "@graphql-typed-document-node/core": "3.2.0",
     "@parcel/watcher": "2.6.0",
     "@types/node": "24.13.3",
-    "eslint": "9.39.5",
+    "eslint": "10.8.1",
     "npm-run-all2": "9.0.3",
     "prettier": "3.9.6",
     "tsx": "4.23.11",

@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@eddeee888/eslint-plugin": "1.0.1",
-    "@eddeee888/gcg-typescript-resolver-files": "0.17.0",
+    "@eddeee888/gcg-typescript-resolver-files": "0.18.0",
     "@graphql-codegen/cli": "7.2.0",
     "@graphql-typed-document-node/core": "3.2.0",
     "@parcel/watcher": "2.6.0",

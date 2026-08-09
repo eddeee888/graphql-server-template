@@ -227,8 +227,8 @@ importers:
         specifier: 1.0.1
         version: 1.0.1(jiti@2.7.0)(typescript@5.9.3)
       '@eddeee888/gcg-typescript-resolver-files':
-        specifier: 0.17.0
-        version: 0.17.0(graphql@17.0.2)
+        specifier: 0.0.0-pr466-run387-1-20260809063344
+        version: 0.0.0-pr466-run387-1-20260809063344(graphql@17.0.2)
       '@graphql-codegen/cli':
         specifier: 7.2.0
         version: 7.2.0(@parcel/watcher@2.6.0)(@types/node@22.18.12)(graphql@17.0.2)(typescript@5.9.3)
@@ -347,11 +347,11 @@ packages:
   '@eddeee888/eslint-plugin@1.0.1':
     resolution: {integrity: sha512-rhPwjhnIzvIVoxzbhokcMUkyHw72nX4u54a7Ifz++wheGf58yoLuZO0Lcc3QQV1CLx02xQ4ohofWFnWs/Vcd3g==}
 
-  '@eddeee888/gcg-server-config@0.5.0':
-    resolution: {integrity: sha512-o5fZ6eppaPbIFFSGALp8zpQ6yvexjsGhLeXQfKAFk5y8EWP+lNSW6WxcuGykN96DS+2zfEA9km5kbHcVydeAKA==}
+  '@eddeee888/gcg-server-config@0.0.0-pr466-run387-1-20260809063344':
+    resolution: {integrity: sha512-espfU/4Bo5sCAR/vVjCnAqSjidzFS0zof5+Q3wXkG/iJh3SDNTBBn8bG13MxLw+jQo4i4MB/Vjtr1YHNS5qWmg==}
 
-  '@eddeee888/gcg-typescript-resolver-files@0.17.0':
-    resolution: {integrity: sha512-To0jHYlvuU84rb6ruVtRMJydQZpP9jH7YziWAbQnUMns2QJpYCb40cc3xJQO666rAOpNxHrZabEwL+4c+LcBLg==}
+  '@eddeee888/gcg-typescript-resolver-files@0.0.0-pr466-run387-1-20260809063344':
+    resolution: {integrity: sha512-e8QylrAGdR+w7n9A1/+dt7x5iVzhbxM0nI5rKX3sO3I3+JTMzE8WRLnSqZ8pRjlHxQ8LXWs5ZaFRuxDeQvk4Dw==}
     peerDependencies:
       graphql: ^15.0.0 || ^16.0.0 || ^17.0.0
 
@@ -2866,7 +2866,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@eddeee888/gcg-server-config@0.5.0(graphql@17.0.2)':
+  '@eddeee888/gcg-server-config@0.0.0-pr466-run387-1-20260809063344(graphql@17.0.2)':
     dependencies:
       '@graphql-codegen/typescript': 6.1.0(graphql@17.0.2)
       '@graphql-codegen/typescript-resolvers': 6.1.0(graphql@17.0.2)
@@ -2875,9 +2875,9 @@ snapshots:
       - graphql
       - graphql-sock
 
-  '@eddeee888/gcg-typescript-resolver-files@0.17.0(graphql@17.0.2)':
+  '@eddeee888/gcg-typescript-resolver-files@0.0.0-pr466-run387-1-20260809063344(graphql@17.0.2)':
     dependencies:
-      '@eddeee888/gcg-server-config': 0.5.0(graphql@17.0.2)
+      '@eddeee888/gcg-server-config': 0.0.0-pr466-run387-1-20260809063344(graphql@17.0.2)
       '@graphql-codegen/add': 7.1.0(graphql@17.0.2)
       '@graphql-codegen/plugin-helpers': 7.1.0(graphql@17.0.2)
       '@graphql-codegen/schema-ast': 6.1.0(graphql@17.0.2)

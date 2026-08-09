@@ -1,3 +1,3 @@
-import type { DatabaseBook } from "../../data";
+import type { DatabaseBook } from '../../data';
 
 export type BookMapper = DatabaseBook;

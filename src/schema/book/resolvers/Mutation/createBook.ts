@@ -1,5 +1,5 @@
-import type { MutationResolvers } from "./../../../types.generated";
-export const createBook: NonNullable<MutationResolvers["createBook"]> = async (
+import type { MutationResolvers } from './../../../types.generated';
+export const createBook: NonNullable<MutationResolvers['createBook']> = async (
   _parent,
   { input: { isbn } },
   { data },
@@ -8,13 +8,13 @@ export const createBook: NonNullable<MutationResolvers["createBook"]> = async (
     const result = await data.$books.create({ isbn });
 
     return {
-      __typename: "CreateBookResultOk",
+      __typename: 'CreateBookResultOk',
       result,
     };
   } catch {
     return {
-      __typename: "ResultError",
-      error: "UNEXPECTED_ERROR",
+      __typename: 'ResultError',
+      error: 'UNEXPECTED_ERROR',
     };
   }
 };

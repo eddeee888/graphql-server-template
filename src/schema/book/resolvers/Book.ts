@@ -1,4 +1,4 @@
-import type { BookResolvers } from "./../../types.generated";
+import type { BookResolvers } from './../../types.generated';
 
 export const Book: BookResolvers = {
   previousBookInSeries: async (parent, _arg, { data }) => {

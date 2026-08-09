@@ -1,6 +1,4 @@
-import type { IGraphQLConfig } from "graphql-config";
-
-const config: IGraphQLConfig = {
+const config = {
   schema: "src/schema/**/*.graphql",
   documents: "src/**/*.spec.ts",
 };

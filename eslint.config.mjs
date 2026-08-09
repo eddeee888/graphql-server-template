@@ -12,6 +12,12 @@ export default defineConfig(
     },
   },
   {
-    ignores: ["src/schema/*.generated.ts", "src/gql/", "eslint.config.mjs"],
+    ignores: [
+      "src/schema/*.generated.ts",
+      "src/gql/",
+      "eslint.config.mjs",
+      "graphql.config.ts",
+      "codegen.ts",
+    ],
   },
 );

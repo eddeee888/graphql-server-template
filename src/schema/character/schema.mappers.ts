@@ -1,3 +1,3 @@
-import type { DatabaseWizard } from "../../data";
+import type { DatabaseWizard } from '../../data';
 
 export type WizardMapper = DatabaseWizard;

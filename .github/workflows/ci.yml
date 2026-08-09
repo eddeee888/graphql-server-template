@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  node-version: "22.x"
+  node-version: '22.x'
 
 jobs:
   test:

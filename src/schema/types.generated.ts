@@ -2,11 +2,11 @@ import {
   GraphQLResolveInfo,
   GraphQLScalarType,
   GraphQLScalarTypeConfig,
-} from "graphql";
-import { BookMapper } from "./book/schema.mappers";
-import { UserMapper } from "./user/schema.mappers";
-import { WizardMapper } from "./character/schema.mappers";
-import { ResolverContext } from "../yoga";
+} from 'graphql';
+import { BookMapper } from './book/schema.mappers';
+import { UserMapper } from './user/schema.mappers';
+import { WizardMapper } from './character/schema.mappers';
+import { ResolverContext } from '../yoga';
 export type Maybe<T> = T | null | undefined;
 export type InputMaybe<T> = T | null | undefined;
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
@@ -27,9 +27,9 @@ export type Scalars = {
 };
 
 export type Book = {
-  __typename?: "Book";
-  id: Scalars["ID"]["output"];
-  isbn: Scalars["String"]["output"];
+  __typename?: 'Book';
+  id: Scalars['ID']['output'];
+  isbn: Scalars['String']['output'];
   nextBookInSeries?: Maybe<Book>;
   previousBookInSeries?: Maybe<Book>;
 };
@@ -37,59 +37,59 @@ export type Book = {
 export type BookResult = BookResultOk | ResultError;
 
 export type BookResultOk = {
-  __typename?: "BookResultOk";
+  __typename?: 'BookResultOk';
   result?: Maybe<Book>;
 };
 
 export type BooksResult = BooksResultOk | ResultError;
 
 export type BooksResultOk = {
-  __typename?: "BooksResultOk";
+  __typename?: 'BooksResultOk';
   pagination: Pagination;
   result: Array<Book>;
 };
 
 export type CharacterNode = {
-  id: Scalars["ID"]["output"];
+  id: Scalars['ID']['output'];
   mostRelatedCharacter?: Maybe<CharacterNode>;
   relatedCharacters: Array<CharacterNode>;
 };
 
 export type CreateBookInput = {
-  isbn: Scalars["String"]["input"];
+  isbn: Scalars['String']['input'];
 };
 
 export type CreateBookResult = CreateBookResultOk | ResultError;
 
 export type CreateBookResultOk = {
-  __typename?: "CreateBookResultOk";
+  __typename?: 'CreateBookResultOk';
   result: Book;
 };
 
 export type ExtraCharacter = CharacterNode & {
-  __typename?: "ExtraCharacter";
-  creditName: Scalars["String"]["output"];
-  id: Scalars["ID"]["output"];
+  __typename?: 'ExtraCharacter';
+  creditName: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
   mostRelatedCharacter?: Maybe<CharacterNode>;
   relatedCharacters: Array<CharacterNode>;
 };
 
 export type Fighter = CharacterNode &
   MainCharacter & {
-    __typename?: "Fighter";
-    id: Scalars["ID"]["output"];
+    __typename?: 'Fighter';
+    id: Scalars['ID']['output'];
     mostRelatedCharacter?: Maybe<CharacterNode>;
-    powerLevel: Scalars["Int"]["output"];
+    powerLevel: Scalars['Int']['output'];
     relatedCharacters: Array<CharacterNode>;
-    screenName: Scalars["String"]["output"];
+    screenName: Scalars['String']['output'];
   };
 
 export type MainCharacter = {
-  screenName: Scalars["String"]["output"];
+  screenName: Scalars['String']['output'];
 };
 
 export type Mutation = {
-  __typename?: "Mutation";
+  __typename?: 'Mutation';
   createBook: CreateBookResult;
   updateBook: UpdateBookResult;
 };
@@ -103,17 +103,17 @@ export type MutationupdateBookArgs = {
 };
 
 export type Pagination = {
-  __typename?: "Pagination";
-  totalPageCount: Scalars["Int"]["output"];
+  __typename?: 'Pagination';
+  totalPageCount: Scalars['Int']['output'];
 };
 
 export type PaginationInput = {
-  page?: InputMaybe<Scalars["Int"]["input"]>;
-  recordsPerPage?: InputMaybe<Scalars["Int"]["input"]>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  recordsPerPage?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type Query = {
-  __typename?: "Query";
+  __typename?: 'Query';
   book: BookResult;
   books: BooksResult;
   character?: Maybe<CharacterNode>;
@@ -121,7 +121,7 @@ export type Query = {
 };
 
 export type QuerybookArgs = {
-  id: Scalars["ID"]["input"];
+  id: Scalars['ID']['input'];
 };
 
 export type QuerybooksArgs = {
@@ -129,51 +129,51 @@ export type QuerybooksArgs = {
 };
 
 export type QuerycharacterArgs = {
-  id: Scalars["ID"]["input"];
+  id: Scalars['ID']['input'];
 };
 
 export type QueryuserArgs = {
-  id: Scalars["ID"]["input"];
+  id: Scalars['ID']['input'];
 };
 
 export type ResultError = {
-  __typename?: "ResultError";
+  __typename?: 'ResultError';
   error: ResultErrorType;
 };
 
 export type ResultErrorType =
-  | "FORBIDDEN_ERROR"
-  | "INPUT_VALIDATION_ERROR"
-  | "NOT_FOUND"
-  | "UNEXPECTED_ERROR";
+  | 'FORBIDDEN_ERROR'
+  | 'INPUT_VALIDATION_ERROR'
+  | 'NOT_FOUND'
+  | 'UNEXPECTED_ERROR';
 
 export type UpdateBookInput = {
-  id: Scalars["ID"]["input"];
-  isbn: Scalars["String"]["input"];
+  id: Scalars['ID']['input'];
+  isbn: Scalars['String']['input'];
 };
 
 export type UpdateBookResult = ResultError | UpdateBookResultOk;
 
 export type UpdateBookResultOk = {
-  __typename?: "UpdateBookResultOk";
+  __typename?: 'UpdateBookResultOk';
   result: Book;
 };
 
 export type User = {
-  __typename?: "User";
+  __typename?: 'User';
   booksRead: Array<Book>;
-  fullName: Scalars["String"]["output"];
-  id: Scalars["ID"]["output"];
+  fullName: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
 };
 
 export type Wizard = CharacterNode &
   MainCharacter & {
-    __typename?: "Wizard";
-    id: Scalars["ID"]["output"];
+    __typename?: 'Wizard';
+    id: Scalars['ID']['output'];
     mostRelatedCharacter?: Maybe<CharacterNode>;
     relatedCharacters: Array<CharacterNode>;
-    screenName: Scalars["String"]["output"];
-    spells: Array<Scalars["String"]["output"]>;
+    screenName: Scalars['String']['output'];
+    spells: Array<Scalars['String']['output']>;
   };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -296,32 +296,32 @@ export type DirectiveResolverFn<
 /** Mapping of union types */
 export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
   BookResult:
-    | (Omit<BookResultOk, "result"> & { result?: Maybe<_RefType["Book"]> } & {
-        __typename: "BookResultOk";
+    | (Omit<BookResultOk, 'result'> & { result?: Maybe<_RefType['Book']> } & {
+        __typename: 'BookResultOk';
       })
-    | (Omit<ResultError, "error"> & { error: _RefType["ResultErrorType"] } & {
-        __typename: "ResultError";
+    | (Omit<ResultError, 'error'> & { error: _RefType['ResultErrorType'] } & {
+        __typename: 'ResultError';
       });
   BooksResult:
-    | (Omit<BooksResultOk, "result"> & { result: Array<_RefType["Book"]> } & {
-        __typename: "BooksResultOk";
+    | (Omit<BooksResultOk, 'result'> & { result: Array<_RefType['Book']> } & {
+        __typename: 'BooksResultOk';
       })
-    | (Omit<ResultError, "error"> & { error: _RefType["ResultErrorType"] } & {
-        __typename: "ResultError";
+    | (Omit<ResultError, 'error'> & { error: _RefType['ResultErrorType'] } & {
+        __typename: 'ResultError';
       });
   CreateBookResult:
-    | (Omit<CreateBookResultOk, "result"> & { result: _RefType["Book"] } & {
-        __typename: "CreateBookResultOk";
+    | (Omit<CreateBookResultOk, 'result'> & { result: _RefType['Book'] } & {
+        __typename: 'CreateBookResultOk';
       })
-    | (Omit<ResultError, "error"> & { error: _RefType["ResultErrorType"] } & {
-        __typename: "ResultError";
+    | (Omit<ResultError, 'error'> & { error: _RefType['ResultErrorType'] } & {
+        __typename: 'ResultError';
       });
   UpdateBookResult:
-    | (Omit<ResultError, "error"> & { error: _RefType["ResultErrorType"] } & {
-        __typename: "ResultError";
+    | (Omit<ResultError, 'error'> & { error: _RefType['ResultErrorType'] } & {
+        __typename: 'ResultError';
       })
-    | (Omit<UpdateBookResultOk, "result"> & { result: _RefType["Book"] } & {
-        __typename: "UpdateBookResultOk";
+    | (Omit<UpdateBookResultOk, 'result'> & { result: _RefType['Book'] } & {
+        __typename: 'UpdateBookResultOk';
       });
 };
 
@@ -329,154 +329,154 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
 export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> =
   {
     CharacterNode:
-      | (Omit<ExtraCharacter, "mostRelatedCharacter" | "relatedCharacters"> & {
-          mostRelatedCharacter?: Maybe<_RefType["CharacterNode"]>;
-          relatedCharacters: Array<_RefType["CharacterNode"]>;
-        } & { __typename: "ExtraCharacter" })
-      | (Omit<Fighter, "mostRelatedCharacter" | "relatedCharacters"> & {
-          mostRelatedCharacter?: Maybe<_RefType["CharacterNode"]>;
-          relatedCharacters: Array<_RefType["CharacterNode"]>;
-        } & { __typename: "Fighter" })
-      | (WizardMapper & { __typename: "Wizard" });
+      | (Omit<ExtraCharacter, 'mostRelatedCharacter' | 'relatedCharacters'> & {
+          mostRelatedCharacter?: Maybe<_RefType['CharacterNode']>;
+          relatedCharacters: Array<_RefType['CharacterNode']>;
+        } & { __typename: 'ExtraCharacter' })
+      | (Omit<Fighter, 'mostRelatedCharacter' | 'relatedCharacters'> & {
+          mostRelatedCharacter?: Maybe<_RefType['CharacterNode']>;
+          relatedCharacters: Array<_RefType['CharacterNode']>;
+        } & { __typename: 'Fighter' })
+      | (WizardMapper & { __typename: 'Wizard' });
     MainCharacter:
-      | (Omit<Fighter, "mostRelatedCharacter" | "relatedCharacters"> & {
-          mostRelatedCharacter?: Maybe<_RefType["CharacterNode"]>;
-          relatedCharacters: Array<_RefType["CharacterNode"]>;
-        } & { __typename: "Fighter" })
-      | (WizardMapper & { __typename: "Wizard" });
+      | (Omit<Fighter, 'mostRelatedCharacter' | 'relatedCharacters'> & {
+          mostRelatedCharacter?: Maybe<_RefType['CharacterNode']>;
+          relatedCharacters: Array<_RefType['CharacterNode']>;
+        } & { __typename: 'Fighter' })
+      | (WizardMapper & { __typename: 'Wizard' });
   };
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Book: ResolverTypeWrapper<BookMapper>;
-  ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
-  String: ResolverTypeWrapper<Scalars["String"]["output"]>;
+  ID: ResolverTypeWrapper<Scalars['ID']['output']>;
+  String: ResolverTypeWrapper<Scalars['String']['output']>;
   BookResult: ResolverTypeWrapper<
-    ResolversUnionTypes<ResolversTypes>["BookResult"]
+    ResolversUnionTypes<ResolversTypes>['BookResult']
   >;
   BookResultOk: ResolverTypeWrapper<
-    Omit<BookResultOk, "result"> & { result?: Maybe<ResolversTypes["Book"]> }
+    Omit<BookResultOk, 'result'> & { result?: Maybe<ResolversTypes['Book']> }
   >;
   BooksResult: ResolverTypeWrapper<
-    ResolversUnionTypes<ResolversTypes>["BooksResult"]
+    ResolversUnionTypes<ResolversTypes>['BooksResult']
   >;
   BooksResultOk: ResolverTypeWrapper<
-    Omit<BooksResultOk, "result"> & { result: Array<ResolversTypes["Book"]> }
+    Omit<BooksResultOk, 'result'> & { result: Array<ResolversTypes['Book']> }
   >;
   CharacterNode: ResolverTypeWrapper<
-    ResolversInterfaceTypes<ResolversTypes>["CharacterNode"]
+    ResolversInterfaceTypes<ResolversTypes>['CharacterNode']
   >;
   CreateBookInput: CreateBookInput;
   CreateBookResult: ResolverTypeWrapper<
-    ResolversUnionTypes<ResolversTypes>["CreateBookResult"]
+    ResolversUnionTypes<ResolversTypes>['CreateBookResult']
   >;
   CreateBookResultOk: ResolverTypeWrapper<
-    Omit<CreateBookResultOk, "result"> & { result: ResolversTypes["Book"] }
+    Omit<CreateBookResultOk, 'result'> & { result: ResolversTypes['Book'] }
   >;
-  DateTime: ResolverTypeWrapper<Scalars["DateTime"]["output"]>;
+  DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
   ExtraCharacter: ResolverTypeWrapper<
-    Omit<ExtraCharacter, "mostRelatedCharacter" | "relatedCharacters"> & {
-      mostRelatedCharacter?: Maybe<ResolversTypes["CharacterNode"]>;
-      relatedCharacters: Array<ResolversTypes["CharacterNode"]>;
+    Omit<ExtraCharacter, 'mostRelatedCharacter' | 'relatedCharacters'> & {
+      mostRelatedCharacter?: Maybe<ResolversTypes['CharacterNode']>;
+      relatedCharacters: Array<ResolversTypes['CharacterNode']>;
     }
   >;
   Fighter: ResolverTypeWrapper<
-    Omit<Fighter, "mostRelatedCharacter" | "relatedCharacters"> & {
-      mostRelatedCharacter?: Maybe<ResolversTypes["CharacterNode"]>;
-      relatedCharacters: Array<ResolversTypes["CharacterNode"]>;
+    Omit<Fighter, 'mostRelatedCharacter' | 'relatedCharacters'> & {
+      mostRelatedCharacter?: Maybe<ResolversTypes['CharacterNode']>;
+      relatedCharacters: Array<ResolversTypes['CharacterNode']>;
     }
   >;
-  Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
+  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   MainCharacter: ResolverTypeWrapper<
-    ResolversInterfaceTypes<ResolversTypes>["MainCharacter"]
+    ResolversInterfaceTypes<ResolversTypes>['MainCharacter']
   >;
   Mutation: ResolverTypeWrapper<Record<PropertyKey, never>>;
   Pagination: ResolverTypeWrapper<Pagination>;
   PaginationInput: PaginationInput;
   Query: ResolverTypeWrapper<Record<PropertyKey, never>>;
   ResultError: ResolverTypeWrapper<
-    Omit<ResultError, "error"> & { error: ResolversTypes["ResultErrorType"] }
+    Omit<ResultError, 'error'> & { error: ResolversTypes['ResultErrorType'] }
   >;
   ResultErrorType: ResolverTypeWrapper<
-    | "NOT_FOUND"
-    | "INPUT_VALIDATION_ERROR"
-    | "FORBIDDEN_ERROR"
-    | "UNEXPECTED_ERROR"
+    | 'NOT_FOUND'
+    | 'INPUT_VALIDATION_ERROR'
+    | 'FORBIDDEN_ERROR'
+    | 'UNEXPECTED_ERROR'
   >;
   UpdateBookInput: UpdateBookInput;
   UpdateBookResult: ResolverTypeWrapper<
-    ResolversUnionTypes<ResolversTypes>["UpdateBookResult"]
+    ResolversUnionTypes<ResolversTypes>['UpdateBookResult']
   >;
   UpdateBookResultOk: ResolverTypeWrapper<
-    Omit<UpdateBookResultOk, "result"> & { result: ResolversTypes["Book"] }
+    Omit<UpdateBookResultOk, 'result'> & { result: ResolversTypes['Book'] }
   >;
   User: ResolverTypeWrapper<UserMapper>;
   Wizard: ResolverTypeWrapper<WizardMapper>;
-  Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Book: BookMapper;
-  ID: Scalars["ID"]["output"];
-  String: Scalars["String"]["output"];
-  BookResult: ResolversUnionTypes<ResolversParentTypes>["BookResult"];
-  BookResultOk: Omit<BookResultOk, "result"> & {
-    result?: Maybe<ResolversParentTypes["Book"]>;
+  ID: Scalars['ID']['output'];
+  String: Scalars['String']['output'];
+  BookResult: ResolversUnionTypes<ResolversParentTypes>['BookResult'];
+  BookResultOk: Omit<BookResultOk, 'result'> & {
+    result?: Maybe<ResolversParentTypes['Book']>;
   };
-  BooksResult: ResolversUnionTypes<ResolversParentTypes>["BooksResult"];
-  BooksResultOk: Omit<BooksResultOk, "result"> & {
-    result: Array<ResolversParentTypes["Book"]>;
+  BooksResult: ResolversUnionTypes<ResolversParentTypes>['BooksResult'];
+  BooksResultOk: Omit<BooksResultOk, 'result'> & {
+    result: Array<ResolversParentTypes['Book']>;
   };
-  CharacterNode: ResolversInterfaceTypes<ResolversParentTypes>["CharacterNode"];
+  CharacterNode: ResolversInterfaceTypes<ResolversParentTypes>['CharacterNode'];
   CreateBookInput: CreateBookInput;
-  CreateBookResult: ResolversUnionTypes<ResolversParentTypes>["CreateBookResult"];
-  CreateBookResultOk: Omit<CreateBookResultOk, "result"> & {
-    result: ResolversParentTypes["Book"];
+  CreateBookResult: ResolversUnionTypes<ResolversParentTypes>['CreateBookResult'];
+  CreateBookResultOk: Omit<CreateBookResultOk, 'result'> & {
+    result: ResolversParentTypes['Book'];
   };
-  DateTime: Scalars["DateTime"]["output"];
+  DateTime: Scalars['DateTime']['output'];
   ExtraCharacter: Omit<
     ExtraCharacter,
-    "mostRelatedCharacter" | "relatedCharacters"
+    'mostRelatedCharacter' | 'relatedCharacters'
   > & {
-    mostRelatedCharacter?: Maybe<ResolversParentTypes["CharacterNode"]>;
-    relatedCharacters: Array<ResolversParentTypes["CharacterNode"]>;
+    mostRelatedCharacter?: Maybe<ResolversParentTypes['CharacterNode']>;
+    relatedCharacters: Array<ResolversParentTypes['CharacterNode']>;
   };
-  Fighter: Omit<Fighter, "mostRelatedCharacter" | "relatedCharacters"> & {
-    mostRelatedCharacter?: Maybe<ResolversParentTypes["CharacterNode"]>;
-    relatedCharacters: Array<ResolversParentTypes["CharacterNode"]>;
+  Fighter: Omit<Fighter, 'mostRelatedCharacter' | 'relatedCharacters'> & {
+    mostRelatedCharacter?: Maybe<ResolversParentTypes['CharacterNode']>;
+    relatedCharacters: Array<ResolversParentTypes['CharacterNode']>;
   };
-  Int: Scalars["Int"]["output"];
-  MainCharacter: ResolversInterfaceTypes<ResolversParentTypes>["MainCharacter"];
+  Int: Scalars['Int']['output'];
+  MainCharacter: ResolversInterfaceTypes<ResolversParentTypes>['MainCharacter'];
   Mutation: Record<PropertyKey, never>;
   Pagination: Pagination;
   PaginationInput: PaginationInput;
   Query: Record<PropertyKey, never>;
   ResultError: ResultError;
   UpdateBookInput: UpdateBookInput;
-  UpdateBookResult: ResolversUnionTypes<ResolversParentTypes>["UpdateBookResult"];
-  UpdateBookResultOk: Omit<UpdateBookResultOk, "result"> & {
-    result: ResolversParentTypes["Book"];
+  UpdateBookResult: ResolversUnionTypes<ResolversParentTypes>['UpdateBookResult'];
+  UpdateBookResultOk: Omit<UpdateBookResultOk, 'result'> & {
+    result: ResolversParentTypes['Book'];
   };
   User: UserMapper;
   Wizard: WizardMapper;
-  Boolean: Scalars["Boolean"]["output"];
+  Boolean: Scalars['Boolean']['output'];
 };
 
 export type BookResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["Book"] = ResolversParentTypes["Book"],
+    ResolversParentTypes['Book'] = ResolversParentTypes['Book'],
 > = {
-  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  isbn?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  isbn?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   nextBookInSeries?: Resolver<
-    Maybe<ResolversTypes["Book"]>,
+    Maybe<ResolversTypes['Book']>,
     ParentType,
     ContextType
   >;
   previousBookInSeries?: Resolver<
-    Maybe<ResolversTypes["Book"]>,
+    Maybe<ResolversTypes['Book']>,
     ParentType,
     ContextType
   >;
@@ -485,10 +485,10 @@ export type BookResolvers<
 export type BookResultResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["BookResult"] = ResolversParentTypes["BookResult"],
+    ResolversParentTypes['BookResult'] = ResolversParentTypes['BookResult'],
 > = {
   __resolveType?: TypeResolveFn<
-    "BookResultOk" | "ResultError",
+    'BookResultOk' | 'ResultError',
     ParentType,
     ContextType
   >;
@@ -497,19 +497,19 @@ export type BookResultResolvers<
 export type BookResultOkResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["BookResultOk"] = ResolversParentTypes["BookResultOk"],
+    ResolversParentTypes['BookResultOk'] = ResolversParentTypes['BookResultOk'],
 > = {
-  result?: Resolver<Maybe<ResolversTypes["Book"]>, ParentType, ContextType>;
+  result?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type BooksResultResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["BooksResult"] = ResolversParentTypes["BooksResult"],
+    ResolversParentTypes['BooksResult'] = ResolversParentTypes['BooksResult'],
 > = {
   __resolveType?: TypeResolveFn<
-    "BooksResultOk" | "ResultError",
+    'BooksResultOk' | 'ResultError',
     ParentType,
     ContextType
   >;
@@ -518,20 +518,20 @@ export type BooksResultResolvers<
 export type BooksResultOkResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["BooksResultOk"] = ResolversParentTypes["BooksResultOk"],
+    ResolversParentTypes['BooksResultOk'] = ResolversParentTypes['BooksResultOk'],
 > = {
-  pagination?: Resolver<ResolversTypes["Pagination"], ParentType, ContextType>;
-  result?: Resolver<Array<ResolversTypes["Book"]>, ParentType, ContextType>;
+  pagination?: Resolver<ResolversTypes['Pagination'], ParentType, ContextType>;
+  result?: Resolver<Array<ResolversTypes['Book']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type CharacterNodeResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["CharacterNode"] = ResolversParentTypes["CharacterNode"],
+    ResolversParentTypes['CharacterNode'] = ResolversParentTypes['CharacterNode'],
 > = {
   __resolveType?: TypeResolveFn<
-    "ExtraCharacter" | "Fighter" | "Wizard",
+    'ExtraCharacter' | 'Fighter' | 'Wizard',
     ParentType,
     ContextType
   >;
@@ -540,10 +540,10 @@ export type CharacterNodeResolvers<
 export type CreateBookResultResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["CreateBookResult"] = ResolversParentTypes["CreateBookResult"],
+    ResolversParentTypes['CreateBookResult'] = ResolversParentTypes['CreateBookResult'],
 > = {
   __resolveType?: TypeResolveFn<
-    "CreateBookResultOk" | "ResultError",
+    'CreateBookResultOk' | 'ResultError',
     ParentType,
     ContextType
   >;
@@ -552,31 +552,31 @@ export type CreateBookResultResolvers<
 export type CreateBookResultOkResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["CreateBookResultOk"] = ResolversParentTypes["CreateBookResultOk"],
+    ResolversParentTypes['CreateBookResultOk'] = ResolversParentTypes['CreateBookResultOk'],
 > = {
-  result?: Resolver<ResolversTypes["Book"], ParentType, ContextType>;
+  result?: Resolver<ResolversTypes['Book'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export interface DateTimeScalarConfig
-  extends GraphQLScalarTypeConfig<ResolversTypes["DateTime"], any> {
-  name: "DateTime";
+  extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
+  name: 'DateTime';
 }
 
 export type ExtraCharacterResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["ExtraCharacter"] = ResolversParentTypes["ExtraCharacter"],
+    ResolversParentTypes['ExtraCharacter'] = ResolversParentTypes['ExtraCharacter'],
 > = {
-  creditName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  creditName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   mostRelatedCharacter?: Resolver<
-    Maybe<ResolversTypes["CharacterNode"]>,
+    Maybe<ResolversTypes['CharacterNode']>,
     ParentType,
     ContextType
   >;
   relatedCharacters?: Resolver<
-    Array<ResolversTypes["CharacterNode"]>,
+    Array<ResolversTypes['CharacterNode']>,
     ParentType,
     ContextType
   >;
@@ -586,96 +586,96 @@ export type ExtraCharacterResolvers<
 export type FighterResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["Fighter"] = ResolversParentTypes["Fighter"],
+    ResolversParentTypes['Fighter'] = ResolversParentTypes['Fighter'],
 > = {
-  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   mostRelatedCharacter?: Resolver<
-    Maybe<ResolversTypes["CharacterNode"]>,
+    Maybe<ResolversTypes['CharacterNode']>,
     ParentType,
     ContextType
   >;
-  powerLevel?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  powerLevel?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   relatedCharacters?: Resolver<
-    Array<ResolversTypes["CharacterNode"]>,
+    Array<ResolversTypes['CharacterNode']>,
     ParentType,
     ContextType
   >;
-  screenName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  screenName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type MainCharacterResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["MainCharacter"] = ResolversParentTypes["MainCharacter"],
+    ResolversParentTypes['MainCharacter'] = ResolversParentTypes['MainCharacter'],
 > = {
-  __resolveType?: TypeResolveFn<"Fighter" | "Wizard", ParentType, ContextType>;
+  __resolveType?: TypeResolveFn<'Fighter' | 'Wizard', ParentType, ContextType>;
 };
 
 export type MutationResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"],
+    ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
 > = {
   createBook?: Resolver<
-    ResolversTypes["CreateBookResult"],
+    ResolversTypes['CreateBookResult'],
     ParentType,
     ContextType,
-    RequireFields<MutationcreateBookArgs, "input">
+    RequireFields<MutationcreateBookArgs, 'input'>
   >;
   updateBook?: Resolver<
-    ResolversTypes["UpdateBookResult"],
+    ResolversTypes['UpdateBookResult'],
     ParentType,
     ContextType,
-    RequireFields<MutationupdateBookArgs, "input">
+    RequireFields<MutationupdateBookArgs, 'input'>
   >;
 };
 
 export type PaginationResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["Pagination"] = ResolversParentTypes["Pagination"],
+    ResolversParentTypes['Pagination'] = ResolversParentTypes['Pagination'],
 > = {
-  totalPageCount?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  totalPageCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
 };
 
 export type QueryResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["Query"] = ResolversParentTypes["Query"],
+    ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
 > = {
   book?: Resolver<
-    ResolversTypes["BookResult"],
+    ResolversTypes['BookResult'],
     ParentType,
     ContextType,
-    RequireFields<QuerybookArgs, "id">
+    RequireFields<QuerybookArgs, 'id'>
   >;
   books?: Resolver<
-    ResolversTypes["BooksResult"],
+    ResolversTypes['BooksResult'],
     ParentType,
     ContextType,
-    RequireFields<QuerybooksArgs, "input">
+    RequireFields<QuerybooksArgs, 'input'>
   >;
   character?: Resolver<
-    Maybe<ResolversTypes["CharacterNode"]>,
+    Maybe<ResolversTypes['CharacterNode']>,
     ParentType,
     ContextType,
-    RequireFields<QuerycharacterArgs, "id">
+    RequireFields<QuerycharacterArgs, 'id'>
   >;
   user?: Resolver<
-    Maybe<ResolversTypes["User"]>,
+    Maybe<ResolversTypes['User']>,
     ParentType,
     ContextType,
-    RequireFields<QueryuserArgs, "id">
+    RequireFields<QueryuserArgs, 'id'>
   >;
 };
 
 export type ResultErrorResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["ResultError"] = ResolversParentTypes["ResultError"],
+    ResolversParentTypes['ResultError'] = ResolversParentTypes['ResultError'],
 > = {
-  error?: Resolver<ResolversTypes["ResultErrorType"], ParentType, ContextType>;
+  error?: Resolver<ResolversTypes['ResultErrorType'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -686,16 +686,16 @@ export type ResultErrorTypeResolvers = EnumResolverSignature<
     NOT_FOUND?: any;
     UNEXPECTED_ERROR?: any;
   },
-  ResolversTypes["ResultErrorType"]
+  ResolversTypes['ResultErrorType']
 >;
 
 export type UpdateBookResultResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["UpdateBookResult"] = ResolversParentTypes["UpdateBookResult"],
+    ResolversParentTypes['UpdateBookResult'] = ResolversParentTypes['UpdateBookResult'],
 > = {
   __resolveType?: TypeResolveFn<
-    "ResultError" | "UpdateBookResultOk",
+    'ResultError' | 'UpdateBookResultOk',
     ParentType,
     ContextType
   >;
@@ -704,40 +704,40 @@ export type UpdateBookResultResolvers<
 export type UpdateBookResultOkResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["UpdateBookResultOk"] = ResolversParentTypes["UpdateBookResultOk"],
+    ResolversParentTypes['UpdateBookResultOk'] = ResolversParentTypes['UpdateBookResultOk'],
 > = {
-  result?: Resolver<ResolversTypes["Book"], ParentType, ContextType>;
+  result?: Resolver<ResolversTypes['Book'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UserResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["User"] = ResolversParentTypes["User"],
+    ResolversParentTypes['User'] = ResolversParentTypes['User'],
 > = {
-  booksRead?: Resolver<Array<ResolversTypes["Book"]>, ParentType, ContextType>;
-  fullName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  booksRead?: Resolver<Array<ResolversTypes['Book']>, ParentType, ContextType>;
+  fullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
 };
 
 export type WizardResolvers<
   ContextType = ResolverContext,
   ParentType extends
-    ResolversParentTypes["Wizard"] = ResolversParentTypes["Wizard"],
+    ResolversParentTypes['Wizard'] = ResolversParentTypes['Wizard'],
 > = {
-  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   mostRelatedCharacter?: Resolver<
-    Maybe<ResolversTypes["CharacterNode"]>,
+    Maybe<ResolversTypes['CharacterNode']>,
     ParentType,
     ContextType
   >;
   relatedCharacters?: Resolver<
-    Array<ResolversTypes["CharacterNode"]>,
+    Array<ResolversTypes['CharacterNode']>,
     ParentType,
     ContextType
   >;
-  screenName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  spells?: Resolver<Array<ResolversTypes["String"]>, ParentType, ContextType>;
+  screenName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  spells?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

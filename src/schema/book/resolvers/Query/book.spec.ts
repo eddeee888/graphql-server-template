@@ -1,7 +1,7 @@
-import test from "node:test";
+import test from 'node:test';
 
-import { graphql } from "../../../../gql";
-import { executeOperation } from "../../../../testing";
+import { graphql } from '../../../../gql';
+import { executeOperation } from '../../../../testing';
 
 graphql(/* GraphQL */ `
   fragment Query_book_spec_Book on Book {
@@ -26,29 +26,29 @@ const document = graphql(/* GraphQL */ `
   }
 `);
 
-void test("Query.book - returns book data if exists in data", async (t) => {
-  const result = await executeOperation(document, { id: "1" });
+void test('Query.book - returns book data if exists in data', async (t) => {
+  const result = await executeOperation(document, { id: '1' });
 
   t.assert.deepEqual(result, {
     data: {
       book: {
-        __typename: "BookResultOk",
+        __typename: 'BookResultOk',
         result: {
-          id: "1",
-          isbn: "isbn:1",
+          id: '1',
+          isbn: 'isbn:1',
         },
       },
     },
   });
 });
 
-void test("Query.book - returns null if cannot find book data", async (t) => {
-  const result = await executeOperation(document, { id: "does_not_exist" });
+void test('Query.book - returns null if cannot find book data', async (t) => {
+  const result = await executeOperation(document, { id: 'does_not_exist' });
 
   t.assert.deepEqual(result, {
     data: {
       book: {
-        __typename: "BookResultOk",
+        __typename: 'BookResultOk',
         result: null,
       },
     },

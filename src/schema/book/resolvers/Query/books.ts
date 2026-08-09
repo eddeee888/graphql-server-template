@@ -1,5 +1,5 @@
-import type { QueryResolvers } from "./../../../types.generated";
-export const books: NonNullable<QueryResolvers["books"]> = async (
+import type { QueryResolvers } from './../../../types.generated';
+export const books: NonNullable<QueryResolvers['books']> = async (
   _parent,
   { input },
   { data },
@@ -14,14 +14,14 @@ export const books: NonNullable<QueryResolvers["books"]> = async (
     });
 
     return {
-      __typename: "BooksResultOk",
+      __typename: 'BooksResultOk',
       result,
       pagination,
     };
   } catch {
     return {
-      __typename: "ResultError",
-      error: "UNEXPECTED_ERROR",
+      __typename: 'ResultError',
+      error: 'UNEXPECTED_ERROR',
     };
   }
 };

@@ -12,7 +12,7 @@ Check out Frontend React GraphQL template: https://github.com/eddeee888/graphql-
 ## Commands
 
 ```bash
-yarn dev # Start Codegen and Server in watch mode
-yarn test # Start Codegen and Test in watch mode
-yarn test:once # Test once
+pnpm dev # Start Codegen and Server in watch mode
+pnpm test # Start Codegen and Test in watch mode
+pnpm test:once # Test once
 ```

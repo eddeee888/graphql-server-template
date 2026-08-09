@@ -105,3 +105,4 @@ dist
 
 src/gql/
 pnpm-lock.yaml
+*.generated.*

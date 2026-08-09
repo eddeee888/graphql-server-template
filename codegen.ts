@@ -5,9 +5,6 @@ const config: CodegenConfig = {
   schema: 'src/**/schema.graphql',
   documents: 'src/**/*.spec.ts',
   ignoreNoDocuments: true,
-  hooks: {
-    afterAllFileWrite: ['prettier --write'],
-  },
   generates: {
     'src/schema': defineConfig({
       resolverGeneration: 'minimal',

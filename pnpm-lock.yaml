@@ -227,8 +227,8 @@ importers:
         specifier: 1.0.1
         version: 1.0.1(jiti@2.7.0)(typescript@5.9.3)
       '@eddeee888/gcg-typescript-resolver-files':
-        specifier: 0.17.0
-        version: 0.17.0(graphql@17.0.2)
+        specifier: 0.18.0
+        version: 0.18.0(graphql@17.0.2)
       '@graphql-codegen/cli':
         specifier: 7.2.0
         version: 7.2.0(@parcel/watcher@2.6.0)(@types/node@24.13.3)(graphql@17.0.2)(typescript@5.9.3)
@@ -347,11 +347,11 @@ packages:
   '@eddeee888/eslint-plugin@1.0.1':
     resolution: {integrity: sha512-rhPwjhnIzvIVoxzbhokcMUkyHw72nX4u54a7Ifz++wheGf58yoLuZO0Lcc3QQV1CLx02xQ4ohofWFnWs/Vcd3g==}
 
-  '@eddeee888/gcg-server-config@0.5.0':
-    resolution: {integrity: sha512-o5fZ6eppaPbIFFSGALp8zpQ6yvexjsGhLeXQfKAFk5y8EWP+lNSW6WxcuGykN96DS+2zfEA9km5kbHcVydeAKA==}
+  '@eddeee888/gcg-server-config@0.6.0':
+    resolution: {integrity: sha512-1VbpixLCLkuS56zj3ZL2GtOJvNIzOZgxVxLiIChhSmCJN+28tekIxPTKsX0lTaH4AlpvOF+eNLJa5dJJQmqyoA==}
 
-  '@eddeee888/gcg-typescript-resolver-files@0.17.0':
-    resolution: {integrity: sha512-To0jHYlvuU84rb6ruVtRMJydQZpP9jH7YziWAbQnUMns2QJpYCb40cc3xJQO666rAOpNxHrZabEwL+4c+LcBLg==}
+  '@eddeee888/gcg-typescript-resolver-files@0.18.0':
+    resolution: {integrity: sha512-9BYQNUiRYPi2szLNF6Kl1mpfWbxgBVf2m2SZ+RaG5VURT98j+lw9EgBl8MapLB86+IaaHj7dSbkdVkjqu6kXbQ==}
     peerDependencies:
       graphql: ^15.0.0 || ^16.0.0 || ^17.0.0
 
@@ -2880,7 +2880,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@eddeee888/gcg-server-config@0.5.0(graphql@17.0.2)':
+  '@eddeee888/gcg-server-config@0.6.0(graphql@17.0.2)':
     dependencies:
       '@graphql-codegen/typescript': 6.1.0(graphql@17.0.2)
       '@graphql-codegen/typescript-resolvers': 6.1.0(graphql@17.0.2)
@@ -2889,9 +2889,9 @@ snapshots:
       - graphql
       - graphql-sock
 
-  '@eddeee888/gcg-typescript-resolver-files@0.17.0(graphql@17.0.2)':
+  '@eddeee888/gcg-typescript-resolver-files@0.18.0(graphql@17.0.2)':
     dependencies:
-      '@eddeee888/gcg-server-config': 0.5.0(graphql@17.0.2)
+      '@eddeee888/gcg-server-config': 0.6.0(graphql@17.0.2)
       '@graphql-codegen/add': 7.1.0(graphql@17.0.2)
       '@graphql-codegen/plugin-helpers': 7.1.0(graphql@17.0.2)
       '@graphql-codegen/schema-ast': 6.1.0(graphql@17.0.2)

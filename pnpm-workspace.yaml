@@ -1,3 +1,6 @@
 allowBuilds:
   '@parcel/watcher': true
   esbuild: true
+minimumReleaseAgeExclude:
+  - '@eddeee888/gcg-server-config@0.6.0'
+  - '@eddeee888/gcg-typescript-resolver-files@0.18.0'

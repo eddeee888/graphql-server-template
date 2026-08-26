@@ -208,8 +208,8 @@ importers:
   .:
     dependencies:
       '@graphql-yoga/plugin-defer-stream':
-        specifier: 3.21.2
-        version: 3.21.2(graphql-yoga@5.21.2(graphql@17.0.2))(graphql@17.0.2)
+        specifier: 3.22.0
+        version: 3.22.0(graphql-yoga@5.21.2(graphql@17.0.2))(graphql@17.0.2)
       graphql:
         specifier: 17.0.2
         version: 17.0.2
@@ -836,12 +836,12 @@ packages:
     resolution: {integrity: sha512-Nv0BoDGLMg9QBKy9cIswQ3/6aKaKjlTh87x3GiBg2Z4RrjyrM48DvOOK0pJh1C1At+b0mUIM67cwZcFTDLN4sA==}
     engines: {node: '>=18.0.0'}
 
-  '@graphql-yoga/plugin-defer-stream@3.21.2':
-    resolution: {integrity: sha512-B+hwCIPsZHPxH3zsRhBFlMAAuuBMR7SrGVPvGt0ftn3iG2HB1zyOeUIm6ylwVF7G2sN0bw8Z7ZXPdnmI1tgq3A==}
+  '@graphql-yoga/plugin-defer-stream@3.22.0':
+    resolution: {integrity: sha512-7F8/ADgCxRIUgGrG0mWEOI5HB0FYQeUj2YbH88+U05Fe72lrGufKpxOPN3O70jECPukh8jKFtyXfqjl5POPEzA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      graphql: ^15.2.0 || ^16.0.0
-      graphql-yoga: ^5.21.2
+      graphql: ^15.2.0 || ^16.0.0 || ^17.0.0
+      graphql-yoga: ^5.22.0
 
   '@graphql-yoga/subscription@5.0.5':
     resolution: {integrity: sha512-oCMWOqFs6QV96/NZRt/ZhTQvzjkGB4YohBOpKM4jH/lDT4qb7Lex/aGCxpi/JD9njw3zBBtMqxbaC22+tFHVvw==}
@@ -1636,6 +1636,7 @@ packages:
   eslint@9.39.5:
     resolution: {integrity: sha512-DgZS62aPLXKlnxILS/AYCoRvHaZeXceIzlXPkkGGzJWSow1aEk0lbTlxUSlyjC8jcaKxAdOnTDz+o1JFSBsyjw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -3515,9 +3516,9 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@graphql-yoga/plugin-defer-stream@3.21.2(graphql-yoga@5.21.2(graphql@17.0.2))(graphql@17.0.2)':
+  '@graphql-yoga/plugin-defer-stream@3.22.0(graphql-yoga@5.21.2(graphql@17.0.2))(graphql@17.0.2)':
     dependencies:
-      '@graphql-tools/utils': 10.11.0(graphql@17.0.2)
+      '@graphql-tools/utils': 11.2.2(graphql@17.0.2)
       graphql: 17.0.2
       graphql-yoga: 5.21.2(graphql@17.0.2)
 

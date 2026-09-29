@@ -72,3 +72,44 @@ jobs:
         run: |
           echo "::error::Breaking changes found: $BREAKING"
           exit 1
+
+  # Temporary: same as outputs-test, but on the current master action (no list outputs yet) for comparison
+  outputs-test-master:
+    name: Outputs test (master)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Run inspector (master)
+        id: inspector
+        uses: graphql-hive/graphql-inspector@master
+        with:
+          name: Outputs test (master)
+          schema: 'master:src/schema/schema.generated.graphqls'
+          approve-label: approved-breaking-change
+          fail-on-breaking: false
+
+      - name: Show outputs
+        env:
+          CHANGES: ${{ steps.inspector.outputs.changes }}
+          BREAKING: ${{ steps.inspector.outputs.breaking-changes }}
+          DANGEROUS: ${{ steps.inspector.outputs.dangerous-changes }}
+          SAFE: ${{ steps.inspector.outputs.safe-changes }}
+        run: |
+          echo "changes:   $CHANGES"
+          echo "breaking:  $BREAKING"
+          echo "dangerous: $DANGEROUS"
+          echo "safe:      $SAFE"
+
+      # The list outputs are unset on master, so fall back to '[]' to keep fromJSON from erroring
+      - name: Assert (example)
+        if: ${{ fromJSON(steps.inspector.outputs.breaking-changes || '[]')[0] == null }}
+        run: echo "no breaking changes"
+
+      - name: Fail on breaking changes
+        if: ${{ fromJSON(steps.inspector.outputs.breaking-changes || '[]')[0] != null }}
+        env:
+          BREAKING: ${{ steps.inspector.outputs.breaking-changes }}
+        run: |
+          echo "::error::Breaking changes found: $BREAKING"
+          exit 1

@@ -26,3 +26,45 @@ jobs:
           name: Schema check
           schema: 'master:src/schema/schema.generated.graphqls'
           approve-label: approved-breaking-change
+
+  # Temporary: tests the new outputs from https://github.com/graphql-hive/graphql-inspector/pull/2690
+  outputs-test:
+    name: Outputs test (create-action-check=${{ matrix.create-action-check }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        create-action-check: ['true', 'false']
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Run inspector (PR #2690)
+        id: inspector
+        uses: indykite/graphql-inspector@ff42abe1919d0b9f3b029fe77c0a61b0dbdc80c0
+        with:
+          name: Outputs test (create-action-check=${{ matrix.create-action-check }})
+          schema: 'master:src/schema/schema.generated.graphqls'
+          approve-label: approved-breaking-change
+          create-action-check: ${{ matrix.create-action-check }}
+
+      # The inspector step fails on breaking changes, so the steps below must still run
+      - name: Show new outputs
+        if: ${{ !cancelled() }}
+        env:
+          CHANGES: ${{ steps.inspector.outputs.changes }}
+          BREAKING: ${{ steps.inspector.outputs.breaking-changes }}
+          DANGEROUS: ${{ steps.inspector.outputs.dangerous-changes }}
+          SAFE: ${{ steps.inspector.outputs.safe-changes }}
+        run: |
+          echo "changes:   $CHANGES"
+          echo "breaking:  $BREAKING"
+          echo "dangerous: $DANGEROUS"
+          echo "safe:      $SAFE"
+
+      - name: Assert (example)
+        if: ${{ !cancelled() && fromJSON(steps.inspector.outputs.breaking-changes || '[]')[0] == null }}
+        run: echo "no breaking changes"
+
+      - name: Assert (example) - has breaking changes
+        if: ${{ !cancelled() && fromJSON(steps.inspector.outputs.breaking-changes || '[]')[0] != null }}
+        run: echo "breaking changes found - first one is ${{ fromJSON(steps.inspector.outputs.breaking-changes)[0] }}"

@@ -1,0 +1,28 @@
+name: GraphQL Inspector
+
+on:
+  pull_request:
+    branches:
+      - master
+
+concurrency:
+  group: graphql-inspector-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  checks: write
+  contents: read
+  pull-requests: read
+
+jobs:
+  schema-check:
+    name: Schema check
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: graphql-hive/graphql-inspector@master
+        with:
+          name: Schema check
+          schema: 'master:src/schema/schema.generated.graphqls'
+          approve-label: approved-breaking-change

@@ -46,10 +46,10 @@ jobs:
           schema: 'master:src/schema/schema.generated.graphqls'
           approve-label: approved-breaking-change
           create-action-check: ${{ matrix.create-action-check }}
+          # Let the step pass so later steps decide from the outputs
+          fail-on-breaking: false
 
-      # The inspector step fails on breaking changes, so the steps below must still run
       - name: Show new outputs
-        if: ${{ !cancelled() }}
         env:
           CHANGES: ${{ steps.inspector.outputs.changes }}
           BREAKING: ${{ steps.inspector.outputs.breaking-changes }}
@@ -62,9 +62,13 @@ jobs:
           echo "safe:      $SAFE"
 
       - name: Assert (example)
-        if: ${{ !cancelled() && fromJSON(steps.inspector.outputs.breaking-changes || '[]')[0] == null }}
+        if: ${{ fromJSON(steps.inspector.outputs.breaking-changes)[0] == null }}
         run: echo "no breaking changes"
 
-      - name: Assert (example) - has breaking changes
-        if: ${{ !cancelled() && fromJSON(steps.inspector.outputs.breaking-changes || '[]')[0] != null }}
-        run: echo "breaking changes found - first one is ${{ fromJSON(steps.inspector.outputs.breaking-changes)[0] }}"
+      - name: Fail on breaking changes
+        if: ${{ fromJSON(steps.inspector.outputs.breaking-changes)[0] != null }}
+        env:
+          BREAKING: ${{ steps.inspector.outputs.breaking-changes }}
+        run: |
+          echo "::error::Breaking changes found: $BREAKING"
+          exit 1

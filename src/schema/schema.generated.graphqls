@@ -2,7 +2,6 @@ type Book {
   id: ID!
   isbn: String!
   nextBookInSeries: Book
-  previousBookInSeries: Book
 }
 
 union BookResult = BookResultOk | ResultError
@@ -84,6 +83,7 @@ enum ResultErrorType {
   FORBIDDEN_ERROR
   INPUT_VALIDATION_ERROR
   NOT_FOUND
+  RATE_LIMITED
   UNEXPECTED_ERROR
 }
 
@@ -100,6 +100,7 @@ type UpdateBookResultOk {
 
 type User {
   booksRead: [Book!]!
+  firstName: String!
   fullName: String!
   id: ID!
 }

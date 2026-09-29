@@ -23,7 +23,6 @@ export type Book = {
   id: Scalars['ID']['output'];
   isbn: Scalars['String']['output'];
   nextBookInSeries?: Maybe<Book>;
-  previousBookInSeries?: Maybe<Book>;
 };
 
 export type BookResult = BookResultOk | ResultError;
@@ -142,6 +141,7 @@ export type ResultErrorType =
   | 'FORBIDDEN_ERROR'
   | 'INPUT_VALIDATION_ERROR'
   | 'NOT_FOUND'
+  | 'RATE_LIMITED'
   | 'UNEXPECTED_ERROR';
 
 export type UpdateBookInput = {
@@ -159,6 +159,7 @@ export type UpdateBookResultOk = {
 export type User = {
   __typename?: 'User';
   booksRead: Array<Book>;
+  firstName: Scalars['String']['output'];
   fullName: Scalars['String']['output'];
   id: Scalars['ID']['output'];
 };
@@ -297,7 +298,7 @@ export type ResolversTypes = {
   PaginationInput: PaginationInput;
   Query: ResolverTypeWrapper<Record<PropertyKey, never>>;
   ResultError: ResolverTypeWrapper<Omit<ResultError, 'error'> & { error: ResolversTypes['ResultErrorType'] }>;
-  ResultErrorType: ResolverTypeWrapper<'NOT_FOUND' | 'INPUT_VALIDATION_ERROR' | 'FORBIDDEN_ERROR' | 'UNEXPECTED_ERROR'>;
+  ResultErrorType: ResolverTypeWrapper<'NOT_FOUND' | 'INPUT_VALIDATION_ERROR' | 'FORBIDDEN_ERROR' | 'UNEXPECTED_ERROR' | 'RATE_LIMITED'>;
   UpdateBookInput: UpdateBookInput;
   UpdateBookResult: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['UpdateBookResult']>;
   UpdateBookResultOk: ResolverTypeWrapper<Omit<UpdateBookResultOk, 'result'> & { result: ResolversTypes['Book'] }>;
@@ -341,7 +342,6 @@ export type BookResolvers<ContextType = ResolverContext, ParentType extends Reso
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   isbn?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   nextBookInSeries?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType>;
-  previousBookInSeries?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType>;
 };
 
 export type BookResultResolvers<ContextType = ResolverContext, ParentType extends ResolversParentTypes['BookResult'] = ResolversParentTypes['BookResult']> = {
@@ -422,7 +422,7 @@ export type ResultErrorResolvers<ContextType = ResolverContext, ParentType exten
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ResultErrorTypeResolvers = EnumResolverSignature<{ FORBIDDEN_ERROR?: any, INPUT_VALIDATION_ERROR?: any, NOT_FOUND?: any, UNEXPECTED_ERROR?: any }, ResolversTypes['ResultErrorType']>;
+export type ResultErrorTypeResolvers = EnumResolverSignature<{ FORBIDDEN_ERROR?: any, INPUT_VALIDATION_ERROR?: any, NOT_FOUND?: any, RATE_LIMITED?: any, UNEXPECTED_ERROR?: any }, ResolversTypes['ResultErrorType']>;
 
 export type UpdateBookResultResolvers<ContextType = ResolverContext, ParentType extends ResolversParentTypes['UpdateBookResult'] = ResolversParentTypes['UpdateBookResult']> = {
   __resolveType?: TypeResolveFn<'ResultError' | 'UpdateBookResultOk', ParentType, ContextType>;
@@ -435,6 +435,7 @@ export type UpdateBookResultOkResolvers<ContextType = ResolverContext, ParentTyp
 
 export type UserResolvers<ContextType = ResolverContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   booksRead?: Resolver<Array<ResolversTypes['Book']>, ParentType, ContextType>;
+  firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   fullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
 };

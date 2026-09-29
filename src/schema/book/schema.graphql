@@ -12,7 +12,6 @@ type Book {
   id: ID!
   isbn: String!
   nextBookInSeries: Book
-  previousBookInSeries: Book
 }
 
 type BookResultOk {

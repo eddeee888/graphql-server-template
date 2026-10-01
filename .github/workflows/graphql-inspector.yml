@@ -41,4 +41,4 @@ jobs:
           test "$CHANGES" = 3
           echo "$BREAKING" | jq -e 'length == 1 and (.[0] | test("User.fullName"))'
           echo "$DANGEROUS" | jq -e 'length == 1 and (.[0] | test("RATE_LIMITED_ERROR"))'
-          echo "$SAFE" | jq -e 'length == 1 and (.[0] | test("Field 'nickname' was added to object type 'User'"))'
+          echo "$SAFE" | jq -e 'length == 1 and (.[0] | test("nickname.*added.*User"))'

@@ -3,6 +3,5 @@ extend type Query {
 }
 type User {
   id: ID!
-  fullName: String
-  nickname: String
+  fullName: String!
 }

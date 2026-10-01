@@ -21,24 +21,8 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - id: inspector
-        uses: graphql-hive/graphql-inspector@2ffb592c2a01fef4320d13c4e6e6b6610c578e2b # @graphql-inspector/action@6.2.0
+      - uses: graphql-hive/graphql-inspector@2ffb592c2a01fef4320d13c4e6e6b6610c578e2b # @graphql-inspector/action@6.2.0
         with:
           name: Schema check
           schema: 'master:src/schema/schema.generated.graphqls'
           approve-label: approved-breaking-change
-
-      # TEST ONLY: verify the action's outputs. Revert before merging.
-      - name: Verify outputs
-        if: always()
-        env:
-          CHANGES: ${{ steps.inspector.outputs.changes }}
-          BREAKING: ${{ steps.inspector.outputs.breaking-changes }}
-          DANGEROUS: ${{ steps.inspector.outputs.dangerous-changes }}
-          SAFE: ${{ steps.inspector.outputs.safe-changes }}
-        run: |
-          printf 'changes=%s\nbreaking-changes=%s\ndangerous-changes=%s\nsafe-changes=%s\n' "$CHANGES" "$BREAKING" "$DANGEROUS" "$SAFE"
-          test "$CHANGES" = 3
-          echo "$BREAKING" | jq -e 'length == 1 and (.[0] | test("User.fullName"))'
-          echo "$DANGEROUS" | jq -e 'length == 1 and (.[0] | test("RATE_LIMITED_ERROR"))'
-          echo "$SAFE" | jq -e 'length == 1 and (.[0] | test("nickname.*added.*User"))'

@@ -84,6 +84,7 @@ enum ResultErrorType {
   FORBIDDEN_ERROR
   INPUT_VALIDATION_ERROR
   NOT_FOUND
+  RATE_LIMITED_ERROR
   UNEXPECTED_ERROR
 }
 
@@ -100,8 +101,9 @@ type UpdateBookResultOk {
 
 type User {
   booksRead: [Book!]!
-  fullName: String!
+  fullName: String
   id: ID!
+  nickname: String
 }
 
 type Wizard implements CharacterNode & MainCharacter {

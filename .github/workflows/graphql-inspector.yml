@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: graphql-hive/graphql-inspector@master
+      - uses: graphql-hive/graphql-inspector@2ffb592c2a01fef4320d13c4e6e6b6610c578e2b # @graphql-inspector/action@6.2.0
         with:
           name: Schema check
           schema: 'master:src/schema/schema.generated.graphqls'

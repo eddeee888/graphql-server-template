@@ -1,8 +1,8 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
-import { BookMapper } from './book/schema.mappers';
-import { UserMapper } from './user/schema.mappers';
-import { WizardMapper } from './character/schema.mappers';
-import { ResolverContext } from '../yoga';
+import { BookMapper } from './book/schema.mappers.js';
+import { UserMapper } from './user/schema.mappers.js';
+import { WizardMapper } from './character/schema.mappers.js';
+import { ResolverContext } from '../yoga.js';
 export type Maybe<T> = T | null | undefined;
 export type InputMaybe<T> = T | null | undefined;
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;

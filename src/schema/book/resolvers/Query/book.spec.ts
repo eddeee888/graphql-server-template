@@ -1,7 +1,7 @@
 import test from 'node:test';
 
-import { graphql } from '../../../../gql';
-import { executeOperation } from '../../../../testing';
+import { graphql } from '../../../../gql/index.js';
+import { executeOperation } from '../../../../testing/index.js';
 
 graphql(/* GraphQL */ `
   fragment Query_book_spec_Book on Book {

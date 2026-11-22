@@ -1,8 +1,8 @@
 import { createYoga, createSchema } from 'graphql-yoga';
 import { useDeferStream } from '@graphql-yoga/plugin-defer-stream';
-import { typeDefs } from './schema/typeDefs.generated';
-import { resolvers } from './schema/resolvers.generated';
-import { data } from './data';
+import { typeDefs } from './schema/typeDefs.generated.js';
+import { resolvers } from './schema/resolvers.generated.js';
+import { data } from './data/index.js';
 
 export type ResolverContext = { data: typeof data };
 

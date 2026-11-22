@@ -5,11 +5,12 @@ const config: CodegenConfig = {
   schema: 'src/**/schema.graphql',
   documents: 'src/**/*.spec.ts',
   ignoreNoDocuments: true,
+  importExtension: '.js',
   generates: {
     'src/schema': defineConfig({
       resolverGeneration: 'minimal',
       typesPluginsConfig: {
-        contextType: '../yoga#ResolverContext',
+        contextType: '../yoga.js#ResolverContext',
       },
     }),
     './src/gql/': {

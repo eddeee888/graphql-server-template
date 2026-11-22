@@ -1,4 +1,4 @@
-import type { MutationResolvers } from './../../../types.generated';
+import type { MutationResolvers } from './../../../types.generated.js';
 export const createBook: NonNullable<MutationResolvers['createBook']> = async (
   _parent,
   { input: { isbn } },

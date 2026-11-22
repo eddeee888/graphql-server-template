@@ -1,4 +1,4 @@
-import type { QueryResolvers } from './../../../types.generated';
+import type { QueryResolvers } from './../../../types.generated.js';
 export const book: NonNullable<QueryResolvers['book']> = async (
   _parent,
   { id },

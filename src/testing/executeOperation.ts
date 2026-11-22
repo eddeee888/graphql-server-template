@@ -1,6 +1,6 @@
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { type ExecutionResult, print } from 'graphql';
-import { yoga } from '../yoga';
+import { yoga } from '../yoga.js';
 
 export const executeOperation = async <TResult, TVariables>(
   operation: TypedDocumentNode<TResult, TVariables>,

@@ -5,6 +5,7 @@
   "author": "Eddy Nguyen <ch@eddeee888.me>",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "scripts": {
     "start:server": "tsx watch --clear-screen=false src/index.ts",
     "start:codegen": "graphql-codegen --watch",

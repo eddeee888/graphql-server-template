@@ -45,7 +45,7 @@
     },
     "packageManager": {
       "name": "pnpm",
-      "version": "11.28.13"
+      "version": "11.29.0"
     }
   }
 }

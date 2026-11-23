@@ -198,8 +198,8 @@ importers:
   .:
     dependencies:
       '@graphql-yoga/plugin-defer-stream':
-        specifier: 4.1.0
-        version: 4.1.0(graphql-yoga@6.1.0(graphql@17.1.0))(graphql@17.1.0)
+        specifier: 4.1.1
+        version: 4.1.1(graphql-yoga@6.1.0(graphql@17.1.0))(graphql@17.1.0)
       graphql:
         specifier: 17.1.0
         version: 17.1.0
@@ -941,12 +941,12 @@ packages:
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
-  '@graphql-yoga/plugin-defer-stream@4.1.0':
-    resolution: {integrity: sha512-RlSYh896Q2ItL535eG1LLJR0BIJuRLm4eKHtIz424r1o4PtsKXZs45QDXNxOwwxMYPzekhxCpZbd7kVR0KYM7g==}
+  '@graphql-yoga/plugin-defer-stream@4.1.1':
+    resolution: {integrity: sha512-gVQyMqOU5Hr2ju7hr2NqO3lXWIw6ZYmZqTLrJRKdtCOCwF1O4WvpDU/afMMhf/F3w7aNww9rWCZLxvl3Oc/J4w==}
     engines: {node: '>=22.15.0'}
     peerDependencies:
       graphql: ^16.0.0 || ^17.0.0
-      graphql-yoga: ^6.1.0
+      graphql-yoga: ^6.1.1
 
   '@graphql-yoga/subscription@6.0.0':
     resolution: {integrity: sha512-7itRaKCigZXL5gbgtKg8+/xCB2NI5T/1p1yIcAx8fht2nEMmu/2RlQ8xtpsa25xKy/u5h4Y9nDSQo7kV/nCcBg==}
@@ -3775,7 +3775,7 @@ snapshots:
     dependencies:
       graphql: 17.1.0
 
-  '@graphql-yoga/plugin-defer-stream@4.1.0(graphql-yoga@6.1.0(graphql@17.1.0))(graphql@17.1.0)':
+  '@graphql-yoga/plugin-defer-stream@4.1.1(graphql-yoga@6.1.0(graphql@17.1.0))(graphql@17.1.0)':
     dependencies:
       '@graphql-tools/utils': 13.2.2(graphql@17.1.0)
       graphql: 17.1.0
